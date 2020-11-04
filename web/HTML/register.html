@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>拉德衣博客注册</title>
+    <link rel="stylesheet" href="../CSS/register.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="register">
+        <div id="form">
+            <fieldset>
+                <div class="tableRow">
+                    <label for="userName">用户名</label>
+                    <p><input type="text" name="userName" id="userName1" class="textfield" required></p>
+                </div>
+                <div class="tableRow">
+                    <label for="password_field">密码</label>
+                    <p><input type="password" name="password" id="password_field" class="textfield" required></p>
+                </div>
+
+                <div class="tableRow" id="summitRow">
+                    <label for=""></label>
+                    <p><button id="submit" onclick="register()">注册</button></p>
+                </div>
+            </fieldset>
+        </div>
+</body>
+<script>
+    function register() {
+        var userName; 
+        userName= $("#userName1").val();
+        var passWord; 
+        passWord= $("#password_field").val();
+        if (userName.length >= 64) {
+            alert("您的用户名长度需要小于64个字符");
+        } else if (passWord.length < 6 || passWord.length >= 64){
+            alert("您的密码长度需要在6-64个字符之间");
+        } else {
+            $.ajax({
+                type: "post",
+                url: "",
+                data: {
+                    "userName": $("#userName1").val(),
+                    "password": $("#password_field").val(),
+                },
+                success: function (data) {
+                    if (data === 1) {
+                        alert("您已经注册成功，点击确定进入登录界面进行登录");
+                        window.open("login.html");
+                    } else {
+                        alert("用户名已经存在，请选择其他用户名");
+                    }
+                }
+            });
+        }
+        }
+</script>
+
+</html>

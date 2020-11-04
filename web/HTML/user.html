@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>主页</title>
+    <meta charset="utf8">
+
+    <link rel="stylesheet" href="../CSS/user.css">
+
+</head>
+
+<body>
+    <p style="display: none;" id="account"></p>
+    <div class="top">
+        <nav id="navLink">
+            <a class="headerLink" href=""><span>首页</span></a>
+            <a class="headerLink" href=""><span>消息</span> </a>
+            <a class="headerLink" href=""><span>收藏</span></a>
+            <a class="headerLink" href=""><span>商城</span></a>
+        </nav>
+        <form action="">
+            <div class="divSearch">
+                <input type="text" name="KeyWord" class="searchField">
+                <button id="submit" value="">搜索</button>
+            </div>
+        </form>
+
+        <div id="dropdown">
+            <button class="dropbtn"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-list-ul"
+                    fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top: 0px; color: white;">
+                    <path fill-rule="evenodd"
+                        d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                </svg></button>
+            <div class="dropdown-content">
+                <a href="user.html">个人主页</a>
+                <a href="">我的资料</a>
+                <a href="">我的订单</a>
+                <a href="">我的积分</a>
+                <a href="userInfo.html" id="myAccount">我的账号</a>
+                <a href="../index.html">退出登录</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="left">
+            <div id="leftBlock">
+                <p style="width: fit-content;">
+                    我的博客列表
+                    <a href="writeBlog.html"><button class="createBlog">新建博客</button></a>
+                </p>
+                <input type="text" id="searchBlog" placeholder="查找博客.......">
+                <div class="myBlogList">
+                    <ul>
+                        <li><a href="">myBlog</a></li>
+                        <li><a href="">myBlog</a></li>
+                        <li><a href="">myBlog</a></li>
+                        <li><a href="">myBlog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="blog">
+                <div class="blogContent">
+                    <p class="author">作者：标题</p>
+                    <article class="summary">
+                        dsa
+                    </article>
+                </div>
+                <hr>
+                <div class="blogContent">
+                    <p class="author">作者: 标题</p>
+                    <article class="summary">
+                        dsa
+                    </article>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<script>
+    var account = window.location.split('?')[1];
+    var userInfoLink = document.getElementById("myAccount");
+    userInfoLink.href = userInfoLink.href + "?" + account;
+</script>
+
+</html>

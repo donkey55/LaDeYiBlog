@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>拉德衣博客登录</title>
+    <link rel="stylesheet" href="../CSS/login.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="login">
+        <div id="form">
+            <fieldset>
+                <div class="tableRow">
+                    <label for="login_field">账号</label>
+                    <p><input type="text" name="account" id="login_field" class="textfield" required></p>
+                </div>
+                <div class="tableRow">
+                    <label for="password_field">密码</label>
+                    <a class="label-link" href="passwordReset.html" style="float: right;text-decoration: none;">Forgot
+                        password?</a>
+                    <p><input type="password" name="password" id="password_field" class="textfield" required></p>
+                </div>
+                <div class="tableRow" id="login">
+                    <p><button id="submit" onclick="query()">登录</button></p>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="register">
+        <p>没有注册过我们的账号？<a href="register.html" target="_blank">点击这里进行注册</a></p>
+    </div>
+</body>
+<script>
+    function query() {
+        var url = "user.html?" + $("#login_field").val();
+        $.ajax({
+            type: "post",
+            url: "../com/ladeyi/test/LoginServlet",
+            data: {
+                "userName": $("#login_field").val(),
+                "password": $("#password_field").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.ret === "1") {
+                    window.open(url, "_self");
+                } else {
+                    alert("您的账号或密码有误，请重试");
+                }
+            }
+        });
+    }
+</script>
+
+</html>
