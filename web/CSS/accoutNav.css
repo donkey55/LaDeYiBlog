@@ -43,13 +43,12 @@ a {
 }
 
 #flexList2 a:hover, input:focus{
-    background-color:white;
     box-shadow: 0 0 0 3px #1074e7;
 }
 
 #content {
     background-color: #f6f8fa;
-    width: 50%;
+    width: 30%;
     text-align: center;
 }
 
@@ -87,9 +86,15 @@ input {
 }
 
 hr {
-    color: #3d3d3d;
+    color: white;
 }
 
-ul li{
-    margin-right: 30%;
+.table {
+    font-size: 1.5em;
 }
+
+ul.userInfo{
+    text-align: right;
+    margin-right: 40%;
+}
+

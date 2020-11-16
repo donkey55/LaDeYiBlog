@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body onbeforeunload="checkLeave()">
+    <div id="json">
+        <ul id="blogList">
+        </ul>
+    </div>
+</body>
+<script>
+    function checkLeave() {
+        event.returnValue = "确定离开当前页面吗？";
+    }
+    /* var user1 = {
+        "id": "123",
+        "title": "op"
+    };
+    var li = document.createElement("li");
+    var aLi = document.createElement("a");
+    var span = document.createElement("span");
+    aLi.setAttribute('href', '');
+    aLi.setAttribute('class', 'blogLink');
+    aLi.innerHTML = "123";
+    span.innerHTML = "789";
+    aLi.appendChild(span);
+    li.appendChild(aLi);
+    aLi.innerHTML = "123";
+    var ulList = document.getElementById("blogList");
+    ulList.appendChild(li);
+    $(".blogLink").click(function () {
+        alert("success");
+        window.open("user.html");
+    }); */
+</script>
+
+</html>

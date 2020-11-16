@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../CSS/writeBlog.css">
     <link rel="stylesheet" href="../CSS/user.css">
     <link rel="stylesheet" href="../editormd/css/editormd.css" />
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
     <script src=" ../editormd/lib/marked.min.js"> </script>
     <script src="../editormd/lib/prettify.min.js"></script>
@@ -48,7 +47,7 @@
             </div>
         </div>
     </div>
-    <form action="" id="editorForm" style="width: 100%;" method="POST">
+    <div id="editorForm" style="width: 100%; display: block; margin-top: 20px;">
         <div id="blogTitle">
             <label for="title">标题</label>
             <input type="text" id="title" name="title" placeholder="请输入标题...." required>
@@ -58,48 +57,10 @@
             <textarea id="test-editor-html-code" name="my-editormd-html-code" style="display:none;"></textarea>
         </div>
         <button id="create" type="button" onclick="getCon()">提交</button>
-    </form>
+    </div>
     <div id="test-editormd">
         <textarea id="doc-contenttext" style="display: none;"></textarea>
     </div>
 </body>
-<script>
-    
-</script>
-
-<script type="text/javascript">
-    var editor;
-    var testEditor;
-    editor = editormd("test-editor", {
-        width: "100%",
-        height: 600,
-        path: "../editormd/lib/",
-        saveHTMLToTextarea: true,
-        tocm: true,
-        tex: true,
-        emoji: true, //编辑主题
-        saveHTMLToTextarea: true,
-    });
-
-
-    /* function getCon() {
-        alert($("#test-editor-html-code").val());
-        document.getElementById("doc-contenttext").value = $("#test-editor-html-code").val();
-        testEditor = editormd.markdownToHTML("test-editormd", {
-        width: "90%",
-        height: "700",
-        path: "../editormd/lib/",
-        emoji: true,
-        taskList: true,
-        editor: false,
-        preview: true,
-        tex: true, // 默认不解析
-        flowChart: true, // 默认不解析
-        sequenceDiagram: true, // 默认不解析
-    });
-    } */
-</script>
-
-
-
+<script type="text/javascript" src="../script/writeBlog.js"></script>
 </html>
