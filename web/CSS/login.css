@@ -1,12 +1,13 @@
 body {
     font-family: Helvetica,Arial,sans-serif;
-    font-size: 15px;
+    font-size: 25px;
     font-weight: bold;
     line-height: 1.5;
     color: #24292e;
     background-color:#f9f9f9;
 }
 fieldset {
+    width: auto;
     border: 2px solid;
     border-radius: 5px;
 }
@@ -20,7 +21,7 @@ fieldset {
 
 
 .tableRow {
-    display: table-row;
+    margin: auto;
 }
 
 .tableRow p {
@@ -28,11 +29,11 @@ fieldset {
 }
 
 input.textfield {
+    font-size: 20px;
     border-radius: 5px;
     border: 1px solid;
     background-color: white;
-    width: 250px;
-    margin-top: 0px;
+    width: 100%;
     outline: none;
 }
 
@@ -40,13 +41,18 @@ input:focus {
     box-shadow: 0 0 0 2px #1074e7;
 }
 
+#login {
+    text-align: center;
+}
+
 #submit {
+    font-size: 20px;
     color: #fff;
     background-color: #2ea44f;
     border-color: rgba(27,31,35,.15);
     box-shadow: 0 1px 0 rgba(27,31,35,.1), inset 0 1px 0 hsla(0,0%,100%,.03);
     border-radius: 5px;
-    width: 256px;
+    width: auto;
     margin-top: 5px;
 }
 
@@ -54,7 +60,7 @@ input:focus {
     display: table;
     border: transparent;
     border-radius: 5px;
-    width: 300px;
+    width: auto;
     margin-left: auto;
     margin-right: auto ;
     margin-top: 50px;

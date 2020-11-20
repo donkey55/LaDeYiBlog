@@ -11,6 +11,7 @@
 <body>
     <div class="login">
         <div id="form">
+            <p style="text-align: center; background-color: #f9f9f9; margin: auto; padding-bottom: 50px; font-size: 40px;">Please sign in your account</p>
             <fieldset>
                 <div class="tableRow">
                     <label for="login_field">账号</label>
@@ -18,12 +19,12 @@
                 </div>
                 <div class="tableRow">
                     <label for="password_field">密码</label>
-                    <a class="label-link" href="passwordReset.html" style="float: right;text-decoration: none;">Forgot
+                    <a class="label-link" href="passwordReset.html" style="text-decoration: none;">Forgot
                         password?</a>
                     <p><input type="password" name="password" id="password_field" class="textfield" required></p>
                 </div>
                 <div class="tableRow" id="login">
-                    <p><button id="submit" onclick="query()">登录</button></p>
+                    <button id="submit" onclick="query()">登录</button>
                 </div>
             </fieldset>
         </div>
