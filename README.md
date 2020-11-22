@@ -1,2 +1,2 @@
 # LaDeYiBlog
-BUAA CS DataBase
+BUAA CS DataBase.
