@@ -1,4 +1,4 @@
-package com.ladeyi.test;
+package com.ladeyi.test.mapper;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,17 +1,13 @@
-package com.ladeyi.test;
+package com.ladeyi.test.mapper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Query {
-    Connection connection;
+    private static Connection connection=MyConnection.getConnection();
 
-    public Query(Connection connection) {
-        this.connection = connection;
-    }
-
-    public ResultSet select(String column, String table, String restrict) throws SQLException {
+    public static ResultSet select(String column, String table, String restrict) throws SQLException {
         ResultSet resultSet = null;
         String sql = "SELECT " + column + " FROM " + table;
         if (restrict.equals("")) {
@@ -24,7 +20,7 @@ public class Query {
         return resultSet;
     }
 
-    public ResultSet loginSelect(String userName, String password) throws SQLException {
+    public static ResultSet loginSelect(String userName, String password) throws SQLException {
         ResultSet resultSet = null;
         String sql = "SELECT * FROM user WHERE userName=? AND password=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -34,4 +30,13 @@ public class Query {
         return resultSet;
     }
 
+    public static ResultSet blogSearchSelect(String keyword) throws  SQLException{
+        ResultSet resultSet = null;
+        String sql = "SELECT * FROM blog WHERE blog LIKE ? OR title LIKE ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, "%"+keyword+"%");
+        preparedStatement.setString(2, "%"+keyword+"%");
+        resultSet = preparedStatement.executeQuery();
+        return resultSet;
+    }
 }

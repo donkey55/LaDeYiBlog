@@ -1,17 +1,16 @@
-package com.ladeyi.test;
+package com.ladeyi.test.servlet;
+
+import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.Optional;
 
-public class LoginServlet extends HttpServlet {
-
-    public LoginServlet() {
+public class RegisterServlet extends HttpServlet {
+    public RegisterServlet() {
         super();
     }
 
@@ -27,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         PrintWriter printWriter=response.getWriter();
         String userName=request.getParameter("userName");
         String password=request.getParameter("password");
-        int ret = 0;
+        int ret = User.register(userName,password );
         String output="{\"ret\":\""+ret+"\"}";
         printWriter.write(output);
     }
@@ -35,5 +34,4 @@ public class LoginServlet extends HttpServlet {
     public void init() throws ServletException {
         // Put your code here
     }
-
 }
