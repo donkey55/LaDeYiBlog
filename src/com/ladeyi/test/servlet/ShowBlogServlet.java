@@ -1,6 +1,7 @@
 package com.ladeyi.test.servlet;
 
 import com.ladeyi.test.service.Blog;
+import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,19 +24,26 @@ public class ShowBlogServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ret="";
+        String ret = "";
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
-        PrintWriter printWriter=response.getWriter();
-        int blogId=Integer.parseInt(request.getParameter("blogId"));
-        ResultSet blogSet= Blog.checkBlog(blogId);
+        PrintWriter printWriter = response.getWriter();
+        int blogId = Integer.parseInt(request.getParameter("blogId"));
         try {
+            ResultSet blogSet = Blog.checkBlog(blogId);
+            ResultSet userIdSet = Blog.checkUserId(blogId);
+            userIdSet.next();
+            ResultSet userNameSet = User.checkUserName(userIdSet.getString(1));
+            ResultSet titleSet = Blog.checkTitle(blogId);
             blogSet.next();
-            ret=blogSet.getString(1);
-        }catch (SQLException e){
+            userNameSet.next();
+            titleSet.next();
+            ret = ret + "{\"userName\":\"" + userNameSet.getString(1) + "\",";
+            ret = ret + "\"blog\":\"" + blogSet.getString(1) + "\",";
+            ret = ret + "\"title\":\"" + blogSet.getString(1) + "\"}";
+        } catch (SQLException e) {
         }
-        String output="{\"ret\":\""+ret+"\"}";
-        printWriter.write(output);
+        printWriter.write(ret);
     }
 
     public void init() throws ServletException {

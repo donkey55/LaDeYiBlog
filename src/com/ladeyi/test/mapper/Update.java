@@ -89,12 +89,42 @@ public class Update {
         return ret;
     }
 
-    public static int passwordUpdate(String userName,String newPassword){
+    public static int commentInsert(int userId,int blogId,String comment){
         int ret=0;
-        String sql="UPDATE user SET password=? WHERE userName=?";
+        String sql="INSERT INTO comment(userId,blogId,comment) values (?,?,?)";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,userId);
+            preparedStatement.setInt(2,blogId);
+            preparedStatement.setString(3,comment);
+            ret=preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            return -100;
+        }
+        return ret;
+    }
+
+    public static int preferenceInsert(int userId,int blogId,String label){
+        int ret=0;
+        String sql="INSERT INTO preference(userId,blogId,label) values (?,?,?)";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,userId);
+            preparedStatement.setInt(2,blogId);
+            preparedStatement.setString(3,label);
+            ret=preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            return -100;
+        }
+        return ret;
+    }
+
+    public static int userInfoUpdate(String attribute,String userName,String content){
+        int ret=0;
+        String sql="UPDATE user SET "+attribute+"=? WHERE userName=?";
         try{
             PreparedStatement preparedStatement=connection.prepareStatement(sql);
-            preparedStatement.setString(1,newPassword);
+            preparedStatement.setString(1,content);
             preparedStatement.setString(2,userName);
             ret=preparedStatement.executeUpdate();
         }catch(SQLException e){

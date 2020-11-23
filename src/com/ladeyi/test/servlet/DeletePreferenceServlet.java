@@ -1,10 +1,9 @@
 package com.ladeyi.test.servlet;
 
-
-import com.ladeyi.test.mapper.Query;
 import com.ladeyi.test.service.Blog;
+import com.ladeyi.test.service.Comment;
+import com.ladeyi.test.service.Preference;
 import com.ladeyi.test.service.User;
-import com.mysql.cj.xdevapi.JsonArray;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class SearchBlogServlet extends HttpServlet {
-    public SearchBlogServlet() {
+public class DeletePreferenceServlet extends HttpServlet {
+    public DeletePreferenceServlet() {
         super();
     }
 
@@ -28,26 +27,21 @@ public class SearchBlogServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ret = "[";
+        int ret=0;
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        String keyword = request.getParameter("keyword");
+        String userName = request.getParameter("userName");
+        int blogId = Integer.parseInt(request.getParameter("blogId"));
         try {
-            ResultSet blogSet = Blog.searchBlog(keyword);
-            while (blogSet.next()) {
-                ResultSet userSet=User.checkUserName(blogSet.getString(2));
-                userSet.next();
-                ret = ret + "{\"blogId\":\"" + blogSet.getString(1) + "\",";
-                ret = ret + "\"userName\":\"" + userSet.getString(1) + "\",";
-                ret = ret + "\"blog\":\"" + blogSet.getString(3) + "\",";
-                ret = ret + "\"title\":\"" + blogSet.getString(4) + "\"},";
-            }
-        } catch (SQLException e) {
+            ResultSet userIdSet = User.checkId(userName);
+            userIdSet.next();
+            int userId = Integer.parseInt(userIdSet.getString(1));
+            ret = Preference.deletePreference(userId, blogId);
+        }catch(SQLException e){
         }
-        ret = ret.substring(0, ret.length() - 1);
-        ret = ret + "]";
-        printWriter.write(ret);
+        String output = "{\"ret\":\"" + ret + "\"}";
+        printWriter.write(output);
     }
 
     public void init() throws ServletException {

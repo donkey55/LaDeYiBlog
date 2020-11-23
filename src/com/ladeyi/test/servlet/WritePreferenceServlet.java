@@ -1,7 +1,8 @@
 package com.ladeyi.test.servlet;
 
 import com.ladeyi.test.mapper.Query;
-import com.ladeyi.test.service.Blog;
+import com.ladeyi.test.service.Comment;
+import com.ladeyi.test.service.Preference;
 import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
@@ -13,8 +14,8 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class WriteBlogServlet extends HttpServlet {
-    public WriteBlogServlet() {
+public class WritePreferenceServlet extends HttpServlet {
+    public WritePreferenceServlet() {
         super();
     }
 
@@ -30,13 +31,13 @@ public class WriteBlogServlet extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter printWriter=response.getWriter();
         String userName=request.getParameter("userName");
-        String blog=request.getParameter("blog");
-        String title=request.getParameter("title");
+        int blogId= Integer.parseInt(request.getParameter("blogId"));
+        String label=request.getParameter("label");
         try{
-            ResultSet userIdSet = User.checkId(userName);;
+            ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
             int userId=Integer.parseInt(userIdSet.getString(1));
-            ret= Blog.insertBlog(userId,blog,title);
+            ret= Preference.insertPreference(userId,blogId,label);
         }catch(SQLException e){
         }
         String output="{\"ret\":\""+ret+"\"}";

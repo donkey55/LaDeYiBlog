@@ -1,8 +1,7 @@
 package com.ladeyi.test.servlet;
 
-import com.ladeyi.test.mapper.Query;
 import com.ladeyi.test.service.Blog;
-import com.ladeyi.test.service.User;
+import com.ladeyi.test.service.Comment;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,9 +11,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class WriteBlogServlet extends HttpServlet {
-    public WriteBlogServlet() {
+public class DeleteCommentServlet extends HttpServlet {
+    public DeleteCommentServlet() {
         super();
     }
 
@@ -25,21 +25,12 @@ public class WriteBlogServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int ret=0;
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
-        PrintWriter printWriter=response.getWriter();
-        String userName=request.getParameter("userName");
-        String blog=request.getParameter("blog");
-        String title=request.getParameter("title");
-        try{
-            ResultSet userIdSet = User.checkId(userName);;
-            userIdSet.next();
-            int userId=Integer.parseInt(userIdSet.getString(1));
-            ret= Blog.insertBlog(userId,blog,title);
-        }catch(SQLException e){
-        }
-        String output="{\"ret\":\""+ret+"\"}";
+        PrintWriter printWriter = response.getWriter();
+        int commentId = Integer.parseInt(request.getParameter("commentId"));
+        int ret = Comment.deleteComment(commentId);
+        String output = "{\"ret\":\"" + ret + "\"}";
         printWriter.write(output);
     }
 

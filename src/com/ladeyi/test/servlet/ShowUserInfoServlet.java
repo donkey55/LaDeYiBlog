@@ -16,8 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class LoadBlogInfoServlet extends HttpServlet {
-    public LoadBlogInfoServlet() {
+public class ShowUserInfoServlet extends HttpServlet {
+    public ShowUserInfoServlet() {
         super();
     }
 
@@ -28,27 +28,32 @@ public class LoadBlogInfoServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ret="[";
+        String ret="";
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
         String userName=request.getParameter("userName");
         try {
-            ResultSet userIdSet = User.checkId(userName);
-            userIdSet.next();
-            int userId=Integer.parseInt(userIdSet.getString(1));
-            ResultSet blogIdSet = Blog.checkBlogId(userId);
-            while (blogIdSet.next()) {
-                ResultSet blogTitle = Blog.checkBlogTitle(Integer.parseInt(blogIdSet.getString(1)));
-                ret=ret+"{\"blogId\":\""+blogIdSet.getString(1)+"\",";
-                while (blogTitle.next()) {
-                    ret = ret + "\"title\":\"" + blogTitle.getString(1) + "\"},";
-                }
-            }
+            ResultSet resultSet = User.checkSex(userName);
+            resultSet.next();
+            ret=ret+"{\"sex\":\""+resultSet.getString(1)+"\",";
+            resultSet = User.checkInterest(userName);
+            resultSet.next();
+            ret=ret+"\"interest\":\""+resultSet.getString(1)+"\",";
+            resultSet = User.checkPhone(userName);
+            resultSet.next();
+            ret=ret+"\"phone\":\""+resultSet.getString(1)+"\",";
+            resultSet = User.checkAddress(userName);
+            resultSet.next();
+            ret=ret+"\"address\":\""+resultSet.getString(1)+"\",";
+            resultSet = User.checkSelfIntroduction(userName);
+            resultSet.next();
+            ret=ret+"\"selfIntroduction\":\""+resultSet.getString(1)+"\",";
+            resultSet = User.checkPoint(userName);
+            resultSet.next();
+            ret=ret+"\"point\":\""+resultSet.getString(1)+"\"}";
         } catch (SQLException e) {
         }
-        ret = ret.substring(0,ret.length() - 1);
-        ret=ret+"]";
         printWriter.write(ret);
     }
 

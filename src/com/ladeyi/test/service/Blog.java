@@ -28,7 +28,7 @@ public class Blog {
         }
     }
 
-    public static ResultSet checkBlogTitle(int id){
+    public static ResultSet checkTitle(int id){
         try{
             String restrict="blogId="+id;
             ResultSet resultSet = Query.select("title","blog",restrict);
@@ -38,7 +38,7 @@ public class Blog {
         }
     }
 
-    public static ResultSet checkBlogUserId(int id){
+    public static ResultSet checkUserId(int id){
         try{
             String restrict="blogId="+id;
             ResultSet resultSet = Query.select("userId","blog",restrict);

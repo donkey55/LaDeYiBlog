@@ -37,20 +37,20 @@ public class User {
         }
     }
 
-    public static int changePassword(String userName,String oldPassword,String newPassword){
-        if(login(userName,oldPassword)==1){
-            return Update.passwordUpdate(userName,newPassword);
+    public static int changePassword(String userName, String oldPassword, String newPassword) {
+        if (login(userName, oldPassword) == 1) {
+            return Update.userInfoUpdate("password", userName, newPassword);
         }
         return 0;
     }
 
-    public static int deleteUser(int userId){
+    public static int deleteUser(int userId) {
         return Update.userDelete(userId);
     }
 
     public static ResultSet checkId(String userName) {
         try {
-            String restrict = "userName=\"" + userName+"\"";
+            String restrict = "userName=\"" + userName + "\"";
             ResultSet resultSet = Query.select("id", "user", restrict);
             return resultSet;
         } catch (SQLException e) {
@@ -60,7 +60,7 @@ public class User {
 
     public static ResultSet checkSex(String userName) {
         try {
-            String restrict = "userName=\"" + userName+"\"";
+            String restrict = "userName=\"" + userName + "\"";
             ResultSet resultSet = Query.select("sex", "user", restrict);
             return resultSet;
         } catch (SQLException e) {
@@ -70,7 +70,7 @@ public class User {
 
     public static ResultSet checkInterest(String userName) {
         try {
-            String restrict = "userName=\"" + userName+"\"";
+            String restrict = "userName=\"" + userName + "\"";
             ResultSet resultSet = Query.select("interest", "user", restrict);
             return resultSet;
         } catch (SQLException e) {
@@ -80,7 +80,7 @@ public class User {
 
     public static ResultSet checkAddress(String userName) {
         try {
-            String restrict = "userName=\"" + userName+"\"";
+            String restrict = "userName=\"" + userName + "\"";
             ResultSet resultSet = Query.select("address", "user", restrict);
             return resultSet;
         } catch (SQLException e) {
@@ -90,7 +90,7 @@ public class User {
 
     public static ResultSet checkPhone(String userName) {
         try {
-            String restrict = "userName=\"" + userName+"\"";
+            String restrict = "userName=\"" + userName + "\"";
             ResultSet resultSet = Query.select("phone", "user", restrict);
             return resultSet;
         } catch (SQLException e) {
@@ -100,7 +100,7 @@ public class User {
 
     public static ResultSet checkSelfIntroduction(String userName) {
         try {
-            String restrict = "userName=\"" + userName+"\"";
+            String restrict = "userName=\"" + userName + "\"";
             ResultSet resultSet = Query.select("selfIntroduction", "user", restrict);
             return resultSet;
         } catch (SQLException e) {
@@ -110,7 +110,7 @@ public class User {
 
     public static ResultSet checkPoint(String userName) {
         try {
-            String restrict = "userName=\"" + userName+"\"";
+            String restrict = "userName=\"" + userName + "\"";
             ResultSet resultSet = Query.select("point", "user", restrict);
             return resultSet;
         } catch (SQLException e) {
@@ -120,7 +120,7 @@ public class User {
 
     public static ResultSet checkRemind(String userName) {
         try {
-            String restrict = "userName=\"" + userName+"\"";
+            String restrict = "userName=\"" + userName + "\"";
             ResultSet resultSet = Query.select("remind", "user", restrict);
             return resultSet;
         } catch (SQLException e) {
@@ -128,54 +128,38 @@ public class User {
         }
     }
 
-    public static int changeSelfIntroduction(String userName, String selfIntroduction) {
-        if (validSelfIntroduction(selfIntroduction)) {
-            String newData = "selfIntroduction=\"" + selfIntroduction + "\"";
-            String restrict = "userName=\"" + userName+"\"";
-            return Update.update("user", newData, restrict);
-        } else {
-            return -3;
+    public static ResultSet checkUserName(String id) {
+        try {
+            String restrict = "id=\"" + id + "\"";
+            ResultSet resultSet = Query.select("userName", "user", restrict);
+            return resultSet;
+        } catch (SQLException e) {
+            return null;
         }
+    }
+
+    public static int changeSelfIntroduction(String userName, String selfIntroduction) {
+        return Update.userInfoUpdate("selfIntroduction",userName,selfIntroduction);
     }
 
     public static int changePhone(String userName, String phone) {
-        if (validPhone(phone)) {
-            String newData = "phone=\"" + phone + "\"";
-            String restrict = "userName=\"" + userName+"\"";
-            return Update.update("user", newData, restrict);
-        } else {
-            return -4;
-        }
+        return Update.userInfoUpdate("phone",userName,phone);
     }
 
     public static int changeAddress(String userName, String address) {
-        if (validAddress(address)) {
-            String newData = "address=\"" + address + "\"";
-            String restrict = "userName=\"" + userName+"\"";
-            return Update.update("user", newData, restrict);
-        } else {
-            return -5;
-        }
+        return Update.userInfoUpdate("address",userName,address);
     }
 
     public static int changeInterest(String userName, String interest) {
-        if (validInterest(interest)) {
-            String newData = "interest=\"" + interest + "\"";
-            String restrict = "userName=\"" + userName+"\"";
-            return Update.update("user", newData, restrict);
-        } else {
-            return -6;
-        }
+        return Update.userInfoUpdate("interest",userName,interest);
     }
 
     public static int changeSex(String userName, String sex) {
-        if (validSex(sex)) {
-            String newData = "sex=\"" + sex + "\"";
-            String restrict = "userName=\"" + userName+"\"";
-            return Update.update("user", newData, restrict);
-        } else {
-            return -7;
-        }
+        return Update.userInfoUpdate("sex",userName,sex);
+    }
+
+    public static int changeUserName(String userName,String newUserName){
+        return Update.userInfoUpdate("userName",userName,newUserName);
     }
 
     private static boolean validSex(String sex) {
