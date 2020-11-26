@@ -1,9 +1,6 @@
 package com.ladeyi.test.servlet;
 
 import com.ladeyi.test.service.Attention;
-import com.ladeyi.test.service.Blog;
-import com.ladeyi.test.service.Comment;
-import com.ladeyi.test.service.Preference;
 import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;

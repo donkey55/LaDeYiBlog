@@ -1,7 +1,6 @@
 package com.ladeyi.test.servlet;
 
-import com.ladeyi.test.service.Blog;
-import com.ladeyi.test.service.Comment;
+
 import com.ladeyi.test.service.Preference;
 import com.ladeyi.test.service.User;
 
@@ -13,7 +12,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DeletePreferenceServlet extends HttpServlet {
     public DeletePreferenceServlet() {
