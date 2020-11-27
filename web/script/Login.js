@@ -15,6 +15,7 @@ function query() {
                 window.open(url, "_self");
             } else {
                 alert("用户名或密码未填写或错误");
+                location.reload();
             }
         }
     });

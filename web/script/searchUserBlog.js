@@ -172,11 +172,20 @@ function deleteBlog(obj) {
             },
             dataType: "json",
             success: function (data) {
-                alert("删除成功");
+                if(data.ret > 0){
+                    alert("删除成功");
+                    location.reload();
+                }else{
+                    alert("删除失败");
+                }
             },
             error: function () {
                 alert("error");
             }
         });
     }
+}
+
+function writeBlog() {
+    window.open("writeBlog.html?" + $.cookie("account"), "_blank");
 }

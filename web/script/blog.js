@@ -8,35 +8,16 @@ window.onload = function () {
         },
         dataType: "json",
         success: function (data) {
-            $("#blog").val(data.ret);
+            document.getElementById("title").innerHTML = data.title;
+            document.getElementById("topTitle").innerHTML = data.title;
+            document.getElementById("author").innerHTML = data.userName;
+            document.getElementById("blog").innerHTML = data.blog;
             preview();
         },
         error: function () {
-            alert("1");
+            alert("error");
         }
     });
-}
-
-function deleteBlog() {
-    var id = window.location.toString().split('?')[1];
-    if (confirm("您真的准备删除此博客吗？")) {
-        $.ajax({
-            type: "post",
-            url: "../com/ladeyi/test/DeleteBlogServlet",
-            data: {
-                blogId: id
-            },
-            dataType: "json",
-            success: function (data) {
-                if (data.ret === "1") {
-                    window.open("user.html?" + window.location.toString().split("?")[2]);
-                }
-            },
-            error: function () {
-                alert("error");
-            }
-        });
-    }
 }
 
 function preview() {
