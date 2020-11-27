@@ -2,7 +2,6 @@ package com.ladeyi.test.servlet;
 
 import com.ladeyi.test.service.Blog;
 import com.ladeyi.test.service.Comment;
-import com.ladeyi.test.service.Message;
 import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
@@ -14,8 +13,8 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ShowToMessageServlet extends HttpServlet {
-    public ShowToMessageServlet() {
+public class ShowCommentServlet extends HttpServlet {
+    public ShowCommentServlet() {
         super();
     }
 
@@ -30,15 +29,15 @@ public class ShowToMessageServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        int toUserId = Integer.parseInt(request.getParameter("toUserId"));
-        ResultSet messageSet = Message.checkMessageUseToUserId(toUserId);
+        int blogId = Integer.parseInt(request.getParameter("blogId"));
+        ResultSet commentSet = Comment.checkCommentUseBlogId(blogId);
         try {
-            while (messageSet.next()) {
-                ResultSet userSet = User.checkUserName(messageSet.getString(2));
+            while (commentSet.next()) {
+                ResultSet userSet = User.checkUserName(commentSet.getString(2));
                 userSet.next();
-                ret = ret + "{\"messageId\":\"" + messageSet.getString(1) + "\",";
+                ret = ret + "{\"commendId\":\"" + commentSet.getString(1) + "\",";
                 ret = ret + "\"userName\":\"" + userSet.getString(1) + "\",";
-                ret = ret + "\"message\":\"" + messageSet.getString(4) + "\"},";
+                ret = ret + "\"comment\":\"" + commentSet.getString(4) + "\"},";
             }
         } catch (SQLException e) {
         }

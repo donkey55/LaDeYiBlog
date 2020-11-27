@@ -3,6 +3,7 @@ var blogNum = 0;
 var blogList;
 var pageIndex = 1;
 var pageNum;
+var blogTotal = 0;
 
 $(function () {
     if($.cookie("account") == undefined){
@@ -19,8 +20,10 @@ $(function () {
         success: function (data) {
             //保存得到的文章
             blogList = data;
+            pageNum = Math.ceil(blogList.length / 5);
+            blogTotal = blogList.length;
             //显示文章
-            for (let index = 0; index < 5 && blogCount < blogList.length; index++, blogCount++, blogNum++) {
+            for (let index = 0; index < 5 && blogCount < blogTotal; index++, blogCount++, blogNum++) {
                 const element = blogList[blogCount];
                 let tableElement = document.getElementById("tableElement" + String(index + 1));
                 let td1 = document.createElement("td");
@@ -32,8 +35,9 @@ $(function () {
                 aLi1.innerHTML = element.title;
                 aLi1.setAttribute('href', 'blog.html?' + element.blogId + '?' + $.cookie("account"));
                 aLi1.setAttribute("target", "_blank");
+                aLi2.setAttribute("id", element.blogId);
                 aLi2.setAttribute("href","#");
-                aLi2.setAttribute("onclick","return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')");
+                aLi2.setAttribute("onclick","deleteBlog(this)");
                 aLi2.setAttribute("class", "ui mini red basic button");
                 aLi2.innerHTML = "删除"
                 tableElement.appendChild(td1);
@@ -42,17 +46,16 @@ $(function () {
                 td3.appendChild(aLi2);
                 tableElement.appendChild(td3);
             }
-            if(blogList.length == 0){
-                pageNum = 1;
-            }else{
-                pageNum = Math.ceil(blogList.length / 5);
-            }
             document.getElementById("pageIndex").innerHTML = String(pageIndex);
             document.getElementById("pageNum").innerHTML = String(pageNum);
-            document.getElementById("blogNum").innerHTML = String(blogList.length);
+            document.getElementById("blogNum").innerHTML = String(blogTotal);
         },
         error:function(){
-            alert("error");
+            console.log("error");
+            pageNum = 1;
+            document.getElementById("pageIndex").innerHTML = String(pageIndex);
+            document.getElementById("pageNum").innerHTML = String(pageNum);
+            document.getElementById("blogNum").innerHTML = String(blogTotal);
         }
     });
 });
@@ -63,7 +66,7 @@ function gotoLogin() {
 }
 
 function pageDown() {
-   if(blogCount < blogList.length){
+   if(blogCount < blogTotal){
        blogNum = 0;
        //清空子元素
        $("#tableElement1").empty();
@@ -72,7 +75,7 @@ function pageDown() {
        $("#tableElement4").empty();
        $("#tableElement5").empty();
        //显示文章
-       for (let index = 0; index < 5 && blogCount < blogList.length; index++, blogCount++, blogNum++) {
+       for (let index = 0; index < 5 && blogCount < blogTotal; index++, blogCount++, blogNum++) {
            const element = blogList[blogCount];
            let tableElement = document.getElementById("tableElement" + String(index + 1));
            let td1 = document.createElement("td");
@@ -84,8 +87,9 @@ function pageDown() {
            aLi1.innerHTML = element.title;
            aLi1.setAttribute('href', 'blog.html?' + element.blogId + '?' + $.cookie("account"));
            aLi1.setAttribute("target", "_blank");
+           aLi2.setAttribute("id", element.blogId);
            aLi2.setAttribute("href","#");
-           aLi2.setAttribute("onclick","return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')");
+           aLi2.setAttribute("onclick","deleteBlog(this)");
            aLi2.setAttribute("class", "ui mini red basic button");
            aLi2.innerHTML = "删除"
            tableElement.appendChild(td1);
@@ -110,7 +114,7 @@ function pageUp() {
         $("#tableElement4").empty();
         $("#tableElement5").empty();
         //显示文章
-        for (let index = 0; index < 5 && blogCount < blogList.length; index++, blogCount++, blogNum++) {
+        for (let index = 0; index < 5 && blogCount < blogTotal; index++, blogCount++, blogNum++) {
             const element = blogList[blogCount];
             let tableElement = document.getElementById("tableElement" + String(index + 1));
             let td1 = document.createElement("td");
@@ -122,8 +126,9 @@ function pageUp() {
             aLi1.innerHTML = element.title;
             aLi1.setAttribute('href', 'blog.html?' + element.blogId + '?' + $.cookie("account"));
             aLi1.setAttribute("target", "_blank");
+            aLi2.setAttribute("id", element.blogId);
             aLi2.setAttribute("href","#");
-            aLi2.setAttribute("onclick","return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')");
+            aLi2.setAttribute("onclick","deleteBlog(this)");
             aLi2.setAttribute("class", "ui mini red basic button");
             aLi2.innerHTML = "删除"
             tableElement.appendChild(td1);
@@ -142,4 +147,24 @@ function searchUserBlog() {
     $.cookie("keywords", keywords, { expires: 7, path: '/', secure: false});
     let url = "searchUserBlog.html?" + $.cookie("account");
     window.open(url, "_self");
+}
+
+function deleteBlog(obj) {
+    var id = obj.id;
+    if (confirm("您真的准备删除此博客吗？")) {
+        $.ajax({
+            type: "post",
+            url: "../com/ladeyi/test/DeleteBlogServlet",
+            data: {
+                blogId: id
+            },
+            dataType: "json",
+            success: function (data) {
+                alert("删除成功");
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
 }

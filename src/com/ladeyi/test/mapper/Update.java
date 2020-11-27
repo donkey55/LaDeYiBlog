@@ -119,35 +119,6 @@ public class Update {
         return ret;
     }
 
-    public static int messageInsert(int fromUserId,int toUserId,String message){
-        int ret=0;
-        String sql="INSERT INTO message(fromUserId,toUserId,message) values (?,?,?)";
-        try{
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,fromUserId);
-            preparedStatement.setInt(2,toUserId);
-            preparedStatement.setString(3,message);
-            ret=preparedStatement.executeUpdate();
-        }catch(SQLException e){
-            return -100;
-        }
-        return ret;
-    }
-
-    public static int attentionInsert(int fromUserId,int toUserId){
-        int ret=0;
-        String sql="INSERT INTO attention(fromUserId,toUserId) values (?,?)";
-        try{
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,fromUserId);
-            preparedStatement.setInt(2,toUserId);
-            ret=preparedStatement.executeUpdate();
-        }catch(SQLException e){
-            return -100;
-        }
-        return ret;
-    }
-
     public static int userInfoUpdate(String attribute,String userName,String content){
         int ret=0;
         String sql="UPDATE user SET "+attribute+"=? WHERE userName=?";
