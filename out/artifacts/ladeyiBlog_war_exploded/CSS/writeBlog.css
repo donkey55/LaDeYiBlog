@@ -1,0 +1,56 @@
+.editBlog {
+    display: table;
+    margin: auto;
+}
+
+.editBlog input {
+    background-color: white;
+    outline: none;
+    border-radius: 8px;
+    border: solid;
+    border-color: gray;
+    width: 200px;
+    height: 25px;
+    outline: none;
+}
+
+#blogArea {
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    border: solid;
+    border-color: gray;
+}
+
+#create {
+    width: 50px;
+    height: 30px;
+    color: white;
+    background-color: #2ea44f;
+    border-radius: 5px;
+}
+
+#blogTitle{
+    display: block;
+    margin-bottom: 20px;
+}
+#blogTitle>label {
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: large;
+}
+
+#blogTitle>input {
+    border-radius: 5px;
+    font-size: 1em;
+    border: 1px;
+    border: solid;
+    outline: none;
+    width: 200px;
+    height: 30px;
+}
+
+#blogTitle>input:hover {
+    box-shadow: 0 0 0 3px royalblue;
+    caret-color: blue;
+}

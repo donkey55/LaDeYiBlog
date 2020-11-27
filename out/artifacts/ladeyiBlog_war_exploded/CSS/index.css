@@ -1,0 +1,7 @@
+body {
+    background-color: chocolate;
+}
+#LoginLogo{
+    width: min-content;
+    float: right;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>拉德衣博客注册</title>
+    <link rel="stylesheet" href="../CSS/register.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="register">
+        <div id="form">
+            <fieldset>
+                <div class="tableRow">
+                    <label for="userName1">用户名</label>
+                    <p><input type="text" name="userName" id="userName1" class="textfield" required></p>
+                </div>
+                <div class="tableRow">
+                    <label for="password_field">密码</label>
+                    <p><input type="password" name="password" id="password_field" class="textfield" required></p>
+                </div>
+
+                <div class="tableRow" id="summitRow">
+                    <label for="submit"></label>
+                    <p><button id="submit" onclick="register()">注册</button></p>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</body>
+<script src="../script/register.js"></script>
+</html>
