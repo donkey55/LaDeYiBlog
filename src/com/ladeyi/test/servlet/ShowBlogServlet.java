@@ -40,7 +40,7 @@ public class ShowBlogServlet extends HttpServlet {
             titleSet.next();
             ret = ret + "{\"userName\":\"" + userNameSet.getString(1) + "\",";
             ret = ret + "\"blog\":\"" + blogSet.getString(1) + "\",";
-            ret = ret + "\"title\":\"" + blogSet.getString(1) + "\"}";
+            ret = ret + "\"title\":\"" + titleSet.getString(1) + "\"}";
         } catch (SQLException e) {
         }
         printWriter.write(ret);
