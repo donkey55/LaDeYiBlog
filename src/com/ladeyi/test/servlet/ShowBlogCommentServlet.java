@@ -1,7 +1,7 @@
 package com.ladeyi.test.servlet;
 
-
-import com.ladeyi.test.service.Preference;
+import com.ladeyi.test.service.Blog;
+import com.ladeyi.test.service.Comment;
 import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
@@ -13,8 +13,8 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DeletePreferenceServlet extends HttpServlet {
-    public DeletePreferenceServlet() {
+public class ShowBlogCommentServlet extends HttpServlet {
+    public ShowBlogCommentServlet() {
         super();
     }
 
@@ -25,21 +25,25 @@ public class DeletePreferenceServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int ret=0;
+        String ret = "[";
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        String userName = request.getParameter("userName");
         int blogId = Integer.parseInt(request.getParameter("blogId"));
+        ResultSet commentSet = Comment.checkCommentUseBlogId(blogId);
         try {
-            ResultSet userIdSet = User.checkId(userName);
-            userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
-            ret = Preference.deletePreference(userId, blogId);
-        }catch(SQLException e){
+            while (commentSet.next()) {
+                ResultSet userSet = User.checkUserName(commentSet.getString(2));
+                userSet.next();
+                ret = ret + "{\"commendId\":\"" + commentSet.getString(1) + "\",";
+                ret = ret + "\"userName\":\"" + userSet.getString(1) + "\",";
+                ret = ret + "\"comment\":\"" + commentSet.getString(4) + "\"},";
+            }
+        } catch (SQLException e) {
         }
-        String output = "{\"ret\":\"" + ret + "\"}";
-        printWriter.write(output);
+        ret = ret.substring(0, ret.length() - 1);
+        ret = ret + "]";
+        printWriter.write(ret);
     }
 
     public void init() throws ServletException {

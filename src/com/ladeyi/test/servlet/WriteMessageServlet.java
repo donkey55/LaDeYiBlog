@@ -1,7 +1,8 @@
 package com.ladeyi.test.servlet;
 
-
-import com.ladeyi.test.service.Preference;
+import com.ladeyi.test.mapper.Query;
+import com.ladeyi.test.service.Comment;
+import com.ladeyi.test.service.Message;
 import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
@@ -13,8 +14,8 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DeletePreferenceServlet extends HttpServlet {
-    public DeletePreferenceServlet() {
+public class WriteMessageServlet extends HttpServlet {
+    public WriteMessageServlet() {
         super();
     }
 
@@ -28,17 +29,21 @@ public class DeletePreferenceServlet extends HttpServlet {
         int ret=0;
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
-        PrintWriter printWriter = response.getWriter();
-        String userName = request.getParameter("userName");
-        int blogId = Integer.parseInt(request.getParameter("blogId"));
-        try {
-            ResultSet userIdSet = User.checkId(userName);
-            userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
-            ret = Preference.deletePreference(userId, blogId);
+        PrintWriter printWriter=response.getWriter();
+        String fromUserName=request.getParameter("fromUserName");
+        String toUserName= request.getParameter("toUserName");
+        String message=request.getParameter("message");
+        try{
+            ResultSet fromUserIdSet = User.checkId(fromUserName);
+            fromUserIdSet.next();
+            int fromUserId=Integer.parseInt(fromUserIdSet.getString(1));
+            ResultSet toUserIdSet = User.checkId(toUserName);
+            toUserIdSet.next();
+            int toUserId=Integer.parseInt(toUserIdSet.getString(1));
+            ret= Message.insertMessage(fromUserId,toUserId,message);
         }catch(SQLException e){
         }
-        String output = "{\"ret\":\"" + ret + "\"}";
+        String output="{\"ret\":\""+ret+"\"}";
         printWriter.write(output);
     }
 

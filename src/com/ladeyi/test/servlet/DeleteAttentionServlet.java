@@ -1,7 +1,6 @@
 package com.ladeyi.test.servlet;
 
-
-import com.ladeyi.test.service.Preference;
+import com.ladeyi.test.service.Attention;
 import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
@@ -12,9 +11,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class DeletePreferenceServlet extends HttpServlet {
-    public DeletePreferenceServlet() {
+public class DeleteAttentionServlet extends HttpServlet {
+    public DeleteAttentionServlet() {
         super();
     }
 
@@ -29,13 +29,16 @@ public class DeletePreferenceServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        String userName = request.getParameter("userName");
-        int blogId = Integer.parseInt(request.getParameter("blogId"));
+        String fromUserName = request.getParameter("fromUserName");
+        String toUserName = request.getParameter("toUserName");
         try {
-            ResultSet userIdSet = User.checkId(userName);
-            userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
-            ret = Preference.deletePreference(userId, blogId);
+            ResultSet fromUserIdSet = User.checkId(fromUserName);
+            fromUserIdSet.next();
+            int fromUserId=Integer.parseInt(fromUserIdSet.getString(1));
+            ResultSet toUserIdSet = User.checkId(toUserName);
+            toUserIdSet.next();
+            int toUserId=Integer.parseInt(toUserIdSet.getString(1));
+            ret = Attention.deleteAttention(fromUserId, toUserId);
         }catch(SQLException e){
         }
         String output = "{\"ret\":\"" + ret + "\"}";

@@ -1,7 +1,8 @@
 package com.ladeyi.test.servlet;
 
-
-import com.ladeyi.test.service.Preference;
+import com.ladeyi.test.service.Blog;
+import com.ladeyi.test.service.Comment;
+import com.ladeyi.test.service.Message;
 import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
@@ -13,8 +14,8 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DeletePreferenceServlet extends HttpServlet {
-    public DeletePreferenceServlet() {
+public class ShowFromMessageServlet extends HttpServlet {
+    public ShowFromMessageServlet() {
         super();
     }
 
@@ -25,21 +26,25 @@ public class DeletePreferenceServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int ret=0;
+        String ret = "[";
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        String userName = request.getParameter("userName");
-        int blogId = Integer.parseInt(request.getParameter("blogId"));
+        int fromUserId = Integer.parseInt(request.getParameter("fromUserId"));
+        ResultSet messageSet = Message.checkMessageUseFromUserId(fromUserId);
         try {
-            ResultSet userIdSet = User.checkId(userName);
-            userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
-            ret = Preference.deletePreference(userId, blogId);
-        }catch(SQLException e){
+            while (messageSet.next()) {
+                ResultSet userSet = User.checkUserName(messageSet.getString(3));
+                userSet.next();
+                ret = ret + "{\"messageId\":\"" + messageSet.getString(1) + "\",";
+                ret = ret + "\"userName\":\"" + userSet.getString(1) + "\",";
+                ret = ret + "\"message\":\"" + messageSet.getString(4) + "\"},";
+            }
+        } catch (SQLException e) {
         }
-        String output = "{\"ret\":\"" + ret + "\"}";
-        printWriter.write(output);
+        ret = ret.substring(0, ret.length() - 1);
+        ret = ret + "]";
+        printWriter.write(ret);
     }
 
     public void init() throws ServletException {
