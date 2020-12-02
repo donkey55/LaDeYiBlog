@@ -3,7 +3,7 @@ var testEditor;
 
 editor = editormd("test-editor", {
     width: "100%",
-    height: 600,
+    height: "80%",
     path: "../editormd/lib/",
     saveHTMLToTextarea: true,
     tocm: true,
@@ -13,9 +13,9 @@ editor = editormd("test-editor", {
 });
 
 $(function(){
-    if($.cookie("account") == undefined){
+    /* if($.cookie("account") == undefined){
         window.location.href="../HTML/login.html";
-    }
+    } */
 });
 
 function getCon() {

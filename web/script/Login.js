@@ -1,5 +1,6 @@
 function query() {
     var url = "user.html?" + $("#login_field").val();
+    window.open("user.html","_self");
     $.ajax({
         type: "post",
         url: "../com/ladeyi/test/LoginServlet",

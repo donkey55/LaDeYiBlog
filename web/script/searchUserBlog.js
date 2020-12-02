@@ -6,9 +6,9 @@ var SPageNum;
 var SBlogTotal = 0;
 
 $(function () {
-    if($.cookie("account") == undefined){
+    /* if($.cookie("account") == undefined){
         window.location.href="../HTML/login.html";
-    }
+    } */
     document.getElementById("username").innerHTML=$.cookie("account")
     $.ajax({
         type: "post",

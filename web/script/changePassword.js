@@ -1,9 +1,3 @@
-var account = window.location.toString().split('?')[1];
-var deleteAccount = document.getElementById("deleteAccount");
-deleteAccount = deleteAccount + "?" + account;
-var userInfoLink = document.getElementById("changePassword");
-userInfoLink.href = userInfoLink + "?" + account;
-
 function change() {
     if ($("#newPassword").val() !== $("#newPassword1").val()) {
         alert("两次输入的密码需要一致");
