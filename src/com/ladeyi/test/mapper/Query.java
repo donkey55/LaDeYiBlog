@@ -1,11 +1,12 @@
 package com.ladeyi.test.mapper;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Query {
-    private static Connection connection=MyConnection.getConnection();
+    private static Connection connection = MyConnection.getConnection();
 
     public static ResultSet select(String column, String table, String restrict) throws SQLException {
         ResultSet resultSet = null;
@@ -15,8 +16,8 @@ public class Query {
         } else {
             sql = sql + " WHERE " + restrict + ";";
         }
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            resultSet = preparedStatement.executeQuery();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        resultSet = preparedStatement.executeQuery();
         return resultSet;
     }
 
@@ -30,12 +31,12 @@ public class Query {
         return resultSet;
     }
 
-    public static ResultSet blogSearchSelect(String keyword) throws  SQLException{
+    public static ResultSet blogSearchSelect(String keyword) throws SQLException {
         ResultSet resultSet = null;
         String sql = "SELECT * FROM blog WHERE blog LIKE ? OR title LIKE ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, "%"+keyword+"%");
-        preparedStatement.setString(2, "%"+keyword+"%");
+        preparedStatement.setString(1, "%" + keyword + "%");
+        preparedStatement.setString(2, "%" + keyword + "%");
         resultSet = preparedStatement.executeQuery();
         return resultSet;
     }

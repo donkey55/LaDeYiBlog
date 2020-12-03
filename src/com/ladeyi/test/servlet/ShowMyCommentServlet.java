@@ -33,7 +33,7 @@ public class ShowMyCommentServlet extends HttpServlet {
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId=Integer.parseInt(userIdSet.getString(1));
+            int userId = Integer.parseInt(userIdSet.getString(1));
             ResultSet commentSet = Comment.checkCommentUseUserId(userId);
             while (commentSet.next()) {
                 ResultSet blogSet = Blog.checkTitle(Integer.parseInt(commentSet.getString(3)));
@@ -44,7 +44,9 @@ public class ShowMyCommentServlet extends HttpServlet {
             }
         } catch (SQLException e) {
         }
-        ret = ret.substring(0, ret.length() - 1);
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
         ret = ret + "]";
         printWriter.write(ret);
     }

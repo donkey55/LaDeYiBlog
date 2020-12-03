@@ -42,7 +42,9 @@ public class ShowFromMessageServlet extends HttpServlet {
             }
         } catch (SQLException e) {
         }
-        ret = ret.substring(0, ret.length() - 1);
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
         ret = ret + "]";
         printWriter.write(ret);
     }

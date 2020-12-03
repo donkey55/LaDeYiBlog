@@ -1,6 +1,7 @@
 package com.ladeyi.test;
 
 import com.ladeyi.test.mapper.MyConnection;
+import com.ladeyi.test.service.Attention;
 import com.ladeyi.test.service.Blog;
 import com.ladeyi.test.service.Comment;
 import com.ladeyi.test.service.Message;
@@ -18,19 +19,22 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         String ret = "[";
-        int toUserId = 10;
-        ResultSet messageSet = Message.checkMessageUseToUserId(toUserId);
+        String userName = "user12";
         try {
-            while (messageSet.next()) {
-                ResultSet userSet = User.checkUserName(messageSet.getString(2));
-                userSet.next();
-                ret = ret + "{\"messageId\":\"" + messageSet.getString(1) + "\",";
-                ret = ret + "\"userName\":\"" + userSet.getString(1) + "\",";
-                ret = ret + "\"message\":\"" + messageSet.getString(4) + "\"},";
+            ResultSet userIdSet = User.checkId(userName);
+            userIdSet.next();
+            int userId = Integer.parseInt(userIdSet.getString(1));
+            ResultSet attentionSet = Attention.checkAttentionUseToUserId(userId);
+            while (attentionSet.next()) {
+                ResultSet userNameSet = User.checkUserName(attentionSet.getString(1));
+                userNameSet.next();
+                ret = ret + "{\"userName\":\"" + userNameSet.getString(1) + "\"},";
             }
         } catch (SQLException e) {
         }
-        ret = ret.substring(0, ret.length() - 1);
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
         ret = ret + "]";
         System.out.println(ret);
         //Query query = new Query(myConnection.getConnection());

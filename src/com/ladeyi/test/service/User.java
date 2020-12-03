@@ -139,27 +139,27 @@ public class User {
     }
 
     public static int changeSelfIntroduction(String userName, String selfIntroduction) {
-        return Update.userInfoUpdate("selfIntroduction",userName,selfIntroduction);
+        return Update.userInfoUpdate("selfIntroduction", userName, selfIntroduction);
     }
 
     public static int changePhone(String userName, String phone) {
-        return Update.userInfoUpdate("phone",userName,phone);
+        return Update.userInfoUpdate("phone", userName, phone);
     }
 
     public static int changeAddress(String userName, String address) {
-        return Update.userInfoUpdate("address",userName,address);
+        return Update.userInfoUpdate("address", userName, address);
     }
 
     public static int changeInterest(String userName, String interest) {
-        return Update.userInfoUpdate("interest",userName,interest);
+        return Update.userInfoUpdate("interest", userName, interest);
     }
 
     public static int changeSex(String userName, String sex) {
-        return Update.userInfoUpdate("sex",userName,sex);
+        return Update.userInfoUpdate("sex", userName, sex);
     }
 
-    public static int changeUserName(String userName,String newUserName){
-        return Update.userInfoUpdate("userName",userName,newUserName);
+    public static int changeUserName(String userName, String newUserName) {
+        return Update.userInfoUpdate("userName", userName, newUserName);
     }
 
     private static boolean validSex(String sex) {

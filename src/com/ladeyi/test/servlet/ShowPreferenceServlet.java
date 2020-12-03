@@ -34,7 +34,7 @@ public class ShowPreferenceServlet extends HttpServlet {
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId=Integer.parseInt(userIdSet.getString(1));
+            int userId = Integer.parseInt(userIdSet.getString(1));
             ResultSet PreferenceSet = Preference.checkPreference(userId);
             while (PreferenceSet.next()) {
                 ResultSet blogSet = Blog.checkTitle(Integer.parseInt(PreferenceSet.getString(2)));
@@ -44,7 +44,9 @@ public class ShowPreferenceServlet extends HttpServlet {
             }
         } catch (SQLException e) {
         }
-        ret = ret.substring(0, ret.length() - 1);
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
         ret = ret + "]";
         printWriter.write(ret);
     }

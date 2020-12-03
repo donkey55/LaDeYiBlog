@@ -25,7 +25,7 @@ public class DeletePreferenceServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int ret=0;
+        int ret = 0;
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
@@ -36,7 +36,7 @@ public class DeletePreferenceServlet extends HttpServlet {
             userIdSet.next();
             int userId = Integer.parseInt(userIdSet.getString(1));
             ret = Preference.deletePreference(userId, blogId);
-        }catch(SQLException e){
+        } catch (SQLException e) {
         }
         String output = "{\"ret\":\"" + ret + "\"}";
         printWriter.write(output);

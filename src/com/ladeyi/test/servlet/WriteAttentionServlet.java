@@ -27,23 +27,23 @@ public class WriteAttentionServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int ret=0;
+        int ret = 0;
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
-        PrintWriter printWriter=response.getWriter();
-        String fromUserName=request.getParameter("fromUserName");
-        String toUserName= request.getParameter("toUserName");
-        try{
+        PrintWriter printWriter = response.getWriter();
+        String fromUserName = request.getParameter("fromUserName");
+        String toUserName = request.getParameter("toUserName");
+        try {
             ResultSet fromUserIdSet = User.checkId(fromUserName);
             fromUserIdSet.next();
-            int fromUserId=Integer.parseInt(fromUserIdSet.getString(1));
+            int fromUserId = Integer.parseInt(fromUserIdSet.getString(1));
             ResultSet toUserIdSet = User.checkId(toUserName);
             toUserIdSet.next();
-            int toUserId=Integer.parseInt(toUserIdSet.getString(1));
+            int toUserId = Integer.parseInt(toUserIdSet.getString(1));
             ret = Attention.insertAttention(fromUserId, toUserId);
-        }catch(SQLException e){
+        } catch (SQLException e) {
         }
-        String output="{\"ret\":\""+ret+"\"}";
+        String output = "{\"ret\":\"" + ret + "\"}";
         printWriter.write(output);
     }
 
