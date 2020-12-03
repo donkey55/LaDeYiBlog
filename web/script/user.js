@@ -145,7 +145,6 @@ function pageUp() {
 function searchUserBlog() {
     let keywords = document.getElementById("keywords").value
     $.cookie("keywords", keywords, { expires: 7, path: '/', secure: false});
-    let url = "searchUserBlog.html?" + $.cookie("account");
     window.open(url, "_self");
 }
 
@@ -156,7 +155,7 @@ function deleteBlog(obj) {
             type: "post",
             url: "../com/ladeyi/test/DeleteBlogServlet",
             data: {
-                blogId: id
+                "blogId" : id
             },
             dataType: "json",
             success: function (data) {
