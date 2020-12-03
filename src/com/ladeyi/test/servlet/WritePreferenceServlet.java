@@ -26,21 +26,21 @@ public class WritePreferenceServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int ret=0;
+        int ret = 0;
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
-        PrintWriter printWriter=response.getWriter();
-        String userName=request.getParameter("userName");
-        int blogId= Integer.parseInt(request.getParameter("blogId"));
-        String label=request.getParameter("label");
-        try{
+        PrintWriter printWriter = response.getWriter();
+        String userName = request.getParameter("userName");
+        int blogId = Integer.parseInt(request.getParameter("blogId"));
+        String label = request.getParameter("label");
+        try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId=Integer.parseInt(userIdSet.getString(1));
-            ret= Preference.insertPreference(userId,blogId,label);
-        }catch(SQLException e){
+            int userId = Integer.parseInt(userIdSet.getString(1));
+            ret = Preference.insertPreference(userId, blogId, label);
+        } catch (SQLException e) {
         }
-        String output="{\"ret\":\""+ret+"\"}";
+        String output = "{\"ret\":\"" + ret + "\"}";
         printWriter.write(output);
     }
 

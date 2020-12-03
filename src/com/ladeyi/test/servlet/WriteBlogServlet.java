@@ -25,21 +25,22 @@ public class WriteBlogServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int ret=0;
+        int ret = 0;
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
-        PrintWriter printWriter=response.getWriter();
-        String userName=request.getParameter("userName");
-        String blog=request.getParameter("blog");
-        String title=request.getParameter("title");
-        try{
-            ResultSet userIdSet = User.checkId(userName);;
+        PrintWriter printWriter = response.getWriter();
+        String userName = request.getParameter("userName");
+        String blog = request.getParameter("blog");
+        String title = request.getParameter("title");
+        try {
+            ResultSet userIdSet = User.checkId(userName);
+            ;
             userIdSet.next();
-            int userId=Integer.parseInt(userIdSet.getString(1));
-            ret= Blog.insertBlog(userId,blog,title);
-        }catch(SQLException e){
+            int userId = Integer.parseInt(userIdSet.getString(1));
+            ret = Blog.insertBlog(userId, blog, title);
+        } catch (SQLException e) {
         }
-        String output="{\"ret\":\""+ret+"\"}";
+        String output = "{\"ret\":\"" + ret + "\"}";
         printWriter.write(output);
     }
 

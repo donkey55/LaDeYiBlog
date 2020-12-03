@@ -28,27 +28,29 @@ public class ShowBlogInfoServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ret="[";
+        String ret = "[";
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        String userName=request.getParameter("userName");
+        String userName = request.getParameter("userName");
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId=Integer.parseInt(userIdSet.getString(1));
+            int userId = Integer.parseInt(userIdSet.getString(1));
             ResultSet blogIdSet = Blog.checkBlogId(userId);
             while (blogIdSet.next()) {
                 ResultSet blogTitle = Blog.checkTitle(Integer.parseInt(blogIdSet.getString(1)));
-                ret=ret+"{\"blogId\":\""+blogIdSet.getString(1)+"\",";
+                ret = ret + "{\"blogId\":\"" + blogIdSet.getString(1) + "\",";
                 while (blogTitle.next()) {
                     ret = ret + "\"title\":\"" + blogTitle.getString(1) + "\"},";
                 }
             }
         } catch (SQLException e) {
         }
-        ret = ret.substring(0,ret.length() - 1);
-        ret=ret+"]";
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
+        ret = ret + "]";
         printWriter.write(ret);
     }
 

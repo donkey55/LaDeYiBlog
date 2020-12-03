@@ -1,9 +1,11 @@
 package com.ladeyi.test.servlet;
 
+
 import com.ladeyi.test.mapper.Query;
-import com.ladeyi.test.service.Comment;
-import com.ladeyi.test.service.Message;
+import com.ladeyi.test.service.Blog;
+import com.ladeyi.test.service.Shop;
 import com.ladeyi.test.service.User;
+import com.mysql.cj.xdevapi.JsonArray;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +15,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class WriteMessageServlet extends HttpServlet {
-    public WriteMessageServlet() {
+public class ShowShopInfoServlet extends HttpServlet {
+    public ShowShopInfoServlet() {
         super();
     }
 
@@ -26,25 +29,25 @@ public class WriteMessageServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int ret = 0;
+        String ret = "[";
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        String fromUserName = request.getParameter("fromUserName");
-        String toUserName = request.getParameter("toUserName");
-        String message = request.getParameter("message");
         try {
-            ResultSet fromUserIdSet = User.checkId(fromUserName);
-            fromUserIdSet.next();
-            int fromUserId = Integer.parseInt(fromUserIdSet.getString(1));
-            ResultSet toUserIdSet = User.checkId(toUserName);
-            toUserIdSet.next();
-            int toUserId = Integer.parseInt(toUserIdSet.getString(1));
-            ret = Message.insertMessage(fromUserId, toUserId, message);
+            ResultSet resultSet = Shop.checkShopAttribute();
+            while (resultSet.next()) {
+                ret = ret + "{\"shopId\":\"" + resultSet.getString(1) + "\",";
+                ret = ret + "\"shopName\":\"" + resultSet.getString(2) + "\",";
+                ret = ret + "\"shopIntroduction\":\"" + resultSet.getString(3) + "\",";
+                ret = ret + "\"shopStar\":\"" + resultSet.getString(4) + "\"},";
+            }
         } catch (SQLException e) {
         }
-        String output = "{\"ret\":\"" + ret + "\"}";
-        printWriter.write(output);
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
+        ret = ret + "]";
+        printWriter.write(ret);
     }
 
     public void init() throws ServletException {

@@ -28,30 +28,30 @@ public class ShowUserInfoServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ret="";
+        String ret = "";
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        String userName=request.getParameter("userName");
+        String userName = request.getParameter("userName");
         try {
             ResultSet resultSet = User.checkSex(userName);
             resultSet.next();
-            ret=ret+"{\"sex\":\""+resultSet.getString(1)+"\",";
+            ret = ret + "{\"sex\":\"" + resultSet.getString(1) + "\",";
             resultSet = User.checkInterest(userName);
             resultSet.next();
-            ret=ret+"\"interest\":\""+resultSet.getString(1)+"\",";
+            ret = ret + "\"interest\":\"" + resultSet.getString(1) + "\",";
             resultSet = User.checkPhone(userName);
             resultSet.next();
-            ret=ret+"\"phone\":\""+resultSet.getString(1)+"\",";
+            ret = ret + "\"phone\":\"" + resultSet.getString(1) + "\",";
             resultSet = User.checkAddress(userName);
             resultSet.next();
-            ret=ret+"\"address\":\""+resultSet.getString(1)+"\",";
+            ret = ret + "\"address\":\"" + resultSet.getString(1) + "\",";
             resultSet = User.checkSelfIntroduction(userName);
             resultSet.next();
-            ret=ret+"\"selfIntroduction\":\""+resultSet.getString(1)+"\",";
+            ret = ret + "\"selfIntroduction\":\"" + resultSet.getString(1) + "\",";
             resultSet = User.checkPoint(userName);
             resultSet.next();
-            ret=ret+"\"point\":\""+resultSet.getString(1)+"\"}";
+            ret = ret + "\"point\":\"" + resultSet.getString(1) + "\"}";
         } catch (SQLException e) {
         }
         printWriter.write(ret);

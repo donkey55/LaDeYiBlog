@@ -1,8 +1,9 @@
 package com.ladeyi.test.servlet;
 
-import com.ladeyi.test.mapper.Query;
+import com.ladeyi.test.service.Attention;
+import com.ladeyi.test.service.Blog;
 import com.ladeyi.test.service.Comment;
-import com.ladeyi.test.service.Message;
+import com.ladeyi.test.service.Preference;
 import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
@@ -14,8 +15,8 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class WriteMessageServlet extends HttpServlet {
-    public WriteMessageServlet() {
+public class ShowFromAttentionServlet extends HttpServlet {
+    public ShowFromAttentionServlet() {
         super();
     }
 
@@ -26,25 +27,28 @@ public class WriteMessageServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int ret = 0;
+        String ret = "[";
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        String fromUserName = request.getParameter("fromUserName");
-        String toUserName = request.getParameter("toUserName");
-        String message = request.getParameter("message");
+        String userName = request.getParameter("userName");
         try {
-            ResultSet fromUserIdSet = User.checkId(fromUserName);
-            fromUserIdSet.next();
-            int fromUserId = Integer.parseInt(fromUserIdSet.getString(1));
-            ResultSet toUserIdSet = User.checkId(toUserName);
-            toUserIdSet.next();
-            int toUserId = Integer.parseInt(toUserIdSet.getString(1));
-            ret = Message.insertMessage(fromUserId, toUserId, message);
+            ResultSet userIdSet = User.checkId(userName);
+            userIdSet.next();
+            int userId = Integer.parseInt(userIdSet.getString(1));
+            ResultSet attentionSet = Attention.checkAttentionUseFromUserId(userId);
+            while (attentionSet.next()) {
+                ResultSet userNameSet = User.checkUserName(attentionSet.getString(2));
+                userNameSet.next();
+                ret = ret + "{\"userName\":\"" + userNameSet.getString(1) + "\"},";
+            }
         } catch (SQLException e) {
         }
-        String output = "{\"ret\":\"" + ret + "\"}";
-        printWriter.write(output);
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
+        ret = ret + "]";
+        printWriter.write(ret);
     }
 
     public void init() throws ServletException {

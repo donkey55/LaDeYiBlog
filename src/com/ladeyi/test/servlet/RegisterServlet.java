@@ -23,11 +23,11 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
-        PrintWriter printWriter=response.getWriter();
-        String userName=request.getParameter("userName");
-        String password=request.getParameter("password");
-        int ret = User.register(userName,password );
-        String output="{\"ret\":\""+ret+"\"}";
+        PrintWriter printWriter = response.getWriter();
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        int ret = User.register(userName, password);
+        String output = "{\"ret\":\"" + ret + "\"}";
         printWriter.write(output);
     }
 

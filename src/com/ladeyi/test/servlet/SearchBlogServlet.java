@@ -36,7 +36,7 @@ public class SearchBlogServlet extends HttpServlet {
         try {
             ResultSet blogSet = Blog.searchBlog(keyword);
             while (blogSet.next()) {
-                ResultSet userSet=User.checkUserName(blogSet.getString(2));
+                ResultSet userSet = User.checkUserName(blogSet.getString(2));
                 userSet.next();
                 ret = ret + "{\"blogId\":\"" + blogSet.getString(1) + "\",";
                 ret = ret + "\"userName\":\"" + userSet.getString(1) + "\",";
@@ -45,7 +45,9 @@ public class SearchBlogServlet extends HttpServlet {
             }
         } catch (SQLException e) {
         }
-        ret = ret.substring(0, ret.length() - 1);
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
         ret = ret + "]";
         printWriter.write(ret);
     }
