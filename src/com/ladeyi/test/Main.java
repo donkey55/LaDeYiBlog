@@ -6,6 +6,7 @@ import com.ladeyi.test.service.Blog;
 import com.ladeyi.test.service.Comment;
 import com.ladeyi.test.service.Message;
 import com.ladeyi.test.service.Preference;
+import com.ladeyi.test.service.Shop;
 import com.ladeyi.test.service.User;
 
 import java.io.PrintWriter;
@@ -21,14 +22,12 @@ public class Main {
         String ret = "[";
         String userName = "user12";
         try {
-            ResultSet userIdSet = User.checkId(userName);
-            userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
-            ResultSet attentionSet = Attention.checkAttentionUseToUserId(userId);
-            while (attentionSet.next()) {
-                ResultSet userNameSet = User.checkUserName(attentionSet.getString(1));
-                userNameSet.next();
-                ret = ret + "{\"userName\":\"" + userNameSet.getString(1) + "\"},";
+            ResultSet resultSet= Shop.checkShopAttribute();
+            while (resultSet.next()){
+                ret=ret+"{\"shopId\":\""+resultSet.getString(1)+"\",";
+                ret=ret+"\"shopName\":\""+resultSet.getString(2)+"\",";
+                ret=ret+"\"shopIntroduction\":\""+resultSet.getString(3)+"\",";
+                ret=ret+"\"shopStar\":\""+resultSet.getString(4)+"\"},";
             }
         } catch (SQLException e) {
         }
