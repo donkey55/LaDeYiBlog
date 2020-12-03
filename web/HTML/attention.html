@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache">
     <title>博客后台</title>
     <link href="../images/blogLogo.jpg" rel="icon" type="image/x-ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
@@ -12,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script src="../script/refJS/jquery.cookie.js"></script>
     <script src="../script/user.js"></script>
+
 </head>
 
 <body>
@@ -44,8 +46,59 @@
         </div>
         
     </nav>
-
     
-</body>
+    <div  class="" style="margin-top: 10%;">
+        <div class="ui container">
+            <div  class="ui secondary segment form">
+                <input type="hidden" name="page" >
+                <div class="inline fields">
+                    <div class="field">
+                        <input type="text" name="title" placeholder="标题或关键字" id="keywords">
+                    </div>
+                    <div class="field">
+                        <button  type="button" id="search-btn" class="ui mini teal basic button" onclick="searchAttention()"><i class="search icon"></i>搜索</button>
+                    </div>
+                </div>
+            </div>
+            <div id="table-container">
+                <table class="ui compact teal table">
+                    <thead>
+                    <tr align="center">
+                        <th>ID</th>
+                        <th>人</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    <tr align="center" id="tableElement1"></tr>
+                    <tr align="center" id="tableElement2"></tr>
+                    <tr align="center" id="tableElement3"></tr>
+                    <tr align="center" id="tableElement4"></tr>
+                    <tr align="center" id="tableElement5"></tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="7">
+                            <div class="ui inverted divided stackable grid">
+                                <div class="three wide column" align="center">
+                                    <a class="item" onclick="pageUp()">上一页</a>
+                                </div>
 
+                                <div class="ten wide column" align="center">
+                                    <p>第 <span id="pageIndex"></span> 页，共 <span id="pageNum"></span> 页，有 <span id="preferenceTotal"></span> 个人</p>
+                                </div>
+
+                                <div class="three wide column" align="center">
+                                    <a class="item" onclick="pageDown()">下一页</a>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../script/normal.js"></script>
 </html>

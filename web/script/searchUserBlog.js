@@ -72,11 +72,6 @@ $(function () {
     //console.log(SBlogList);
 });
 
-function gotoLogin() {
-    $.removeCookie("account",{ path: '/'});
-    window.location.href="../HTML/login.html";
-}
-
 function pageDown() {
     if(SBlogCount < SBlogTotal){
         SBlogNum = 0;

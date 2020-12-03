@@ -27,8 +27,8 @@ $(function () {
             preferenceTotal = preferenceList.length;
             //显示文章
             addTd();
-            document.getElementById("preferenceIndex").innerHTML = String(pageIndex);
-            document.getElementById("preferenceNum").innerHTML = String(pageNum);
+            document.getElementById("pageIndex").innerHTML = String(pageIndex);
+            document.getElementById("pageNum").innerHTML = String(pageNum);
             document.getElementById("preferenceNum").innerHTML = String(preferenceTotal);
         },
         error: function () {
@@ -62,8 +62,8 @@ function searchPreference() {
             preferenceTotal = preferenceList.length;
             //显示文章
             addTd();
-            document.getElementById("preferenceIndex").innerHTML = String(pageIndex);
-            document.getElementById("preferenceNum").innerHTML = String(pageNum);
+            document.getElementById("pageIndex").innerHTML = String(pageIndex);
+            document.getElementById("pageNum").innerHTML = String(pageNum);
             document.getElementById("preferenceTotal").innerHTML = String(preferenceTotal);
         },
         error: function () {
@@ -162,11 +162,4 @@ function emptyTd() {
     $("#tableElement3").empty();
     $("#tableElement4").empty();
     $("#tableElement5").empty();
-}
-
-function gotoLogin() {
-    $.removeCookie("account", {
-        path: '/'
-    });
-    window.location.href = "../HTML/login.html";
 }

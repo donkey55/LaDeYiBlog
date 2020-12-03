@@ -41,7 +41,7 @@ $(function () {
     });
 });
 
-function searchPreference() {
+function searchAttention() {
     let keywords = document.getElementById("keywords").value;
     $.ajax({
         //等接口
@@ -62,15 +62,15 @@ function searchPreference() {
             attentionTotal = attentionList.length;
             //显示文章
             addTd();
-            document.getElementById("attentionIndex").innerHTML = String(pageIndex);
-            document.getElementById("attentionNum").innerHTML = String(pageNum);
+            document.getElementById("pageIndex").innerHTML = String(pageIndex);
+            document.getElementById("pageNum").innerHTML = String(pageNum);
             document.getElementById("attentionTotal").innerHTML = String(attentionTotal);
         },
         error: function () {
             console.log("error");
             pageNum = 1;
-            document.getElementById("attentionIndex").innerHTML = String(pageIndex);
-            document.getElementById("attentionNum").innerHTML = String(pageNum);
+            document.getElementById("pageIndex").innerHTML = String(pageIndex);
+            document.getElementById("pageNum").innerHTML = String(pageNum);
             document.getElementById("attentionTotal").innerHTML = String(attentionTotal);
         }
     });
@@ -159,11 +159,4 @@ function emptyTd() {
     $("#tableElement3").empty();
     $("#tableElement4").empty();
     $("#tableElement5").empty();
-}
-
-function gotoLogin() {
-    $.removeCookie("account", {
-        path: '/'
-    });
-    window.location.href = "../HTML/login.html";
 }

@@ -27,7 +27,7 @@ $(function () {
                 const element = blogList[blogCount];
                 let tableElement = document.getElementById("tableElement" + String(index + 1));
                 let td1 = document.createElement("td");
-                let td2 = document.createElement("td");gi
+                let td2 = document.createElement("td");
                 let td3 = document.createElement("td");
                 let aLi1 = document.createElement("a");
                 let aLi2 = document.createElement("a");
@@ -59,11 +59,6 @@ $(function () {
         }
     });
 });
-
-function gotoLogin() {
-    $.removeCookie("account",{ path: '/'});
-    window.location.href="../HTML/login.html";
-}
 
 function pageDown() {
    if(blogCount < blogTotal){

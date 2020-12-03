@@ -9,13 +9,13 @@ editor = editormd("test-editor", {
     tocm: true,
     tex: true,
     emoji: true, //编辑主题
-    saveHTMLToTextarea: true,
 });
 
 $(function(){
     /* if($.cookie("account") == undefined){
         window.location.href="../HTML/login.html";
     } */
+    document.getElementById("username").innerHTML = $.cookie("account");
 });
 
 function getCon() {
@@ -32,6 +32,7 @@ function getCon() {
             //console.log($("#test-editor-html-code").val());
             if (data.ret === "1") {
                 alert("发布成功");
+                location.reload();
             }else{
                 alert("发布失败");
             }
@@ -41,3 +42,7 @@ function getCon() {
         }
     });
 }
+
+
+
+

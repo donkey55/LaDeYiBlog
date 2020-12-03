@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache">
     <title>博客编辑</title>
     <link href="../images/blogLogo.jpg" rel="icon" type="image/x-ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="../CSS/writeBlog.css">
     <link rel="stylesheet" href="../CSS/user.css">
     <link rel="stylesheet" href="../editormd/css/editormd.css" />
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script src="../script/jquery.cookie.js"></script>
@@ -20,26 +22,26 @@
     <script src="../editormd/lib/sequence-diagram.min.js"></script>
     <script src="../editormd/lib/jquery.flowchart.min.js"></script>
     <script src="../editormd/editormd.min.js"></script>
-    <script>
-        function gotoLogin() {
-            $.removeCookie("account",{ path: '/'});
-            window.location.href="../HTML/login.html";
-        }
-    </script>
+    <script src="../script/refJS/jquery.cookie.js"></script>
+    <script src="../script/writeBlog.js"></script>
 
 </head>
 <body>
 
 <!--导航栏-->
-<nav class="ui inverted gird-header" >
+<<nav class="ui inverted gird-header">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
-            <h2 class="ui olive header item" style="font-family: STSong">博客编辑</h2>
+            <h2 class="ui olive header item" style="font-family: STSong">添加博客</h2>
+            <a href="#" class=" m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+            <a href="user.html" class=" m-item item m-mobile-hide"><i class="pencil alternate icon"></i>文章</a>
+            <a href="attention.html" class=" m-item item m-mobile-hide"><i class="heart icon"></i>关注</a>
+            <a href="preference.html" class="m-item item m-mobile-hide"><i class="folder icon"></i>收藏</a>
             <div class="right m-item m-mobile-hide menu">
                 <div class="ui dropdown  item">
                     <img class="ui avatar image" src="../images/blogLogo.jpg">
                     <div class="text">
-                        <span id="username">商城</span>
+                        <span id="username"></span>
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
@@ -78,15 +80,7 @@
         <textarea id="doc-contenttext" style="display: none;"></textarea>
     </div>
 </div>
-
-<script>
-    $('.ui.dropdown').dropdown({
-        on : 'hover'
-    });
-</script>
-
-<script src="../script/writeBlog.js"></script>
-
 </body>
+<script src="../script/normal.js"></script>
 </html>
 
