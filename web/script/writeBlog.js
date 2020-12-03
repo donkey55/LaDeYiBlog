@@ -9,6 +9,7 @@ editor = editormd("test-editor", {
     tocm: true,
     tex: true,
     emoji: true, //编辑主题
+    saveHTMLToTextarea: true,
 });
 
 $(function(){
