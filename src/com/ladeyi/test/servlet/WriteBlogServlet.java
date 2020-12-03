@@ -13,6 +13,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+为用户新建一条博客，需要输入新建博客的用户的用户名，博客的内容和博客的标题
+返回1则新建成功，返回新建失败
+*/
 public class WriteBlogServlet extends HttpServlet {
     public WriteBlogServlet() {
         super();

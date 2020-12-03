@@ -13,6 +13,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+显示一个用户发表的所有的评论，需要输入该用户的用户名，
+返回该用户发表的所有评论的id、发表的评论所述的博客标题以及评论的具体内容
+*/
 public class ShowMyCommentServlet extends HttpServlet {
     public ShowMyCommentServlet() {
         super();

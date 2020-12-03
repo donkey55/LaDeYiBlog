@@ -14,6 +14,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+显示一个用户接受到的所有的信息，即收件箱，需要输入该用户的用户名
+返回接收到的所有信息的id、发送信息的用户名以及信息的具体内容
+*/
 public class ShowToMessageServlet extends HttpServlet {
     public ShowToMessageServlet() {
         super();

@@ -13,6 +13,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+用户为一个博客撰写一条评论，需要输入撰写评论的用户的用户名、被插入评论的博客id以及评论的具体内容，
+返回1则添加成功，返回0添加失败
+*/
 public class WriteCommentServlet extends HttpServlet {
     public WriteCommentServlet() {
         super();

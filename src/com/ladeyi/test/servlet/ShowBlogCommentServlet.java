@@ -13,6 +13,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+展示一篇博客的所有评论，需要输入当前博客的id，
+返回该博客下所有的评论的id、评论者的用户名以及评论的内容
+*/
 public class ShowBlogCommentServlet extends HttpServlet {
     public ShowBlogCommentServlet() {
         super();

@@ -17,6 +17,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/*
+在用户打开商店界面的时候显示所有商店的信息，不需要任何输入，
+返回所有商店的商店id，商店名字，商店介绍以及商店星级
+*/
 public class ShowShopInfoServlet extends HttpServlet {
     public ShowShopInfoServlet() {
         super();

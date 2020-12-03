@@ -13,6 +13,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+删除一个用户收藏的博客，需要输入当前执行删除操作的用户名和收藏的博客的id
+返回1代表删除成功，返回0代表删除失败
+*/
 public class DeletePreferenceServlet extends HttpServlet {
     public DeletePreferenceServlet() {
         super();

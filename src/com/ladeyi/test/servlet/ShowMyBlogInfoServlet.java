@@ -16,6 +16,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/*
+在登录进入主界面之后，在主界面上加载该用户发表的所有博客，需要输入该用户的用户名，
+返回该用户发表的所有博客的id以及博客标题
+*/
 public class ShowMyBlogInfoServlet extends HttpServlet {
     public ShowMyBlogInfoServlet() {
         super();

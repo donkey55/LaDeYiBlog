@@ -15,6 +15,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+显示一个用户被那些用户所关注，即关注该用户的所有其他用户，需要输入当前用户的用户名
+返回关注该用户的所有其他用户的用户名
+*/
 public class ShowToAttentionServlet extends HttpServlet {
     public ShowToAttentionServlet() {
         super();

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/*
+修改用户的密码，需要输入旧密码和新密码，返回1时修改成功，返回0时修改失败
+*/
 public class ChangePasswordServlet extends HttpServlet {
     public ChangePasswordServlet() {
         super();

@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/*
+修改用户的个人信息，需要输入用户名，attribute，修改后的内容，
+通过设定输入的attribute值来指定修改某一类个人信息，
+attribute可为phone,address,sex,interest,userName,
+返回1表示修改成功，返回0表示修改失败
+*/
 public class ChangeUserInfoServlet extends HttpServlet {
     public ChangeUserInfoServlet() {
         super();

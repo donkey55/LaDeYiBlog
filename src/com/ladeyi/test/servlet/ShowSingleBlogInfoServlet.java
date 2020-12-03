@@ -18,6 +18,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/*
+显示一篇博客的所有相关信息，包括打开该博客的用户是否收藏了该篇博客，该博客的被收藏数和被评论数，
+需要输入当前查看该博客的用户名和博客的id
+concerned返回1时表示已经收藏，返回0表示未收藏
+preferenceCount为该博客被收藏的次数
+commentCount为该博客被评论的次数
+*/
 public class ShowSingleBlogInfoServlet extends HttpServlet {
     public ShowSingleBlogInfoServlet() {
         super();

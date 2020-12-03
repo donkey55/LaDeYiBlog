@@ -10,7 +10,10 @@ import java.io.IOException;
 
 import java.io.PrintWriter;
 
-
+/*
+执行登录操作，需要输入用户输入的用户名，以及用户输入的密码
+返回1代表登录成功，返回0代表登录失败
+*/
 public class LoginServlet extends HttpServlet {
 
     public LoginServlet() {

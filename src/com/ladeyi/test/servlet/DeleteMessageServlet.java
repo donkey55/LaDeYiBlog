@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/*
+删除一条用户发送的消息，需要输入需要被删除的信息的id
+返回1代表删除成功，返回0代表删除失败
+*/
 public class DeleteMessageServlet extends HttpServlet {
     public DeleteMessageServlet() {
         super();

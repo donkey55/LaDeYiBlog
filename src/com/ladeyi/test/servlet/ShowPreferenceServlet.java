@@ -14,6 +14,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+显示一个用户收藏的所有的博客，需要输入当前用户的姓名
+返回用户收藏的所有博客的标题，博客的id以及该收藏所设置的标签
+*/
 public class ShowPreferenceServlet extends HttpServlet {
     public ShowPreferenceServlet() {
         super();

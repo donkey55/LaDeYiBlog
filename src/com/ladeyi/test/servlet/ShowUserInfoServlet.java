@@ -16,6 +16,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/*
+显示用户的所有个人信息，需要输入该用户的用户名
+返回用户的个人信息，即用户的phone,address,sex,interest,userName信息
+*/
 public class ShowUserInfoServlet extends HttpServlet {
     public ShowUserInfoServlet() {
         super();

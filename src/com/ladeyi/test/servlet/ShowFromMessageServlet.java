@@ -14,6 +14,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+显示一个用户发送给他人的所有的信息，即已发送的信息，需要输入该用户的用户名
+返回已发送的信息的id、接受者的用户名以及信息的具体内容
+*/
 public class ShowFromMessageServlet extends HttpServlet {
     public ShowFromMessageServlet() {
         super();

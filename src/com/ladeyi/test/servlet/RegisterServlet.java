@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/*
+注册一个用户，需要输入用户希望的用户名，以及用户设置的密码
+返回1代表注册成功，返回0代表注册失败
+*/
 public class RegisterServlet extends HttpServlet {
     public RegisterServlet() {
         super();

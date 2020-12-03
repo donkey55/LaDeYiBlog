@@ -14,6 +14,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+用户收藏一篇博客，需要输入收藏博客的用户的用户名，被收藏的博客的id以及本次收藏的简介
+返回1则收藏成功，返回0收藏失败
+*/
 public class WritePreferenceServlet extends HttpServlet {
     public WritePreferenceServlet() {
         super();

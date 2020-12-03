@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/*
+删除一个用户的一篇博客，需要输入需要被删除的博客的Id
+返回1代表删除成功，返回0代表删除失败
+*/
 public class DeleteBlogServlet extends HttpServlet {
     public DeleteBlogServlet() {
         super();

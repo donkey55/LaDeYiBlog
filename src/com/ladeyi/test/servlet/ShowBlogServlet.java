@@ -12,6 +12,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+在点击一篇博客之后显示该博客内容，需要输入该博客的id，
+返回写这篇博客的作者的用户名、博客的内容和博客的标题
+*/
 public class ShowBlogServlet extends HttpServlet {
     public ShowBlogServlet() {
         super();

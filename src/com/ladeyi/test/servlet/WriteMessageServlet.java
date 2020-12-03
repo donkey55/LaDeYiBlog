@@ -14,6 +14,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+用户发送一条信息，需要输入发送者的用户名、接受者的用户名以及信息的具体内容
+返回1则发送成功，返回0发送失败
+*/
 public class WriteMessageServlet extends HttpServlet {
     public WriteMessageServlet() {
         super();

@@ -13,6 +13,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/*
+删除一个用户的关注对象，需要输入执行删除操作的用户名，以及需要被删除的关注对象的用户名
+返回1代表删除成功，返回0代表删除失败
+*/
 public class DeleteAttentionServlet extends HttpServlet {
     public DeleteAttentionServlet() {
         super();

@@ -16,6 +16,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/*
+根据关键字返回 标题 和 内容 中带有关键字的博客，需要输入搜索的关键字，
+返回所有符合要求的博客的博客id、写这篇博客的用户名、博客的内容以及博客的标题
+*/
 public class SearchBlogServlet extends HttpServlet {
     public SearchBlogServlet() {
         super();

@@ -12,6 +12,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+删除一个用户，需要输入需要被删除的用户的姓名
+返回1代表删除成功，返回0代表删除失败
+*/
 public class DeleteUserServlet extends HttpServlet {
     public DeleteUserServlet() {
         super();

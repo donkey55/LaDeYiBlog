@@ -15,6 +15,10 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+为用户添加一个关注，需要输入添加关注的用户的用户名，以及关注对象的用户名，
+返回1则添加成功，返回0添加失败
+*/
 public class WriteAttentionServlet extends HttpServlet {
     public WriteAttentionServlet() {
         super();
