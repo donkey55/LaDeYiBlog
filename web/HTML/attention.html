@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -12,24 +11,24 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script src="../script/refJS/jquery.cookie.js"></script>
-    <script src="../script/mall.js"></script>
+    <script src="../script/user.js"></script>
 </head>
 
-<!--导航栏-->
 <body>
-    <nav class="ui inverted gird-header" >
+    <!--导航栏-->
+    <nav class="ui inverted gird-header">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
-                <h2 class="ui olive header item" style="font-family: STSong">商城</h2>
-                <!-- <a href="#" class=" m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
-                <a href="#" class="active m-item item m-mobile-hide"><i class="pencil alternate icon"></i>文章</a>
-                <a href="#" class=" m-item item m-mobile-hide"><i class="heart icon"></i>关注</a>
-                <a href="#" class=" m-item item m-mobile-hide"><i class="folder icon"></i>收藏</a> -->
+                <h2 class="ui olive header item" style="font-family: STSong">管理后台</h2>
+                <a href="#" class=" m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                <a href="user.html" class=" m-item item m-mobile-hide"><i class="pencil alternate icon"></i>文章</a>
+                <a href="attention.html" class="active m-item item m-mobile-hide"><i class="heart icon"></i>关注</a>
+                <a href="preference.html" class=" m-item item m-mobile-hide"><i class="folder icon"></i>收藏</a>
                 <div class="right m-item m-mobile-hide menu">
                     <div class="ui dropdown  item">
                         <img class="ui avatar image" src="../images/blogLogo.jpg">
                         <div class="text">
-                            <span id="username">商城</span>
+                            <span id="username">关注</span>
                         </div>
                         <i class="dropdown icon"></i>
                         <div class="menu">
@@ -43,14 +42,10 @@
                 </div>
             </div>
         </div>
-        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
-            <i class="sidebar icon"></i>
-        </a>
+        
     </nav>
+
+    
 </body>
-<script>
-    $('.ui.dropdown').dropdown({
-        on : 'hover'
-    });
-</script>
+
 </html>
