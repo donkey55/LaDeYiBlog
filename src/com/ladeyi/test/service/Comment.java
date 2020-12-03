@@ -22,6 +22,17 @@ public class Comment {
         }
     }
 
+    public static int checkCommentCount(int id){
+        try {
+            String restrict = "blogId=" + id;
+            ResultSet resultSet = Query.select("COUNT(*)", "comment", restrict);
+            resultSet.next();
+            return resultSet.getInt(1);
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
     public static ResultSet checkCommentUseUserId(int id) {
         try {
             String restrict = "userId=" + id;

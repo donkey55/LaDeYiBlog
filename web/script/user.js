@@ -12,7 +12,7 @@ $(function () {
     document.getElementById("username").innerHTML=$.cookie("account")
     $.ajax({
         type: "post",
-        url: "../com/ladeyi/test/ShowBlogInfoServlet",
+        url: "../com/ladeyi/test/ShowMyBlogInfoServlet",
         data: {
             "userName": $.cookie("account")
         },

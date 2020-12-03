@@ -22,8 +22,33 @@ public class Preference {
         }
     }
 
+    public static int checkPreferenceCount(int id){
+        try {
+            String restrict = "blogId=" + id;
+            ResultSet resultSet = Query.select("COUNT(*)", "preference", restrict);
+            resultSet.next();
+            return resultSet.getInt(1);
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
     public static int deletePreference(int userId, int blogId) {
         String restrict = "userId=" + userId + " AND blogId=" + blogId;
         return Update.delete("preference", restrict);
+    }
+
+    public static int checkSingleBlogPreference(int userId,int blogId){
+        try {
+            String restrict = "userId=" + userId+" AND blogId="+blogId;
+            ResultSet resultSet = Query.select("*", "preference", restrict);
+            if (resultSet.next()){
+                return 1;
+            }else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            return 0;
+        }
     }
 }

@@ -34,7 +34,7 @@ public class ShowPreferenceServlet extends HttpServlet {
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
+            int userId=userIdSet.getInt(1);
             ResultSet PreferenceSet = Preference.checkPreference(userId);
             while (PreferenceSet.next()) {
                 ResultSet blogSet = Blog.checkTitle(Integer.parseInt(PreferenceSet.getString(2)));

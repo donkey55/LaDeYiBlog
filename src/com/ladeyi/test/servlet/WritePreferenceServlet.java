@@ -36,7 +36,7 @@ public class WritePreferenceServlet extends HttpServlet {
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
+            int userId=userIdSet.getInt(1);
             ret = Preference.insertPreference(userId, blogId, label);
         } catch (SQLException e) {
         }

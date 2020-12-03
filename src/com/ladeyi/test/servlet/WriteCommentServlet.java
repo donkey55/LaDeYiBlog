@@ -35,7 +35,7 @@ public class WriteCommentServlet extends HttpServlet {
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
+            int userId=userIdSet.getInt(1);
             ret = Comment.insertComment(userId, blogId, comment);
         } catch (SQLException e) {
         }

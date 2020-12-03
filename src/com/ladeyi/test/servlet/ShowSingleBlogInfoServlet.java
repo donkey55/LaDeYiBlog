@@ -3,6 +3,8 @@ package com.ladeyi.test.servlet;
 
 import com.ladeyi.test.mapper.Query;
 import com.ladeyi.test.service.Blog;
+import com.ladeyi.test.service.Comment;
+import com.ladeyi.test.service.Preference;
 import com.ladeyi.test.service.User;
 import com.mysql.cj.xdevapi.JsonArray;
 
@@ -16,8 +18,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ShowBlogInfoServlet extends HttpServlet {
-    public ShowBlogInfoServlet() {
+public class ShowSingleBlogInfoServlet extends HttpServlet {
+    public ShowSingleBlogInfoServlet() {
         super();
     }
 
@@ -28,29 +30,21 @@ public class ShowBlogInfoServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ret = "[";
+        String ret = "";
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
         String userName = request.getParameter("userName");
+        int blogId = Integer.parseInt(request.getParameter("blogId"));
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
-            ResultSet blogIdSet = Blog.checkBlogId(userId);
-            while (blogIdSet.next()) {
-                ResultSet blogTitle = Blog.checkTitle(Integer.parseInt(blogIdSet.getString(1)));
-                ret = ret + "{\"blogId\":\"" + blogIdSet.getString(1) + "\",";
-                while (blogTitle.next()) {
-                    ret = ret + "\"title\":\"" + blogTitle.getString(1) + "\"},";
-                }
-            }
+            int userId = userIdSet.getInt(1);
+            ret = ret + "{\"concerned\":\"" + Preference.checkSingleBlogPreference(userId, blogId) + "\",";
+            ret = ret + "\"preferenceCount\":\"" + Preference.checkPreferenceCount(blogId) + "\",";
+            ret = ret + "\"commentCount\":\"" + Comment.checkCommentCount(blogId) + "\"}";
         } catch (SQLException e) {
         }
-        if (ret.charAt(ret.length() - 1) == ',') {
-            ret = ret.substring(0, ret.length() - 1);
-        }
-        ret = ret + "]";
         printWriter.write(ret);
     }
 

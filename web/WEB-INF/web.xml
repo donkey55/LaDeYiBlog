@@ -25,12 +25,12 @@
         <url-pattern>/com/ladeyi/test/ChangePasswordServlet</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>ShowBlogInfoServlet</servlet-name>
-        <servlet-class>com.ladeyi.test.servlet.ShowBlogInfoServlet</servlet-class>
+        <servlet-name>ShowMyBlogInfoServlet</servlet-name>
+        <servlet-class>com.ladeyi.test.servlet.ShowMyBlogInfoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ShowBlogInfoServlet</servlet-name>
-        <url-pattern>/com/ladeyi/test/ShowBlogInfoServlet</url-pattern>
+        <servlet-name>ShowMyBlogInfoServlet</servlet-name>
+        <url-pattern>/com/ladeyi/test/ShowMyBlogInfoServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>DeleteBlogServlet</servlet-name>

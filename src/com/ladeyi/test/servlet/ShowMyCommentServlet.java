@@ -33,7 +33,7 @@ public class ShowMyCommentServlet extends HttpServlet {
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
+            int userId=userIdSet.getInt(1);
             ResultSet commentSet = Comment.checkCommentUseUserId(userId);
             while (commentSet.next()) {
                 ResultSet blogSet = Blog.checkTitle(Integer.parseInt(commentSet.getString(3)));

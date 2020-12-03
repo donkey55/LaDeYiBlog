@@ -35,7 +35,7 @@ public class ShowToAttentionServlet extends HttpServlet {
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
+            int userId=userIdSet.getInt(1);
             ResultSet attentionSet = Attention.checkAttentionUseToUserId(userId);
             while (attentionSet.next()) {
                 ResultSet userNameSet = User.checkUserName(attentionSet.getString(1));

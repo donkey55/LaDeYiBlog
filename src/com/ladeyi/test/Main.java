@@ -19,32 +19,24 @@ public class Main {
     private static Connection connection = MyConnection.getConnection();
 
     public static void main(String[] args) throws SQLException {
-        String ret = "[";
+        String ret = "";
         String userName = "user1";
+        int blogId = 8;
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId = Integer.parseInt(userIdSet.getString(1));
-            ResultSet PreferenceSet = Preference.checkPreference(userId);
-            while (PreferenceSet.next()) {
-                ResultSet blogSet = Blog.checkTitle(Integer.parseInt(PreferenceSet.getString(2)));
-                blogSet.next();
-                ret = ret + "{\"title\":\"" + blogSet.getString(1) + "\",";
-                ret = ret + "\"blogId\":\"" + PreferenceSet.getString(2) + "\",";
-                ret = ret + "\"label\":\"" + PreferenceSet.getString(3) + "\"},";
-            }
+            int userId = userIdSet.getInt(1);
+            ret = ret + "{\"concerned\":\"" + Preference.checkSingleBlogPreference(userId, blogId) + "\",";
+            ret = ret + "\"preferenceCount\":\"" + Preference.checkPreferenceCount(blogId) + "\",";
+            ret = ret + "\"commentCount\":\"" + Comment.checkCommentCount(blogId) + "\"}";
         } catch (SQLException e) {
         }
-        if (ret.charAt(ret.length() - 1) == ',') {
-            ret = ret.substring(0, ret.length() - 1);
-        }
-        ret = ret + "]";
         System.out.println(ret);
         //Query query = new Query(myConnection.getConnection());
         //Update update = new Update(myConnection.getConnection());
         //Call call=new Call(myConnection.getConnection());
         //ResultSet resultSet = null;
-        //System.out.println(ShowBlogInfoServlet.doPost());
+        //System.out.println(ShowMyBlogInfoServlet.doPost());
     }
 }
 
