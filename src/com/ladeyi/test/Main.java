@@ -20,14 +20,18 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         String ret = "[";
-        String userName = "user12";
+        String userName = "user1";
         try {
-            ResultSet resultSet= Shop.checkShopAttribute();
-            while (resultSet.next()){
-                ret=ret+"{\"shopId\":\""+resultSet.getString(1)+"\",";
-                ret=ret+"\"shopName\":\""+resultSet.getString(2)+"\",";
-                ret=ret+"\"shopIntroduction\":\""+resultSet.getString(3)+"\",";
-                ret=ret+"\"shopStar\":\""+resultSet.getString(4)+"\"},";
+            ResultSet userIdSet = User.checkId(userName);
+            userIdSet.next();
+            int userId = Integer.parseInt(userIdSet.getString(1));
+            ResultSet PreferenceSet = Preference.checkPreference(userId);
+            while (PreferenceSet.next()) {
+                ResultSet blogSet = Blog.checkTitle(Integer.parseInt(PreferenceSet.getString(2)));
+                blogSet.next();
+                ret = ret + "{\"title\":\"" + blogSet.getString(1) + "\",";
+                ret = ret + "\"blogId\":\"" + PreferenceSet.getString(2) + "\",";
+                ret = ret + "\"label\":\"" + PreferenceSet.getString(3) + "\"},";
             }
         } catch (SQLException e) {
         }

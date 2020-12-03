@@ -40,6 +40,7 @@ public class ShowPreferenceServlet extends HttpServlet {
                 ResultSet blogSet = Blog.checkTitle(Integer.parseInt(PreferenceSet.getString(2)));
                 blogSet.next();
                 ret = ret + "{\"title\":\"" + blogSet.getString(1) + "\",";
+                ret = ret + "\"blogId\":\"" + PreferenceSet.getString(2) + "\",";
                 ret = ret + "\"label\":\"" + PreferenceSet.getString(3) + "\"},";
             }
         } catch (SQLException e) {
