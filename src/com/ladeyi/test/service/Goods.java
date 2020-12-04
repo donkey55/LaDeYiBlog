@@ -20,6 +20,16 @@ public class Goods {
         }
     }
 
+    public static ResultSet checkGoodsUseGoodsId(int goodsId) {
+        try {
+            String restrict = "goodsId=" + goodsId;
+            ResultSet resultSet = Query.select("goodsName", "goods", restrict);
+            return resultSet;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
     public static int buyGoods(int goodsId, int userId, int amount) {
         return Call.buyProcedure(goodsId,userId,amount);
     }

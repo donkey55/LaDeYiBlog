@@ -2,6 +2,7 @@ package com.ladeyi.test;
 
 import com.ladeyi.test.mapper.MyConnection;
 import com.ladeyi.test.service.Attention;
+import com.ladeyi.test.service.Bill;
 import com.ladeyi.test.service.Blog;
 import com.ladeyi.test.service.Comment;
 import com.ladeyi.test.service.Goods;
@@ -21,12 +22,27 @@ public class Main {
     private static Connection connection = MyConnection.getConnection();
 
     public static void main(String[] args) throws SQLException {
-        int ret =0;
-        int goodsId = 1;
-        int userId = 1;
-        int amount = 1;
-        ret= Goods.buyGoods(goodsId,userId,amount);
-        String output = "{\"ret\":\"" + ret + "\"}";
+        String ret = "[";
+        String userName = "user2";
+        try {
+            ResultSet userIdSet = User.checkId(userName);
+            userIdSet.next();
+            int userId = userIdSet.getInt(1);
+            ResultSet billSet = Bill.checkBill(userId);
+            while (billSet.next()) {
+                ResultSet goodsSet = Goods.checkGoodsUseGoodsId(Integer.parseInt(billSet.getString(2)));
+                goodsSet.next();
+                ret = ret + "{\"goodsId\":\"" + billSet.getString(2) + "\",";
+                ret = ret + "\"goodsName\":\"" + goodsSet.getString(1) + "\",";
+                ret = ret + "\"amount\":\"" + billSet.getString(3) + "\",";
+                ret = ret + "\"billId\":\"" + billSet.getString(4) + "\"},";
+            }
+        } catch (SQLException e) {
+        }
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
+        ret = ret + "]";
         System.out.println(ret);
         //Query query = new Query(myConnection.getConnection());
         //Update update = new Update(myConnection.getConnection());
