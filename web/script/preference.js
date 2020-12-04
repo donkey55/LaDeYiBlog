@@ -105,7 +105,6 @@ function deletePreference(obj) {
 
 function pageDown() {
     if (preferenceCount < preferenceTotal) {
-        preferenceNum = 0;
         emptyTd();
         addTd();
         pageIndex++;
@@ -116,7 +115,6 @@ function pageDown() {
 function pageUp() {
     if (preferenceCount > preferenceNum) {
         preferenceCount -= (preferenceNum + 5);
-        preferenceNum = 0;
         emptyTd();
         addTd();
         pageIndex--;
@@ -157,6 +155,7 @@ function addTd() {
 }
 
 function emptyTd() {
+    preferenceNum = 0;
     $("#tableElement1").empty();
     $("#tableElement2").empty();
     $("#tableElement3").empty();

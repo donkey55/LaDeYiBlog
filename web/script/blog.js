@@ -1,20 +1,35 @@
+//
+let count = 0;
+
 window.onload = function () {
     var id = window.location.toString().split('?')[1];
+    if (count === 0) {
+        $.ajax({
+            type: "post",
+            url: "../com/ladeyi/test/ShowBlogServlet",
+            data: {
+                "blogId": id
+            },
+            dataType: "json",
+            success: function (data) {
+                document.getElementById("title").innerHTML = data.title;
+                document.getElementById("topTitle").innerHTML = data.title;
+                document.getElementById("author").innerHTML = data.userName;
+                document.getElementById("blog").innerHTML = data.blog;
+                document.getElementById("preferenceNum").innerHTML = data.preferenceNum;
+                document.getElementById("commentNum").innerHTML = data.commentNum;
+                preview();
+            }
+        });
+        count++;
+    }
+
     $.ajax({
-        type: "post",
-        url: "../com/ladeyi/test/ShowBlogServlet",
-        data: {
-            "blogId": id
-        },
-        dataType: "json",
-        success: function (data) {
-            alert("hello world");
-            document.getElementById("title").innerHTML = data.title;
-            document.getElementById("topTitle").innerHTML = data.title;
-            document.getElementById("author").innerHTML = data.userName;
-            document.getElementById("blog").innerHTML = data.blog;
-            preview();
-        }
+       type: "post",
+       url: "",
+       data: {
+           "blogId": id
+       },
     });
 }
 
@@ -32,3 +47,4 @@ function preview() {
         sequenceDiagram: true, // 默认不解析
     });
 }
+
