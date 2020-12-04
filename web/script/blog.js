@@ -1,11 +1,8 @@
 //
 let count = 0;
 
-window.onload = function () {
+window.onload = function() {
     var id = window.location.toString().split('?')[1];
-    let str = {"blog":"$$\nsum=\sum k"};
-    console.log(JSON.stringify( {"blog":"$$\nsum=\sum k"}));
-
     if (count === 0) {
         $.ajax({
             type: "post",
@@ -26,14 +23,6 @@ window.onload = function () {
         });
         count++;
     }
-
-    $.ajax({
-       type: "post",
-       url: "",
-       data: {
-           "blogId": id
-       },
-    });
 }
 
 function preview() {

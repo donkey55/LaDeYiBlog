@@ -64,7 +64,7 @@ function searchPreference() {
             addTd();
             document.getElementById("pageIndex").innerHTML = String(pageIndex);
             document.getElementById("pageNum").innerHTML = String(pageNum);
-            document.getElementById("preferenceTotal").innerHTML = String(preferenceTotal);
+            document.getElementById("preferenceTotal").innerHTML = String(preferenceTotal);      
         },
         error: function () {
             console.log("error");
