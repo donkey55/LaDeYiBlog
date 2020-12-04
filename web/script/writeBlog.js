@@ -25,7 +25,8 @@ function getCon() {
         url: "../com/ladeyi/test/WriteBlogServlet",
         data: {
             "title" : $("#title").val(),
-            "blog" : $("#test-editor-html-code").val().replace(/\r\n/g, '\\n').replace(/\n/g, '\\n').replace(/\s/g, ' '),
+            "blog" : $("#test-editor-html-code").val().replace(/\r\n/g, '\\n').replace(/\n/g, '\\n').
+            replace(/\s/g, ' '),
             "userName": $.cookie("account")
         },
         dataType: "json",

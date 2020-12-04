@@ -69,19 +69,16 @@
         <div id="blogTitle">
             <label for="title">标题</label>
             <input type="text" id="title" name="title" placeholder="请输入标题...." required>
-            <button class="ui primary button" onclick="getCon()">发布</button>
+            <button class="ui primary button" onclick="getCon()">修改</button>
         </div>
         <div id="test-editor">
-            <textarea style="display:none;"></textarea>
+            <textarea style="display:none;" id="blogContent"></textarea>
             <textarea id="test-editor-html-code" name="my-editormd-html-code" style="display:none;"></textarea>
         </div>
-    </div>
-    <div id="test-editormd">
-        <textarea id="doc-contenttext" style="display: none;"></textarea>
     </div>
 </div>
 </body>
 <script src="../script/normal.js"></script>
-<script src="../script/writeBlog.js"></script>
+<script src="../script/changeBlog.js"></script>
 </html>
 

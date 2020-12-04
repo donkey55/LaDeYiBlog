@@ -74,7 +74,7 @@ function searchUserBlog() {
 }
 
 function pageDown() {
-   if(blogCount < blogTotal){
+   if(blogCount < blogTotal) {
        empty();
        //显示文章
        addTd();
@@ -120,6 +120,11 @@ function deleteBlog(obj) {
     }
 }
 
+function changeBlog(obj) {
+    let id = obj.id;
+    window.open("changeBlog.html?" + id);
+}
+
 function writeBlog() {
     window.open("writeBlog.html?" + $.cookie("account"), "_blank");
 }
@@ -148,7 +153,7 @@ function addTd() {
 
         aLi3.setAttribute("id", element.blogId);
         aLi3.setAttribute("href","#");
-        aLi3.setAttribute("onclick","deleteBlog(this)");
+        aLi3.setAttribute("onclick","changeBlog(this)");
         aLi3.setAttribute("class", "ui mini green basic button");
         aLi2.innerHTML = "删除";
         aLi3.innerHTML = "修改";
