@@ -105,6 +105,21 @@ public class Update {
         return ret;
     }
 
+    public static int replyInsert(int userId, int commentId, String reply) {
+        int ret = 0;
+        String sql = "INSERT INTO reply(userId,commentId,reply) values (?,?,?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, commentId);
+            preparedStatement.setString(3, reply);
+            ret = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            return -100;
+        }
+        return ret;
+    }
+
     public static int preferenceInsert(int userId, int blogId, String label) {
         int ret = 0;
         String sql = "INSERT INTO preference(userId,blogId,label) values (?,?,?)";

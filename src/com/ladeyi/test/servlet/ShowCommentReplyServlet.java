@@ -2,6 +2,7 @@ package com.ladeyi.test.servlet;
 
 import com.ladeyi.test.service.Blog;
 import com.ladeyi.test.service.Comment;
+import com.ladeyi.test.service.Reply;
 import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
@@ -14,11 +15,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /*
-显示一个用户发表的所有的评论，需要输入该用户的用户名，
-返回该用户发表的所有评论的id、发表的评论所属的博客id、发表的平路你所述的博客标题以及评论的具体内容
+展示一篇评论的所有回复，需要输入当前评论的id，
+返回该评论下所有的回复的id、回复者的用户名以及回复的内容
 */
-public class ShowMyCommentServlet extends HttpServlet {
-    public ShowMyCommentServlet() {
+public class ShowCommentReplyServlet extends HttpServlet {
+    public ShowCommentReplyServlet() {
         super();
     }
 
@@ -33,19 +34,15 @@ public class ShowMyCommentServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        String userName = request.getParameter("userName");
+        int commentId = Integer.parseInt(request.getParameter("commentId"));
+        ResultSet replySet = Reply.checkReplyUseCommentId(commentId);
         try {
-            ResultSet userIdSet = User.checkId(userName);
-            userIdSet.next();
-            int userId=userIdSet.getInt(1);
-            ResultSet commentSet = Comment.checkCommentUseUserId(userId);
-            while (commentSet.next()) {
-                ResultSet blogSet = Blog.checkTitle(Integer.parseInt(commentSet.getString(3)));
-                blogSet.next();
-                ret = ret + "{\"commentId\":\"" + commentSet.getString(1) + "\",";
-                ret = ret + "\"title\":\"" + blogSet.getString(1) + "\",";
-                ret = ret + "\"blogId\":\"" + commentSet.getString(3) + "\",";
-                ret = ret + "\"comment\":\"" + commentSet.getString(4) + "\"},";
+            while (replySet.next()) {
+                ResultSet userSet = User.checkUserName(replySet.getString(2));
+                userSet.next();
+                ret = ret + "{\"replyId\":\"" + replySet.getString(1) + "\",";
+                ret = ret + "\"userName\":\"" + userSet.getString(1) + "\",";
+                ret = ret + "\"reply\":\"" + replySet.getString(4) + "\"},";
             }
         } catch (SQLException e) {
         }

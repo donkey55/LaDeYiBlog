@@ -1,7 +1,8 @@
 package com.ladeyi.test.servlet;
 
-import com.ladeyi.test.service.Blog;
+import com.ladeyi.test.mapper.Query;
 import com.ladeyi.test.service.Comment;
+import com.ladeyi.test.service.Reply;
 import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
@@ -14,11 +15,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /*
-显示一个用户发表的所有的评论，需要输入该用户的用户名，
-返回该用户发表的所有评论的id、发表的评论所属的博客id、发表的平路你所述的博客标题以及评论的具体内容
+用户为一个评论撰写一条回复，需要输入撰写回复的用户的用户名、被插入回复的评论id以及回复的具体内容，
+返回1则添加成功，返回0添加失败
 */
-public class ShowMyCommentServlet extends HttpServlet {
-    public ShowMyCommentServlet() {
+public class WriteReplyServlet extends HttpServlet {
+    public WriteReplyServlet() {
         super();
     }
 
@@ -29,31 +30,22 @@ public class ShowMyCommentServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ret = "[";
+        int ret = 0;
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
         String userName = request.getParameter("userName");
+        int commentId = Integer.parseInt(request.getParameter("commentId"));
+        String reply = request.getParameter("reply");
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
             int userId=userIdSet.getInt(1);
-            ResultSet commentSet = Comment.checkCommentUseUserId(userId);
-            while (commentSet.next()) {
-                ResultSet blogSet = Blog.checkTitle(Integer.parseInt(commentSet.getString(3)));
-                blogSet.next();
-                ret = ret + "{\"commentId\":\"" + commentSet.getString(1) + "\",";
-                ret = ret + "\"title\":\"" + blogSet.getString(1) + "\",";
-                ret = ret + "\"blogId\":\"" + commentSet.getString(3) + "\",";
-                ret = ret + "\"comment\":\"" + commentSet.getString(4) + "\"},";
-            }
+            ret = Reply.insertReply(userId, commentId, reply);
         } catch (SQLException e) {
         }
-        if (ret.charAt(ret.length() - 1) == ',') {
-            ret = ret.substring(0, ret.length() - 1);
-        }
-        ret = ret + "]";
-        printWriter.write(ret);
+        String output = "{\"ret\":\"" + ret + "\"}";
+        printWriter.write(output);
     }
 
     public void init() throws ServletException {
