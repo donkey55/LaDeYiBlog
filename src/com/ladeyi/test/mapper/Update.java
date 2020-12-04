@@ -198,4 +198,23 @@ public class Update {
         }
         return ret;
     }
+
+    public static int blogUpdate(int blogId, String blog, String title) {
+        int ret = 0;
+        String sql1 = "UPDATE blog SET " + blog + "=? WHERE blogId=?";
+        String sql2 = "UPDATE blog SET " + title + "=? WHERE blogId=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql1);
+            preparedStatement.setString(1, blog);
+            preparedStatement.setInt(2, blogId);
+            ret += preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement(sql2);
+            preparedStatement.setString(1, title);
+            preparedStatement.setInt(2, blogId);
+            ret += preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            return -100;
+        }
+        return ret;
+    }
 }

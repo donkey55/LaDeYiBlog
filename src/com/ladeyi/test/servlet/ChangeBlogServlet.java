@@ -14,11 +14,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /*
-为用户新建一条博客，需要输入新建博客的用户的用户名，博客的内容和博客的标题
-返回1则新建成功，返回新建失败
+修改一篇博客的内容，需要输入博客的id、修改后博客的内容以及修改后博客的标题，
+返回值大于0时修改成功，范围值为0时修改失败
 */
-public class WriteBlogServlet extends HttpServlet {
-    public WriteBlogServlet() {
+public class ChangeBlogServlet extends HttpServlet {
+    public ChangeBlogServlet() {
         super();
     }
 
@@ -33,16 +33,10 @@ public class WriteBlogServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        String userName = request.getParameter("userName");
+        int blogId = Integer.parseInt(request.getParameter("blogId"));
         String blog = request.getParameter("blog");
         String title = request.getParameter("title");
-        try {
-            ResultSet userIdSet = User.checkId(userName);
-            userIdSet.next();
-            int userId=userIdSet.getInt(1);
-            ret = Blog.insertBlog(userId, blog, title);
-        } catch (SQLException e) {
-        }
+        ret = Blog.updateBlog(blogId, blog, title);
         String output = "{\"ret\":\"" + ret + "\"}";
         printWriter.write(output);
     }

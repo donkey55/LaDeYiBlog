@@ -18,6 +18,10 @@ public class Blog {
         return Update.blogInsert(userId, blog, title);
     }
 
+    public static int updateBlog(int blogId, String blog, String title) {
+        return Update.blogUpdate(blogId, blog, title);
+    }
+
     public static ResultSet checkBlog(int id) {
         try {
             String restrict = "blogId=" + id;
