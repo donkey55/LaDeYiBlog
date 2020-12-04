@@ -12,6 +12,16 @@ public class Comment {
         return Update.commentInsert(userId, blogId, comment);
     }
 
+    public static ResultSet checkComment(int id) {
+        try {
+            String restrict = "commentId=" + id;
+            ResultSet resultSet = Query.select("*", "comment", restrict);
+            return resultSet;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
     public static ResultSet checkCommentUseBlogId(int id) {
         try {
             String restrict = "blogId=" + id;

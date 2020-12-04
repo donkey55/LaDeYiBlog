@@ -6,6 +6,7 @@ import com.ladeyi.test.service.Blog;
 import com.ladeyi.test.service.Comment;
 import com.ladeyi.test.service.Message;
 import com.ladeyi.test.service.Preference;
+import com.ladeyi.test.service.Reply;
 import com.ladeyi.test.service.Shop;
 import com.ladeyi.test.service.User;
 
@@ -19,18 +20,27 @@ public class Main {
     private static Connection connection = MyConnection.getConnection();
 
     public static void main(String[] args) throws SQLException {
-        String ret = "";
+        String ret = "[";
         String userName = "user1";
-        int blogId = 8;
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId = userIdSet.getInt(1);
-            ret = ret + "{\"concerned\":\"" + Preference.checkSingleBlogPreference(userId, blogId) + "\",";
-            ret = ret + "\"preferenceCount\":\"" + Preference.checkPreferenceCount(blogId) + "\",";
-            ret = ret + "\"commentCount\":\"" + Comment.checkCommentCount(blogId) + "\"}";
+            int userId=userIdSet.getInt(1);
+            ResultSet replySet = Reply.checkReplyUseUserId(userId);
+            while (replySet.next()) {
+                ResultSet commentSet = Comment.checkComment(Integer.parseInt(replySet.getString(3)));
+                commentSet.next();
+                ret = ret + "{\"replyId\":\"" + replySet.getString(1) + "\",";
+                ret = ret + "\"comment\":\"" + commentSet.getString(4) + "\",";
+                ret = ret + "\"blogId\":\"" + commentSet.getString(3) + "\",";
+                ret = ret + "\"reply\":\"" + replySet.getString(4) + "\"},";
+            }
         } catch (SQLException e) {
         }
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
+        ret = ret + "]";
         System.out.println(ret);
         //Query query = new Query(myConnection.getConnection());
         //Update update = new Update(myConnection.getConnection());
