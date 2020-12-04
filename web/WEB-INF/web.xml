@@ -6,7 +6,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>BuyGoodsServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/BuyGoodsServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/BuyGoodsServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ChangePasswordServlet</servlet-name>
@@ -14,7 +14,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ChangePasswordServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ChangePasswordServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ChangePasswordServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ChangeUserInfoServlet</servlet-name>
@@ -22,7 +22,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ChangeUserInfoServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ChangeUserInfoServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ChangeUserInfoServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>DeleteAttentionServlet</servlet-name>
@@ -30,7 +30,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DeleteAttentionServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/DeleteAttentionServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/DeleteAttentionServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>DeleteBlogServlet</servlet-name>
@@ -38,7 +38,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DeleteBlogServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/DeleteBlogServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/DeleteBlogServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>DeleteCommentServlet</servlet-name>
@@ -46,7 +46,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DeleteCommentServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/DeleteCommentServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/DeleteCommentServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>DeleteMessageServlet</servlet-name>
@@ -54,7 +54,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DeleteMessageServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/DeleteMessageServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/DeleteMessageServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>DeletePreferenceServlet</servlet-name>
@@ -62,7 +62,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DeletePreferenceServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/DeletePreferenceServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/DeletePreferenceServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>DeleteReplyServlet</servlet-name>
@@ -70,7 +70,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DeleteReplyServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/DeleteReplyServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/DeleteReplyServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>DeleteUserServlet</servlet-name>
@@ -78,7 +78,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DeleteUserServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/DeleteUserServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/DeleteUserServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
@@ -86,7 +86,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/LoginServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/LoginServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>RegisterServlet</servlet-name>
@@ -94,7 +94,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RegisterServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/RegisterServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/RegisterServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>SearchBlogServlet</servlet-name>
@@ -102,7 +102,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SearchBlogServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/SearchBlogServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/SearchBlogServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowBlogCommentServlet</servlet-name>
@@ -110,7 +110,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowBlogCommentServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowBlogCommentServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowBlogCommentServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowBlogServlet</servlet-name>
@@ -118,7 +118,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowBlogServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowBlogServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowBlogServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowCommentReplyServlet</servlet-name>
@@ -126,7 +126,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowCommentReplyServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowCommentReplyServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowCommentReplyServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowFromAttentionServlet</servlet-name>
@@ -134,7 +134,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowFromAttentionServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowFromAttentionServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowFromAttentionServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowFromMessageServlet</servlet-name>
@@ -142,7 +142,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowFromMessageServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowFromMessageServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowFromMessageServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowGoodsInfoServlet</servlet-name>
@@ -150,7 +150,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowGoodsInfoServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowGoodsInfoServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowGoodsInfoServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowMyBillServlet</servlet-name>
@@ -158,7 +158,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowMyBillServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowMyBillServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowMyBillServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowMyBlogInfoServlet</servlet-name>
@@ -166,7 +166,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowMyBlogInfoServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowMyBlogInfoServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowMyBlogInfoServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowMyCommentServlet</servlet-name>
@@ -174,7 +174,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowMyCommentServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowMyCommentServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowMyCommentServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowMyReplyServlet</servlet-name>
@@ -182,7 +182,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowMyReplyServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowMyReplyServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowMyReplyServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowPreferenceServlet</servlet-name>
@@ -190,7 +190,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowPreferenceServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowPreferenceServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowPreferenceServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowShopInfoServlet</servlet-name>
@@ -198,7 +198,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowShopInfoServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowShopInfoServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowShopInfoServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowSingleBlogInfoServlet</servlet-name>
@@ -206,7 +206,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowSingleBlogInfoServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowSingleBlogInfoServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowSingleBlogInfoServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowToAttentionServlet</servlet-name>
@@ -214,7 +214,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowToAttentionServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowToAttentionServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowToAttentionServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowToMessageServlet</servlet-name>
@@ -222,7 +222,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowToMessageServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowToMessageServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowToMessageServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowUserInfoServlet</servlet-name>
@@ -230,7 +230,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ShowUserInfoServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/ShowUserInfoServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/ShowUserInfoServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>WriteAttentionServlet</servlet-name>
@@ -238,7 +238,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WriteAttentionServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/WriteAttentionServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/WriteAttentionServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>WriteBlogServlet</servlet-name>
@@ -246,7 +246,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WriteBlogServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/WriteBlogServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/WriteBlogServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>WriteCommentServlet</servlet-name>
@@ -254,7 +254,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WriteCommentServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/WriteCommentServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/WriteCommentServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>WriteMessageServlet</servlet-name>
@@ -262,7 +262,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WriteMessageServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/WriteMessageServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/WriteMessageServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>WritePreferenceServlet</servlet-name>
@@ -270,7 +270,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WritePreferenceServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/WritePreferenceServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/WritePreferenceServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>WriteReplyServlet</servlet-name>
@@ -278,6 +278,6 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WriteReplyServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/servlet/WriteReplyServlet</url-pattern>
+		<url-pattern>/com/ladeyi/test/WriteReplyServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
