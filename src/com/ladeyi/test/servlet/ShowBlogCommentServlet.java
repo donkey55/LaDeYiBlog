@@ -39,7 +39,7 @@ public class ShowBlogCommentServlet extends HttpServlet {
             while (commentSet.next()) {
                 ResultSet userSet = User.checkUserName(commentSet.getString(2));
                 userSet.next();
-                ret = ret + "{\"commendId\":\"" + commentSet.getString(1) + "\",";
+                ret = ret + "{\"commentId\":\"" + commentSet.getString(1) + "\",";
                 ret = ret + "\"userName\":\"" + userSet.getString(1) + "\",";
                 ret = ret + "\"comment\":\"" + commentSet.getString(4) + "\"},";
             }
