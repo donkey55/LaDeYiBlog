@@ -10,108 +10,13 @@
     <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <link rel="stylesheet" href="../CSS/login_user.css">
-    <link rel="stylesheet" href="../CSS/accoutNav.css">
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <script src="../script/refJS/jquery.cookie.js"></script>
+    <script src="../script/userInfo.js"></script>
     <style>
-        .tab-content>.tab-pane,
-        .pill-content>.pill-pane {
-            display: none;
-        }
 
-        .tab-content>.active,
-        .pill-content>.active {
-            display: block;
-        }
-
-        .tabs-below>.nav-tabs {
-            border-top: 1px solid #ddd;
-        }
-
-        .tabs-below>.nav-tabs>li {
-            margin-top: -1px;
-            margin-bottom: 0;
-        }
-
-        .tabs-below>.nav-tabs>li>a {
-            -webkit-border-radius: 0 0 4px 4px;
-            -moz-border-radius: 0 0 4px 4px;
-            border-radius: 0 0 4px 4px;
-        }
-
-        .tabs-below>.nav-tabs>li>a:hover,
-        .tabs-below>.nav-tabs>li>a:focus {
-            border-top-color: #ddd;
-            border-bottom-color: transparent;
-        }
-
-        .tabs-below>.nav-tabs>.active>a,
-        .tabs-below>.nav-tabs>.active>a:hover,
-        .tabs-below>.nav-tabs>.active>a:focus {
-            border-color: transparent #ddd #ddd #ddd;
-        }
-
-        .tabs-left>.nav-tabs>li,
-        .tabs-right>.nav-tabs>li {
-            float: none;
-        }
-
-        .tabs-left>.nav-tabs>li>a,
-        .tabs-right>.nav-tabs>li>a {
-            min-width: 74px;
-            margin-right: 0;
-            margin-bottom: 3px;
-        }
-
-        .tabs-left>.nav-tabs {
-            float: left;
-            margin-right: 19px;
-            border-right: 1px solid #ddd;
-        }
-
-        .tabs-left>.nav-tabs>li>a {
-            margin-right: -1px;
-            -webkit-border-radius: 4px 0 0 4px;
-            -moz-border-radius: 4px 0 0 4px;
-            border-radius: 4px 0 0 4px;
-        }
-
-        .tabs-left>.nav-tabs>li>a:hover,
-        .tabs-left>.nav-tabs>li>a:focus {
-            border-color: #eeeeee #dddddd #eeeeee #eeeeee;
-        }
-
-        .tabs-left>.nav-tabs .active>a,
-        .tabs-left>.nav-tabs .active>a:hover,
-        .tabs-left>.nav-tabs .active>a:focus {
-            border-color: #ddd transparent #ddd #ddd;
-            *border-right-color: #ffffff;
-        }
-
-        .tabs-right>.nav-tabs {
-            float: right;
-            margin-left: 19px;
-            border-left: 1px solid #ddd;
-        }
-
-        .tabs-right>.nav-tabs>li>a {
-            margin-left: -1px;
-            -webkit-border-radius: 0 4px 4px 0;
-            -moz-border-radius: 0 4px 4px 0;
-            border-radius: 0 4px 4px 0;
-        }
-
-        .tabs-right>.nav-tabs>li>a:hover,
-        .tabs-right>.nav-tabs>li>a:focus {
-            border-color: #eeeeee #eeeeee #eeeeee #dddddd;
-        }
-
-        .tabs-right>.nav-tabs .active>a,
-        .tabs-right>.nav-tabs .active>a:hover,
-        .tabs-right>.nav-tabs .active>a:focus {
-            border-color: #ddd #ddd #ddd transparent;
-            *border-left-color: #ffffff;
-        }
     </style>
 
     <!--引用百度bootstrap-->
@@ -212,134 +117,138 @@
                 <img alt="140x140" src="../images/a.jpg" class="img-circle" />
                 <div class="hero-unit well" id="user">
                     <h1>
-                        userName
+                        LSP
                     </h1>
-                    <p>
+                    <span><i class="heart icon"></i>粉丝</span><span id="fans">222</span>
+                    <span><i class="star icon"></i>关注</span><span id="attention">222</span>
+                    <p id="selfIntroduction">
                         这是一个可视化布局模板, 你可以点击模板里的文字进行修改, 也可以通过点击弹出的编辑框进行富文本修改. 拖动区块能实现排序
                     </p>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
-
-                    <li class="active"><a href="#panel-150396" data-toggle="tab" contenteditable="true">修改密码</a>
+                    <li class="active"><a href="#panel1" data-toggle="pill" contenteditable="false">个人信息</a>
                     </li>
-                    <li><a href="#panel-183165" data-toggle="tab" contenteditable="true">个人信息</a></li>
+                    <li><a href="#panel2" data-toggle="pill" contenteditable="false">更新个人信息</a></li>
+                    <li><a href="#panel3" data-toggle="pill" contenteditable="false">修改密码</a></li>
                 </ul>
-                <div class="tab-content">
-                    <div class="tab-pane" id="panel-150396" contenteditable="true">
-                        <p></p>
-                    </div>
-                    <div class="tab-pane" id="panel-183165" contenteditable="true">
-                        <div class="col-md-4">
-                            
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="col-md-8">
-                <ul class="thumbnails myhidden" style="list-style: none;">
-                    <li class="col-md-12 blogList">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3>
-                                    blogTitle
-                                </h3>
-                                <p>
-                                    blogSummery
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">收藏</a>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="thumbnails myhidden" style="list-style: none;">
-                    <li class="col-md-12 blogList">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3>
-                                    blogTitle
-                                </h3>
-                                <p>
-                                    blogSummery
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">收藏</a>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="thumbnails myhidden" style="list-style: none;">
-                    <li class="col-md-12 blogList">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3>
-                                    blogTitle
-                                </h3>
-                                <p>
-                                    blogSummery
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">收藏</a>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="thumbnails myhidden" style="list-style: none;">
-                    <li class="col-md-12 blogList">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3>
-                                    blogTitle
-                                </h3>
-                                <p>
-                                    blogSummery
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">收藏</a>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-
-                <ul class="thumbnails" style="list-style: none;">
-                    <li class="col-md-12">
-                        <form class="form-horizontal" >
-                            <div class="control-group">
-                                <label class="control-label" for="inputEmail">邮箱</label>
-                                <div class="controls">
-                                    <input id="inputEmail" type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="inputPassword">密码</label>
-                                <div class="controls">
-                                    <input id="inputPassword" type="password" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <label class="checkbox"><input type="checkbox" /> Remember me</label>
-                                    <button type="submit" class="btn btn-primary"
-                                        style="margin-top: 10px;">登陆</button>
-                                </div>
-                            </div>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-9 col-lg-offset-3">
-                <div class="tabbable tabs-left" id="tabs-785674">
-
-                    
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="panel1" contenteditable="false">
+                        <ul class="thumbnails" style="list-style: none;">
+                            <li class="col-md-12" style="outline: none;">
+                                <h2 contenteditable="false">性别</h2>
+                                <p contenteditable="false" id="sex">本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页,
+                                    下一次打开仍然能恢复上一次的操作.</p>
+                                <hr>
+                                <h2 contenteditable="false">电话</h2>
+                                <p contenteditable="false" id="phone">本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页,
+                                    下一次打开仍然能恢复上一次的操作.</p>
+                                <hr>
+                                <h2 contenteditable="false">兴趣爱好</h2>
+                                <p contenteditable="false" id="interest">本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页,
+                                    下一次打开仍然能恢复上一次的操作.</p>
+                                <hr>
+                                <h2 contenteditable="false">地址</h2>
+                                <p contenteditable="false" id="address">本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页,
+                                    下一次打开仍然能恢复上一次的操作.</p>
+                                <hr>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="panel2" contenteditable="false">
+                        <ul style="list-style: none;">
+                            <li class="col-md-12" id="foo">
+                                <form class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputUserName">用户名</label>
+                                        <div class="controls">
+                                            <input id="inputUserName" type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputSex">性别</label>
+                                        <div id="inputSex">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="sex" id="man"
+                                                    value="男"> 男
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="sex" id="girl"
+                                                    value="女"> 女
+                                            </label>                                 
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputInterest">兴趣</label>
+                                        <div class="controls">
+                                            <input id="inputInterest" type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputPhone">电话</label>
+                                        <div class="controls">
+                                            <input id="inputPhone" type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputAddress">地址</label>
+                                        <div class="controls">
+                                            <textarea class="form-control" id="inputAddress" rows="3"
+                                                style="min-width: 90%"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputSelfIntroduction">个人简介</label>
+                                        <div class="controls">
+                                            <textarea class="form-control" id="inputSelfIntroduction" rows="16"
+                                                style="min-width: 90%"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="button" class="btn btn-primary" onclick="changeUserInfo()"
+                                                style="margin-top: 10px;">更新</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="panel3" contenteditable="false">
+                        <ul class="thumbnails" style="list-style: none;">
+                            <li class="col-md-12">
+                                <form class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputOldPassword">旧密码</label>
+                                        <div class="controls">
+                                            <input id="inputOldPassword" type="password" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputNewPassword">新密码</label>
+                                        <div class="controls">
+                                            <input id="inputNewPassword" type="password" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputConfirmPassword">确认密码</label>
+                                        <div class="controls">
+                                            <input id="inputConfirmPassword" type="password" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="button" class="btn btn-primary" onclick="changePassword()"
+                                                style="margin-top: 10px;" >修改</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 
