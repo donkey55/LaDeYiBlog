@@ -1,5 +1,3 @@
-
-
 $(function(){
     /* if($.cookie("account") == undefined){
         window.location.href="../HTML/login.html";
@@ -42,17 +40,23 @@ function getCon() {
         url: "../com/ladeyi/test/WriteBlogServlet",
         data: {
             "title" : $("#title").val(),
-            "blog" : $("#test-editor-html-code").val().replace(/\r\n/g, '\\n').replace(/\n/g, '\\n').replace(/\s/g, ' '),
+            "blog" : $("#test-editor-html-code").val()
+                .replace(/\\/g,'\\\\' )
+                .replace(/"/g,'\\"')
+                .replace(/\$\$\r\n|\$\$\n/g, '$$$$')
+                .replace(/\r\n\$\$|\n\$\$/g, '$$$$')
+                .replace(/\r\n|\n/g, '\\n')
+                .replace(/\s/g, ' '),
             "userName": $.cookie("account")
         },
         dataType: "json",
         success: function(data) {
             //console.log($("#test-editor-html-code").val());
             if (data.ret === "1") {
-                alert("发布成功");
+                alert("修改成功");
                 location.reload();
             }else{
-                alert("发布失败");
+                alert("修改失败");
             }
         },
         error: function () {

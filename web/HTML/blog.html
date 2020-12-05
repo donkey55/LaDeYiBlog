@@ -29,8 +29,7 @@
     <script src="../script/refJS/prism.js"></script>
     <script src="../script/refJS/tocbot.min.js"></script>
     <script src="../script/refJS/jquery.waypoints.min.js"></script>
-    <script src="../script/blog.js"></script>
-
+    <script src="../script/refJS/jquery.cookie.js"></script>
 </head>
 <body>
 
@@ -38,14 +37,14 @@
 <<nav class="ui inverted gird-header">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
-            <h2 class="ui olive header item" style="font-family: STSong">添加博客</h2>
+            <h2 class="ui olive header item" style="font-family: STSong">拉德衣博客</h2>
             <a href="#" class=" m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
             <a href="user.html" class=" m-item item m-mobile-hide"><i class="pencil alternate icon"></i>文章</a>
             <a href="attention.html" class=" m-item item m-mobile-hide"><i class="heart icon"></i>关注</a>
             <a href="preference.html" class="m-item item m-mobile-hide"><i class="folder icon"></i>收藏</a>
             <div class="right m-item m-mobile-hide menu">
                 <div class="ui dropdown  item">
-                    <img class="ui avatar image" src="../images/blogLogo.jpg">
+                    <img class="ui avatar image" src="../images/defaultAvatar.jpg">
                     <div class="text">
                         <span id="username"></span>
                     </div>
@@ -75,14 +74,7 @@
                 <div class="ui horizontal link list" align="center">
                     <div class="item">
                         <i class="user outline outline icon m-font-size-text-mini"></i>
-                        <a href="#" style="color: #ffffff;font-size: 18px" id="author"></a>
-                    </div>
-                    <div class="item">
-                        <i class="star icon m-font-size-text-mini"></i> <span class="m-font-size-text-mini" id="preferenceNum">2222</span>
-                    </div>
-                    <div class="item">
-                        <i class="comment outline icon m-font-size-text-mini"></i>
-                        <span class="m-font-size-text-mini" id="commentNum"></span>
+                        <a href="#" style="color: #ffffff;font-size: 18px" id="author"><!--填入作者名--></a>
                     </div>
                 </div>
             </div>
@@ -97,7 +89,15 @@
         <div class="ui attached padded segment">
             <div id="content" class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large">
                 <div id="blogContent" style="width: 100%; margin-left: auto; margin-right: auto;">
-                    <textarea id="blog" style="border: transparent"></textarea>
+                    <textarea id="blog" style="border: transparent"><!--填入博客内容--></textarea>
+                </div>
+            </div>
+            <div align="center">
+                <div class="ui labeled button" tabindex="0" onclick="changeStyle()">
+                    <div class="" id="preference">
+                        <i class="heart icon"></i> 收藏
+                    </div>
+                    <a id="preference_num" class=""><!--填入收藏数--></a>
                 </div>
             </div>
         </div>
@@ -105,241 +105,26 @@
         <!--评论区域列表-->
             <div id="comment-container"  class="ui teal segment">
                 <div>
-                    <div class="ui threaded comments" style="max-width: 100%;">
-                        <h3 class="ui dividing header">评论</h3>
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="../static/images/avatar.png">
-                            </a>
-                            <div class="content">
-                                <a class="author" >
-                                    <span>Matt</span>
-                                    <div class="ui mini basic teal left pointing label m-padded-mini">栈主</div>
-                                </a>
-                                <div class="metadata">
-                                    <span class="date">Today at 5:42PM</span>
-                                </div>
-                                <div class="text">
-                                    How artistic!
-                                </div>
-                                <div class="actions">
-                                    <a class="reply" data-commentid="1" data-commentnickname="Matt" onclick="reply(this)">回复</a>
-                                    <a class="delete" href="#" onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.user}">删除</a>
-
-                                </div>
+                    <div id="all_comments" class="ui threaded comments" style="max-width: 100%;">
+                        <h3 class="ui dividing header">
+                            评论<a class="ui basic red left pointing label" id="comment_num"><!--填入评论数--></a>
+                        </h3>
+                        <a onclick="addComment(this)"><i class="comment outline icon"></i>添加评论</a>
+                        <div class="ui form" hidden="hidden" id="comment_field">
+                            <div class="field">
+                                <textarea id="comment_text_field" placeholder="请输入评论"></textarea>
                             </div>
-                            <!--子集评论-->
-                            <div class="comments">
-                                <div class="comment">
-                                    <a class="avatar">
-                                        <img src="../static/images/avatar.png">
-                                    </a>
-                                    <div class="content">
-                                        <a class="author" >
-                                            <span>小红</span>
-                                            <div class="ui mini basic teal left pointing label m-padded-mini">栈主</div>
-                                            &nbsp;<span class="m-teal">@ 小白</span>
-                                        </a>
-                                        <div class="metadata">
-                                            <span class="date">Today at 5:42PM</span>
-                                        </div>
-                                        <div class="text">
-                                            How artistic!
-                                        </div>
-                                        <div class="actions">
-                                            <a class="reply" data-commentid="1" data-commentnickname="Matt" onclick="reply(this)">回复</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <button class="ui button" onclick="publishComment()">发表</button>
                         </div>
-
+                       <!--填入评论及回复-->
                     </div>
                 </div>
-            </div>
-            <div id="comment-form" class="ui form">
-                <input type="hidden" name="blogId">
-                <input type="hidden" name="parentComment.id" value="-1">
-                <div class="field">
-                    <textarea name="content" placeholder="请输入评论信息..."></textarea>
-                </div>
-                <div class="fields">
-                    <div class="field m-mobile-wide m-margin-bottom-small">
-                        <div class="ui left icon input">
-                            <i class="user icon"></i>
-                            <input type="text" name="nickname" placeholder="姓名">
-                        </div>
-                    </div>
-                    <div class="field m-mobile-wide m-margin-bottom-small">
-                        <div class="ui left icon input">
-                            <i class="mail icon"></i>
-                            <input type="text" name="email" placeholder="邮箱">
-                        </div>
-                    </div>
-                    <div class="field  m-margin-bottom-small m-mobile-wide">
-                        <button id="commentpost-btn" type="button" class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
 </div>
-
-<div id="toolbar" class="m-padded m-fixed m-right-bottom" style="display: none">
-    <div class="ui vertical icon buttons ">
-        <button type="button" class="ui toc teal button" >目录</button>
-        <a href="#comment-container" class="ui teal button" >评论</a>
-        <div id="toTop-button" class="ui icon button" ><i class="chevron up icon"></i></div>
-    </div>
-</div>
-
-<div class="ui toc-container flowing popup transition hidden" style="width: 250px!important;">
-    <ol class="js-toc">
-
-    </ol>
-</div>
-
-<div id="qrcode" class="ui wechat-qr flowing popup transition hidden "style="width: 130px !important;">
-    <!--<img src="./static/images/wechat.jpg" alt="" class="ui rounded image" style="width: 120px !important;">-->
-</div>
-
-<script th:inline="javascript">
-    $('.menu.toggle').click(function () {
-        $('.m-item').toggleClass('m-mobile-hide');
-    });
-
-    $('#payButton').popup({
-        popup : $('.payQR.popup'),
-        on : 'click',
-        position: 'bottom center'
-    });
-
-    tocbot.init({
-        // Where to render the table of contents.
-        tocSelector: '.js-toc',
-        // Where to grab the headings to build the table of contents.
-        contentSelector: '.js-toc-content',
-        // Which headings to grab inside of the contentSelector element.
-        headingSelector: 'h1, h2, h3',
-    });
-
-    $('.toc.button').popup({
-        popup : $('.toc-container.popup'),
-        on : 'click',
-        position: 'left center'
-    });
-
-    $('.wechat').popup({
-        popup : $('.wechat-qr'),
-        position: 'left center'
-    });
-
-    var serurl = /*[[#{blog.serurl}]]*/"127.0.0.1:8080";
-    var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
-    var qrcode = new QRCode("qrcode", {
-        text: serurl+url,
-        width: 110,
-        height: 110,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
-
-    $('#toTop-button').click(function () {
-        $(window).scrollTo(0,500);
-    });
-
-
-    var waypoint = new Waypoint({
-        element: document.getElementById('waypoint'),
-        handler: function(direction) {
-            if (direction == 'down') {
-                $('#toolbar').show(100);
-            } else {
-                $('#toolbar').hide(500);
-            }
-            console.log('Scrolled to waypoint!  ' + direction);
-        }
-    })
-
-
-    //评论表单验证
-    $('.ui.form').form({
-        fields: {
-            title: {
-                identifier: 'content',
-                rules: [{
-                    type: 'empty',
-                    prompt: '请输入评论内容'
-                }
-                ]
-            },
-            content: {
-                identifier: 'nickname',
-                rules: [{
-                    type: 'empty',
-                    prompt: '请输入你的大名'
-                }]
-            },
-            type: {
-                identifier: 'email',
-                rules: [{
-                    type: 'email',
-                    prompt: '请填写正确的邮箱地址'
-                }]
-            }
-        }
-    });
-
-    // $(function () {
-    //     $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"comments/6");
-    // });
-
-
-
-    $('#commentpost-btn').click(function () {
-        var boo = $('.ui.form').form('validate form');
-        if (boo) {
-            console.log('校验成功');
-            postData();
-        } else {
-            console.log('校验失败');
-        }
-    });
-
-    // function postData() {
-    //     $("#comment-container").load(/*[[@{/comments}]]*/"",{
-    //         "parentComment.id" : $("[name='parentComment.id']").val(),
-    //         "blogId" : $("[name='blogId']").val(),
-    //         "nickname": $("[name='nickname']").val(),
-    //         "email"   : $("[name='email']").val(),
-    //         "content" : $("[name='content']").val()
-    //     },function (responseTxt, statusTxt, xhr) {
-    //         $(window).scrollTo($('#goto'),500);
-    //         clearContent();
-    //     });
-    // }
-
-    function clearContent() {
-        $("[name='nickname']").val('');
-        $("[name='email']").val('');
-        $("[name='content']").val('');
-        $("[name='parentComment.id']").val(-1);
-        $("[name='content']").attr("placeholder", "请输入评论信息...");
-    }
-
-    // function reply(obj) {
-    //     var commentId = $(obj).data('commentid');
-    //     var commentNickname = $(obj).data('commentnickname');
-    //     $("[name='content']").attr("placeholder", "@"+commentNickname).focus();
-    //     $("[name='parentComment.id']").val(commentId);
-    //     $(window).scrollTo($('#comment-form'),500);
-    // }
-
-
-</script>
-<script src="../script/normal.js"></script>
 </body>
+<script src="../script/normal.js"></script>
+<script src="../script/blog.js"></script>
 </html>
 
