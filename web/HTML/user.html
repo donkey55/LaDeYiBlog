@@ -1,114 +1,304 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="cache-control" content="no-cache">
-    <title>博客后台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息</title>
     <link href="../images/blogLogo.jpg" rel="icon" type="image/x-ico">
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <link rel="stylesheet" href="../CSS/login_user.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-    <script src="../script/refJS/jquery.cookie.js"></script>
-    <script src="../script/user.js"></script>
+
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <style>
+        .tab-content > .tab-pane,
+.pill-content > .pill-pane {
+  display: none;
+}
+
+.tab-content > .active,
+.pill-content > .active {
+  display: block;
+}
+
+.tabs-below > .nav-tabs {
+  border-top: 1px solid #ddd;
+}
+
+.tabs-below > .nav-tabs > li {
+  margin-top: -1px;
+  margin-bottom: 0;
+}
+
+.tabs-below > .nav-tabs > li > a {
+  -webkit-border-radius: 0 0 4px 4px;
+     -moz-border-radius: 0 0 4px 4px;
+          border-radius: 0 0 4px 4px;
+}
+
+.tabs-below > .nav-tabs > li > a:hover,
+.tabs-below > .nav-tabs > li > a:focus {
+  border-top-color: #ddd;
+  border-bottom-color: transparent;
+}
+
+.tabs-below > .nav-tabs > .active > a,
+.tabs-below > .nav-tabs > .active > a:hover,
+.tabs-below > .nav-tabs > .active > a:focus {
+  border-color: transparent #ddd #ddd #ddd;
+}
+
+.tabs-left > .nav-tabs > li,
+.tabs-right > .nav-tabs > li {
+  float: none;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-right > .nav-tabs > li > a {
+  min-width: 74px;
+  margin-right: 0;
+  margin-bottom: 3px;
+}
+
+.tabs-left > .nav-tabs {
+  float: left;
+  margin-right: 19px;
+  border-right: 1px solid #ddd;
+}
+
+.tabs-left > .nav-tabs > li > a {
+  margin-right: -1px;
+  -webkit-border-radius: 4px 0 0 4px;
+     -moz-border-radius: 4px 0 0 4px;
+          border-radius: 4px 0 0 4px;
+}
+
+.tabs-left > .nav-tabs > li > a:hover,
+.tabs-left > .nav-tabs > li > a:focus {
+  border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+}
+
+.tabs-left > .nav-tabs .active > a,
+.tabs-left > .nav-tabs .active > a:hover,
+.tabs-left > .nav-tabs .active > a:focus {
+  border-color: #ddd transparent #ddd #ddd;
+  *border-right-color: #ffffff;
+}
+
+.tabs-right > .nav-tabs {
+  float: right;
+  margin-left: 19px;
+  border-left: 1px solid #ddd;
+}
+
+.tabs-right > .nav-tabs > li > a {
+  margin-left: -1px;
+  -webkit-border-radius: 0 4px 4px 0;
+     -moz-border-radius: 0 4px 4px 0;
+          border-radius: 0 4px 4px 0;
+}
+
+.tabs-right > .nav-tabs > li > a:hover,
+.tabs-right > .nav-tabs > li > a:focus {
+  border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+}
+
+.tabs-right > .nav-tabs .active > a,
+.tabs-right > .nav-tabs .active > a:hover,
+.tabs-right > .nav-tabs .active > a:focus {
+  border-color: #ddd #ddd #ddd transparent;
+  *border-left-color: #ffffff;
+}
+    </style>
+
+    <!--引用百度bootstrap-->
+
 
 </head>
-<body>
 
-<!--导航栏-->
-<nav class="ui inverted gird-header" >
-    <div class="ui container">
-        <div class="ui inverted secondary stackable menu">
-            <h2 class="ui olive header item" style="font-family: STSong">管理后台</h2>
-            <a href="#" class=" m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
-            <a href="user.html" class="active m-item item m-mobile-hide"><i class="pencil alternate icon"></i>文章</a>
-            <a href="attention.html" class=" m-item item m-mobile-hide"><i class="heart icon"></i>关注</a>
-            <a href="preference.html" class=" m-item item m-mobile-hide"><i class="folder icon"></i>收藏</a>
-            <div class="right m-item m-mobile-hide menu">
-                <div class="ui dropdown  item">
-                    <img class="ui avatar image" src="../images/blogLogo.jpg">
-                    <div class="text">
-                        <span id="username"></span>
-                    </div>
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                        <a href="#" class="item" onclick="">个人信息</a>
-                        <a href="#" class="item" onclick="">消息</a>
-                        <a href="#" class="item" onclick="">订单</a>
-                        <a href="#" class="item" onclick="">商城</a>
-                        <a href="#" class="item" onclick="gotoLogin()">注销</a>
+<body style="background-image: none;">
+    <!--导航栏-->
+    <nav class="ui inverted gird-header">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui olive header item" style="font-family: STSong">个人信息</h2>
+                <a href="#" class=" m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                <a href="user.html" class=" m-item item m-mobile-hide"><i class="pencil alternate icon"></i>文章</a>
+                <a href="attention.html" class="active m-item item m-mobile-hide"><i class="heart icon"></i>关注</a>
+                <a href="preference.html" class=" m-item item m-mobile-hide"><i class="folder icon"></i>收藏</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown  item">
+                        <img class="ui avatar image" src="../images/blogLogo.jpg">
+                        <div class="text">
+                            <span id="username"></span>
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="#" class="item" onclick="">个人信息</a>
+                            <a href="#" class="item" onclick="">消息</a>
+                            <a href="#" class="item" onclick="">订单</a>
+                            <a href="#" class="item" onclick="">商城</a>
+                            <a href="#" class="item" onclick="gotoLogin()">注销</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
-        <i class="sidebar icon"></i>
-    </a>
-</nav>
+    </nav>
 
-
-<!--中间内容-->
-<div  class="" style="margin-top: 10%;">
-    <div class="ui container">
-        <div  class="ui secondary segment form">
-            <input type="hidden" name="page" >
-            <div class="inline fields">
-                <div class="field">
-                    <input type="text" name="title" placeholder="标题或关键字" id="keywords">
-                </div>
-                <div class="field">
-                    <button  type="button" id="search-btn" class="ui mini teal basic button" onclick="searchUserBlog()"><i class="search icon"></i>搜索</button>
+    <div class="container-fluid" style="margin-top: 5%;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="carousel slide" id="carousel-644534">
+                    <ol class="carousel-indicators">
+                        <li class="active" data-slide-to="0" data-target="#carousel-644534">
+                        </li>
+                        <li data-slide-to="1" data-target="#carousel-644534">
+                        </li>
+                        <li data-slide-to="2" data-target="#carousel-644534">
+                        </li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img alt="" src="../images/1.jpg" />
+                            <div class="carousel-caption">
+                                <h4>
+                                    棒球
+                                </h4>
+                                <p>
+                                    棒球运动是一种以棒打球为主要特点，集体性、对抗性很强的球类运动项目，在美国、日本尤为盛行。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img alt="" src="../images/2.jpg" />
+                            <div class="carousel-caption">
+                                <h4>
+                                    冲浪
+                                </h4>
+                                <p>
+                                    冲浪是以海浪为动力，利用自身的高超技巧和平衡能力，搏击海浪的一项运动。运动员站立在冲浪板上，或利用腹板、跪板、充气的橡皮垫、划艇、皮艇等驾驭海浪的一项水上运动。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img alt="" src="../images/3.jpg" />
+                            <div class="carousel-caption">
+                                <h4>
+                                    自行车
+                                </h4>
+                                <p>
+                                    以自行车为工具比赛骑行速度的体育运动。1896年第一届奥林匹克运动会上被列为正式比赛项目。环法赛为最著名的世界自行车锦标赛。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <a data-slide="prev" href="#carousel-644534" class="left carousel-control">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a data-slide="next" href="#carousel-644534" class="right carousel-control">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
         </div>
-        <div id="table-container">
-            <table class="ui compact teal table">
-                <thead>
-                <tr align="center">
-                    <th>ID</th>
-                    <th>标题</th>
-                    <th>修改</th>
-                    <th>删除</th>
-                </tr>
-                </thead>
-                <tbody id="tableBody">
-                <tr align="center" id="tableElement1"></tr>
-                <tr align="center" id="tableElement2"></tr>
-                <tr align="center" id="tableElement3"></tr>
-                <tr align="center" id="tableElement4"></tr>
-                <tr align="center" id="tableElement5"></tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th colspan="7">
-                        <div class="ui inverted divided stackable grid">
-                            <div class="three wide column" align="center">
-                                <a class="item" onclick="pageUp()">上一页</a>
-                            </div>
-
-                            <div class="ten wide column" align="center">
-                                <p>第 <span id="pageIndex"></span> 页，共 <span id="pageNum"></span> 页，有 <span id="blogNum"></span> 篇文章</p>
-                            </div>
-
-                            <div class="three wide column" align="center">
-                                <a class="item" onclick="pageDown()">下一页</a>
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-md-4">
+                <img alt="140x140" src="../images/a.jpg" class="img-circle" />
+                <div class="hero-unit well" id="user">
+                    <h1>
+                        userName
+                    </h1>
+                    <p>
+                        这是一个可视化布局模板, 你可以点击模板里的文字进行修改, 也可以通过点击弹出的编辑框进行富文本修改. 拖动区块能实现排序
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <ul class="thumbnails" style="list-style: none;">
+                    <li class="col-md-12 blogList">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>
+                                    blogTitle
+                                </h3>
+                                <p>
+                                    blogSummery
+                                </p>
+                                <p>
+                                    <a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">收藏</a>
+                                </p>
                             </div>
                         </div>
-                        <div align="center">
-                            <a href="#">
-                                <button type="button" class="ui teal button m-mobile-wide m-margin-top" onclick="writeBlog()"><i class="pencil icon"></i>新增</button>
-                            </a>
+                    </li>
+                </ul>
+                <ul class="thumbnails" style="list-style: none;">
+                    <li class="col-md-12 blogList">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>
+                                    blogTitle
+                                </h3>
+                                <p>
+                                    blogSummery
+                                </p>
+                                <p>
+                                    <a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">收藏</a>
+                                </p>
+                            </div>
                         </div>
-                    </th>
-                </tr>
-                </tfoot>
-            </table>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+                <div class="tabbable tabs-left" id="tabs-785674"> <!-- Only required for left/right tabs -->
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#panel-150396" data-toggle="tab" contenteditable="true">第一部分</a></li>
+                      <li><a href="#panel-183165" data-toggle="tab" contenteditable="true">第二部分</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane" id="panel-150396" contenteditable="true">
+                        <p>第一部分内容.</p>
+                      </div>
+                      <div class="tab-pane" id="panel-183165" contenteditable="true">
+                        <p>第二部分内容.</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-4 ">
+                <form class="form-horizontal" style="padding-left: 55px;">
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">邮箱</label>
+                        <div class="controls">
+                            <input id="inputEmail" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword">密码</label>
+                        <div class="controls">
+                            <input id="inputPassword" type="password" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label class="checkbox"><input type="checkbox" /> Remember me</label>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">登陆</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-<script src="../script/normal.js"></script>
+
 </body>
-</html>
+<script src="../script/normal.js"></script>
 
+</html>
