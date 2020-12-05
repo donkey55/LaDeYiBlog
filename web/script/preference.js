@@ -134,7 +134,7 @@ function addTd() {
         let aLi1 = document.createElement("a"); //blog 显示
         let aLi2 = document.createElement("a"); //取消收藏
         td1.innerHTML = String(preferenceCount + 1);
-        td3.innerHTML = element.lable;
+        td3.innerHTML = element.label;
         aLi1.innerHTML = element.title;
         aLi1.setAttribute('href', 'blog.html?' + element.blogId + '?' + $.cookie("account"));
         aLi1.setAttribute("target", "_blank");
