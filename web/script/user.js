@@ -11,7 +11,7 @@ $(function () {
     } */
     blogCount = 0;
     pageIndex = 1;
-    preferenceNum = 0;
+    blogNum = 0;
     document.getElementById("username").innerHTML=$.cookie("account");
     $.ajax({
         type: "post",
