@@ -4,7 +4,7 @@ let commentList;
 
 window.onload = function () {
     var id = window.location.toString().split('?')[1];
-    //let str = {"blog":"$$\nsum=\sum k"};
+    //     //let str = {"blog":"$$\nsum=\sum k"};
     //console.log(JSON.stringify( {"blog":"$$\nsum=\sum k"}));
 
     if (count === 0) {

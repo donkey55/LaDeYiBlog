@@ -13,7 +13,7 @@
 
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
+    <script src="../script/showUser.js"></script>
 
     <!--引用百度bootstrap-->
 
@@ -122,22 +122,21 @@
                     </p>
                 </div>
             </div>
+
             <div class="col-md-8">
                 <ul class="thumbnails myhidden" style="list-style: none;">
                     <li class="col-md-12 blog1">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3 id="blog1Title">
-                                    blogTitle
-                                </h3>
-                                <p id="blog1Summary">
-                                    blogSummery
-                                </p>
-                                <p id="blog1Href">
-                                    <a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">收藏</a>
-                                </p>
-                                <span class="label label-primary" id="blog1Label">博客标签</span>
-                            </div>
+                        <div class="caption">
+                            <h3 id="blog1Title" class="needEmpty">
+                                blogTitle
+                            </h3>
+                            <p id="blog1Summary" class="needEmpty">
+                                blogSummery
+                            </p>
+                            <p id="blog1Href" class="needEmpty">
+                                <a class="btn btn-primary">浏览</a>
+                            </p>
+                            <span class="label label-primary" id="blog1Label"></span>
                         </div>
                     </li>
                 </ul>
@@ -145,12 +144,12 @@
                     <li class="col-md-12 blog2">
                         <div>
                             <div class="caption">
-                                <h3 id="blog2Title">
+                                <h3 id="blog2Title" class="needEmpty">
                                 </h3>
-                                <p id="blog2Summary">
+                                <p id="blog2Summary" class="needEmpty">
                                 </p>
-                                <p id="blog2Href">
-                                    <!-- <a class="btn btn-primary" href="#"></a> <a class="btn" href="#"></a> -->
+                                <p id="blog2Href" class="needEmpty">
+
                                 </p>
                                 <span class="label label-primary" id="blog2Label"></span>
                             </div>
@@ -161,12 +160,12 @@
                     <li class="col-md-12 blog3">
                         <div>
                             <div class="caption">
-                                <h3 id="blog3Title">
+                                <h3 id="blog3Title" class="needEmpty">
                                 </h3>
-                                <p id="blog3Summary">
+                                <p id="blog3Summary" class="needEmpty">
                                 </p>
-                                <p id="blog3Href">
-                                    <!-- <a class="btn btn-primary" href="#"></a> <a class="btn" href="#"></a> -->
+                                <p id="blog3Href" class="needEmpty">
+
                                 </p>
                                 <span class="label label-primary" id="blog3Label"></span>
                             </div>
@@ -175,15 +174,15 @@
                 </ul>
                 <ul class="thumbnails myhidden" style="list-style: none;">
                     <li class="col-md-12 blog4">
-                        
+
                         <div>
                             <div class="caption">
-                                <h3 id="blog4Title">
+                                <h3 id="blog4Title" class="needEmpty">
                                 </h3>
-                                <p id="blog4Summary">
+                                <p id="blog4Summary" class="needEmpty">
                                 </p>
-                                <p id="blog4Href">
-                                    <!-- <a class="btn btn-primary" href="#"></a> <a class="btn" href="#"></a> -->
+                                <p id="blog4Href" class="needEmpty">
+
                                 </p>
                                 <span class="label label-primary" id="blog4Label"></span>
                             </div>
@@ -194,12 +193,12 @@
                     <li class="col-md-12 blog5">
                         <div>
                             <div class="caption">
-                                <h3 id="blog5Title">
+                                <h3 id="blog5Title" class="needEmpty">
                                 </h3>
-                                <p id="blog5Summary">
+                                <p id="blog5Summary" class="needEmpty">
                                 </p>
-                                <p id="blog5Href">
-                                    <!-- <a class="btn btn-primary" href="#"></a> <a class="btn" href="#"></a> -->
+                                <p id="blog5Href" class="needEmpty">
+
                                 </p>
                                 <span class="label label-primary" id="blog5Label"></span>
                             </div>
@@ -217,7 +216,7 @@
 
                                     <div class="ten wide column" align="center">
                                         <p>第 <span id="pageIndex"></span> 页，共 <span id="pageNum"></span> 页，有 <span
-                                                id="attentionTotal"></span> 博客</p>
+                                                id="blogTotal"></span> 博客</p>
                                     </div>
 
                                     <div class="three wide column" align="center">
