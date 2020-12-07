@@ -9,6 +9,14 @@
 		<url-pattern>/com/ladeyi/test/BuyGoodsServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>ChangeBlogServlet</servlet-name>
+		<servlet-class>com.ladeyi.test.servlet.ChangeBlogServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeBlogServlet</servlet-name>
+		<url-pattern>/com/ladeyi/test/ChangeBlogServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>ChangePasswordServlet</servlet-name>
 		<servlet-class>com.ladeyi.test.servlet.ChangePasswordServlet</servlet-class>
 	</servlet>

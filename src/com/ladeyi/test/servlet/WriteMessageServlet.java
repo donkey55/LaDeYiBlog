@@ -37,6 +37,7 @@ public class WriteMessageServlet extends HttpServlet {
         String fromUserName = request.getParameter("fromUserName");
         String toUserName = request.getParameter("toUserName");
         String message = request.getParameter("message");
+        int messageType = Integer.parseInt(request.getParameter("messageType"));
         try {
             ResultSet fromUserIdSet = User.checkId(fromUserName);
             fromUserIdSet.next();
@@ -44,7 +45,7 @@ public class WriteMessageServlet extends HttpServlet {
             ResultSet toUserIdSet = User.checkId(toUserName);
             toUserIdSet.next();
             int toUserId = Integer.parseInt(toUserIdSet.getString(1));
-            ret = Message.insertMessage(fromUserId, toUserId, message);
+            ret = Message.insertMessage(fromUserId, toUserId, message, messageType);
         } catch (SQLException e) {
         }
         String output = "{\"ret\":\"" + ret + "\"}";

@@ -49,6 +49,14 @@ public class Main {
         //Call call=new Call(myConnection.getConnection());
         //ResultSet resultSet = null;
         //System.out.println(ShowMyBlogInfoServlet.doPost());
+        /*
+        int blogId = 51;
+        String blog = "yihuoj";
+        String title = "poiuyghj";
+        int ret = Blog.updateBlog(blogId, blog, title);
+        String output = "{\"ret\":\"" + ret + "\"}";
+        System.out.println(ret);
+         */
     }
 }
 

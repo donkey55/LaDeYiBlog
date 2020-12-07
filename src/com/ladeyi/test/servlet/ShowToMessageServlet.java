@@ -34,15 +34,19 @@ public class ShowToMessageServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        int toUserId = Integer.parseInt(request.getParameter("toUserId"));
-        ResultSet messageSet = Message.checkMessageUseToUserId(toUserId);
+        String toUserName = request.getParameter("toUserName");
         try {
+            ResultSet toUserIdSet = User.checkId(toUserName);
+            toUserIdSet.next();
+            int toUserId=toUserIdSet.getInt(1);
+            ResultSet messageSet = Message.checkMessageUseToUserId(toUserId);
             while (messageSet.next()) {
                 ResultSet userSet = User.checkUserName(messageSet.getString(2));
                 userSet.next();
                 ret = ret + "{\"messageId\":\"" + messageSet.getString(1) + "\",";
                 ret = ret + "\"userName\":\"" + userSet.getString(1) + "\",";
-                ret = ret + "\"message\":\"" + messageSet.getString(4) + "\"},";
+                ret = ret + "\"message\":\"" + messageSet.getString(4) + "\",";
+                ret = ret + "\"messageType\":\"" + messageSet.getString(5) + "\"},";
             }
         } catch (SQLException e) {
         }

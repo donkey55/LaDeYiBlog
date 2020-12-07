@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Message {
-    public static int insertMessage(int fromUserId, int toUserId, String message) {
-        return Update.messageInsert(fromUserId, toUserId, message);
+    public static int insertMessage(int fromUserId, int toUserId, String message, int messageType) {
+        return Update.messageInsert(fromUserId, toUserId, message, messageType);
     }
 
     public static ResultSet checkMessageUseFromUserId(int id) {
