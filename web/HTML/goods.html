@@ -13,6 +13,7 @@
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script src="../script/refJS/jquery.cookie.js"></script>
+    <script src="../script/mall.js"></script>
     <style>
         .good-img {
             width: 100%;
@@ -75,34 +76,71 @@
                         </div>
 
                         <div class="col-md-5 col-md-offset-1">
-                            <h3 id="goodDescribe">商品名称</h3>
+                            <h3 id="goodsName">商品名称</h3>
                             <hr>
-                            ￥ <span>59.99</span>
+                            ￥ <span id="price">59.99</span>
                             <hr>
-                            <div>商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述</div>
+                            <div id="goodDescription">商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述</div>
                             <hr>
-                            库存<span>199</span>件
+                            库存<span id="stockNum">199</span>件
                             <hr>
-                            <button type="button" class="btn btn-sm add-btn" data-operator='increase'>+</button>
-                            <button type="button" class="btn btn-sm  disabled count" data-name='qty'>1</button>
-                            <button type="button" class="btn btn-sm sub-btn" data-operator='decrease'>-</button>
+                            <button type="button" class="btn btn-sm add-btn" id='increase' onclick="increase()">+</button>
+                            <button type="button" class="btn btn-sm disabled count" id='count'>1</button>
+                            <button type="button" class="btn btn-sm sub-btn" id='decrease' onclick="decrease()">-</button>
                             <hr>
-                            <button class="btn btn-primary col-md-5">收藏</button>
-                            <button class="btn btn-success col-md-5 col-md-offset-1">加入购物车</button>
+                            <button class="btn btn-success col-md-5 col-md-offset-1" onclick="buy()">购买</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
-    <!-- 页脚 -->
-    <div id="footer_part"></div>
 </body>
+<script>
 
-<script type="text/javascript">
-    $("#nav_part").load("nav_part.html");
-    $("#footer_part").load("footer_part.html");
+    let index = window.location.split("?")[1];
+    let element = goodsList[i];
+    setHtml("goodsName", element.goodsName);
+    setHtml("price", element.goodsPrice);
+    setHtml("stockNum", element.goodsAmount);
+    function setHtml(id, value) {
+        $("#"+id).html(value);
+    }
+
+    function buy() {
+        $.ajax({
+            type: "post",
+            url: "" ,
+            data: {
+                "userName": $.cookie("account"),
+                "goodsId": element.goodsId,
+                "amount": $("#count").html()
+            },
+            datatype:"json",
+            success:function (data) {
+                if (data.ret === 1) {
+                    alert("购买成功");
+                } else {
+                    alert("购买失败");
+                }
+            }
+        });
+    }
+
+    function increase() {
+        let value = parseInt($("#count").html());
+        value++;
+        $("#count").html(value);
+    }
+
+    function decrease() {
+        let value = parseInt($("#count").html());
+        value--;
+        if (value < 0) {
+            value = 0;
+        }
+        $("#count").html(value);
+    }
 </script>
 
 </html>

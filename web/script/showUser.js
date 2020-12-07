@@ -92,7 +92,7 @@ function empty() {
 function updatePageNum() {
     document.getElementById("pageIndex").innerHTML = String(pageIndex);
     document.getElementById("pageNum").innerHTML = String(pageNum);
-    document.getElementById("blogNum").innerHTML = String(blogTotal);
+    document.getElementById("blogTotal").innerHTML = String(blogTotal);
 }
 
 
