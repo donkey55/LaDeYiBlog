@@ -24,7 +24,11 @@ function getCon() {
         type: "post",
         url: "../com/ladeyi/test/WriteBlogServlet",
         data: {
-            "title" : $("#title").val(),
+            "title" : $("#title").val()
+                .replace(/\\/g,'\\\\' )
+                .replace(/"/g,'\\"')
+                .replace(/\r\n|\n/g, '\\n')
+                .replace(/\s/g, ' '),
             "blog" : $("#test-editor-html-code").val()
                 .replace(/\\/g,'\\\\' )
                 .replace(/"/g,'\\"')
