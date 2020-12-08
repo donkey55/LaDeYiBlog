@@ -74,7 +74,7 @@ function showGoods() {
         showBorder(index);
         aLi.setAttribute("class", "btn btn-primary");
         aLi.innerHTML = "购买";
-        aLi.setAttribute("href", "goods.html?" + index);
+        aLi.setAttribute("href", "goods.html?" + element.goodsId);
         $("#href" + index).append(aLi);
     }
 }

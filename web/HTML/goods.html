@@ -97,12 +97,26 @@
     </main>
 </body>
 <script>
+    let goodId = window.location.split("?")[1];
+    let element;
+    $(function () {
+        $.ajax({
+            type: "post",
+            url: "",
+            data: {
+                "goodsId" : goodId
+            },
+            success: function (data) {
+                setHtml("goodsName", data.goodsName);
+                setHtml("price", data.goodsPrice);
+                setHtml("stockNum", data.goodsAmount);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    });
 
-    let index = window.location.split("?")[1];
-    let element = goodsList[i];
-    setHtml("goodsName", element.goodsName);
-    setHtml("price", element.goodsPrice);
-    setHtml("stockNum", element.goodsAmount);
     function setHtml(id, value) {
         $("#"+id).html(value);
     }

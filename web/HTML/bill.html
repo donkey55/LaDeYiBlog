@@ -1,64 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="cache-control" content="no-cache">
-    <title>博客后台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人订单</title>
     <link href="../images/blogLogo.jpg" rel="icon" type="image/x-ico">
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <link rel="stylesheet" href="../CSS/login_user.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script src="../script/refJS/jquery.cookie.js"></script>
-    <script src="../script/user.js"></script>
+    <script src="../script/mall.js"></script>
+    <style>
+        body {
+            background: none;
+        }
+    </style>
 
 </head>
 
-<body>
+<!--导航栏-->
 
-    <!--导航栏-->
+<body>
     <nav class="ui inverted gird-header">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
-                <h2 class="ui olive header item" style="font-family: STSong">管理后台</h2>
+                <h2 class="ui olive header item" style="font-family: STSong">个人信息</h2>
                 <a href="#" class=" m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
-                <a href="user.html" class="active m-item item m-mobile-hide"><i class="pencil alternate icon"></i>文章</a>
-                <a href="attention.html" class=" m-item item m-mobile-hide"><i class="heart icon"></i>关注</a>
+                <a href="user.html" class=" m-item item m-mobile-hide"><i class="pencil alternate icon"></i>文章</a>
+                <a href="attention.html" class="m-item item m-mobile-hide"><i class="heart icon"></i>关注</a>
                 <a href="preference.html" class=" m-item item m-mobile-hide"><i class="folder icon"></i>收藏</a>
+                <a href="preference.html" class="m-item item m-mobile-hide"><i class="folder icon"></i>商城</a>
                 <div class="right m-item m-mobile-hide menu">
-                    <div class="ui dropdown  item">
+                    <div class="dropdown item" style="z-index: 100;">
                         <img class="ui avatar image" src="../images/blogLogo.jpg">
-                        <div class="text">
-                            <span id="username"></span>
-                        </div>
-                        <i class="dropdown icon"></i>
-                        <div class="menu">
-                            <a href="#" class="item" onclick="">个人信息</a>
-                            <a href="message.html" class="item" onclick="">消息</a>
-                            <a href="#" class="item" onclick="">订单</a>
-                            <a href="#" class="item" onclick="">商城</a>
-                            <a href="#" class="item" onclick="gotoLogin()">注销</a>
-                        </div>
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                            style="background: transparent; color:white; border: none;">
+                            <span class="caret"></span>
+                            <span id="username">45</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="min-width:100%;">
+                            <li><a href="#" onclick="">个人信息</a></li>
+                            <li><a href="#" onclick="">消息</a></li>
+                            <li><a href="#" onclick="">订单</a></li>
+                            <li><a href="#" onclick="">商城</a></li>
+                            <li><a href="#" onclick="gotoLogin()">注销</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
-            <i class="sidebar icon"></i>
-        </a>
     </nav>
 
 
-    <!--中间内容-->
     <div class="" style="margin-top: 10%;">
         <div class="ui container">
             <div class="ui secondary segment form">
                 <input type="hidden" name="page">
                 <div class="inline fields">
                     <div class="field">
-                        <input type="text" name="title" placeholder="标题或关键字" id="keywords">
+                        <input type="text" name="title" placeholder="商品名称或账单号" id="keywords">
                     </div>
                     <div class="field">
                         <button type="button" id="search-btn" class="ui mini teal basic button"
@@ -71,9 +78,9 @@
                     <thead>
                         <tr align="center">
                             <th>ID</th>
-                            <th>标题</th>
-                            <th>修改</th>
-                            <th>删除</th>
+                            <th>商品名称</th>
+                            <th>购买数量</th>
+                            <th>账单号</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -93,18 +100,12 @@
 
                                     <div class="ten wide column" align="center">
                                         <p>第 <span id="pageIndex"></span> 页，共 <span id="pageNum"></span> 页，有 <span
-                                                id="blogTotal"></span> 篇文章</p>
+                                                id="billTotal"></span> 个账单</p>
                                     </div>
 
                                     <div class="three wide column" align="center">
                                         <a class="item" onclick="pageDown()">下一页</a>
                                     </div>
-                                </div>
-                                <div align="center">
-                                    <a href="#">
-                                        <button type="button" class="ui teal button m-mobile-wide m-margin-top"
-                                            onclick="writeBlog()"><i class="pencil icon"></i>新增</button>
-                                    </a>
                                 </div>
                             </th>
                         </tr>
@@ -113,7 +114,10 @@
             </div>
         </div>
     </div>
-    <script src="../script/normal.js"></script>
+
+
+
 </body>
+<script src="../script/normal.js"></script>
 
 </html>
