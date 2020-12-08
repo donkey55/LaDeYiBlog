@@ -2,12 +2,11 @@ let userName = $.cookie("account");
 let shopId;
 let goodsList;
 let pageIndex = 1;
-let pageNum = 0;
+let pageNum = 1;
 let goodsNum = 0;
-let goodsTotal;
+let goodsTotal = 0;
 let goodsCount = 0;
 $(function(){
-    $("#test").setAttribute("style", "");
     $.ajax({
         type: "post",
         url: "../com/ladeyi/test/ShowShopInfoServlet",
