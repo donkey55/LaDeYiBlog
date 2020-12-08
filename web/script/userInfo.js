@@ -1,11 +1,13 @@
 let userInfo;
+
 $(function () {
-    userName = $.cookie("account");
+    let userName = $.cookie("account");
+    setHtml("userName", userName);
     $.ajax({
         type: "post",
         url: "../com/ladeyi/test/ShowUserInfoServlet",
         data: {
-            "userName": id
+            "userName": userName
         },
         dataType: "json",
         success: function (data) {

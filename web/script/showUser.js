@@ -5,7 +5,6 @@ let pageNum = 0;
 let pageIndex = 1;
 let blogTotal = 0;
 $(function () {
-
     blogCount = 0;
     pageIndex = 1;
     blogNum = 0;
@@ -73,6 +72,7 @@ function setHtml(id, value) {
 
 function showBLog() {
     for (let index = 1; index <= 5 && blogCount < blogTotal; index++, blogCount++, blogNum++) {
+        $(".needEmptyBorder").css("style", "border:none");
         const element = blogList[blogCount];
         setHtml("blog" + index + "Title", element.title);
         setHtml("blog" + index + "Summary", element.blog);
@@ -87,7 +87,10 @@ function showBLog() {
 
 function empty() {
     $(".needEmpty").empty();
+    $(".needEmptyBorder").css("style", "border:none");
 }
+
+
 
 function updatePageNum() {
     document.getElementById("pageIndex").innerHTML = String(pageIndex);
