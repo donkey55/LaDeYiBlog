@@ -5,10 +5,53 @@ let pageNum = 0;
 let pageIndex = 1;
 let blogTotal = 0;
 let singlePageNum = 6;
+const fans = 20;
 $(function () {
+    alert(fans);
     blogCount = 0;
     pageIndex = 1;
     blogNum = 0;
+    $.ajax({
+        type: "post",
+        url: "../com/ladeyi/test/ShowUserInfoServlet",
+        data: {
+            "userName": userName
+        },
+        dataType: "json",
+        success: function (data) {
+            $("#user h1").innerText = userName;
+            setHtml("selfIntroduction", data.selfIntroduction);
+        },
+        error() {
+
+        }
+    });
+    //fans  
+    $.ajax({
+        type: "post",
+        url: "../com/ladeyi/test/ShowToAttentionServlet",
+        data: {
+            "userName": userName
+        },
+        dataType: "json",
+        success: function (data) {
+            $("#fans").html(data.length);
+        }
+    });
+
+
+    $.ajax({
+        type: "post",
+        url: "../com/ladeyi/test/ShowFromAttentionServlet",
+        data: {
+            "userName": userName
+        },
+        dataType: "json",
+        success: function (data) {
+            $("#attention").html(data.length);
+        }
+    });
+
     $.ajax({
         type: "post",
         url: "../com/ladeyi/test/ShowMyBlogInfoServlet",
@@ -20,35 +63,20 @@ $(function () {
             //保存得到的文章
             blogList = data;
             blogTotal = blogList.length;
-            pageNum = Math.ceil(blogTotal/5);
+            pageNum = Math.ceil(blogTotal / 5);
             showBLog();
             updatePageNum();
         },
-        error:function(){
+        error: function () {
             console.log("error");
             pageNum = 1;
             updatePageNum();
         }
     });
-
-    $.ajax({
-        type: "post",
-        url: "../com/ladeyi/test/ShowUserInfoServlet",
-        data: {
-            "userName": userName
-        },
-        dataType: "json",
-        success: function (data) {
-            $("#user h1").innerText = userName;
-            setHtml("selfIntroduction", data.selfIntroduction);
-        }, error() {
-            alert("error");
-        }
-    });
 });
 
 function pageDown() {
-    if(blogCount < blogTotal) {
+    if (blogCount < blogTotal) {
         empty();
         //显示文章
         showBLog();
@@ -58,7 +86,7 @@ function pageDown() {
 }
 
 function pageUp() {
-    if(blogCount > blogNum){
+    if (blogCount > blogNum) {
         blogCount -= (blogNum + singlePageNum);
         empty();
         showBLog();
@@ -98,9 +126,9 @@ function showBLog() {
 }
 
 function empty() {
-   for (let index = 1; index <= singlePageNum; index++) {
-       $("#blog" + index).empty();
-   }
+    for (let index = 1; index <= singlePageNum; index++) {
+        $("#blog" + index).empty();
+    }
 }
 
 
@@ -117,12 +145,12 @@ function addAttention() {
         type: "post",
         url: "../com/ladeyi/test/WriteAttentionServlet",
         data: {
-            "formUser" : $.cookie("account"),
+            "formUser": $.cookie("account"),
             "toUser": userName
         },
         datatype: "json",
-        success: function(data) {
-            if (data.ret === "1" ) {
+        success: function (data) {
+            if (data.ret === "1") {
                 alert("关注成功");
             } else {
                 alert("关注失败");

@@ -31,7 +31,7 @@ $(function(){
         dataType: "json",
         success: function (data) {
             goodsList = data;
-            pageNum = pageNum = Math.ceil(goodsTotal/5);
+            pageNum = pageNum = Math.ceil(goodsTotal/9);
             pageIndex = 1;
             goodsTotal = data.length;
             showGoods();
@@ -70,6 +70,7 @@ function showGoods() {
         let aLi = document.createElement("a");
         setHtml("goodsName" + index, element.goodsName);
         setHtml("goodsDescription" + index, goodsDescSummary(element.introduction));
+        setHtml("goodsImg" + index, element.image); //设置照片
         showBorder(index);
         aLi.setAttribute("class", "btn btn-primary");
         aLi.innerHTML = "购买";
