@@ -1,9 +1,10 @@
-let userName = window.location.split("?")[1];
+let userName = window.location.href.split("?")[1];
 let blogList;
 let blogCount = 0;
 let pageNum = 0;
 let pageIndex = 1;
 let blogTotal = 0;
+let singlePageNum = 6;
 $(function () {
     blogCount = 0;
     pageIndex = 1;
@@ -14,7 +15,7 @@ $(function () {
         data: {
             "userName": userName
         },
-        dataType: "json",
+        datatype: "json",
         success: function (data) {
             //保存得到的文章
             blogList = data;
@@ -34,7 +35,7 @@ $(function () {
         type: "post",
         url: "../com/ladeyi/test/ShowUserInfoServlet",
         data: {
-            "userName": id
+            "userName": userName
         },
         dataType: "json",
         success: function (data) {
@@ -58,7 +59,7 @@ function pageDown() {
 
 function pageUp() {
     if(blogCount > blogNum){
-        blogCount -= (blogNum + 5);
+        blogCount -= (blogNum + singlePageNum);
         empty();
         showBLog();
         pageIndex--;
@@ -66,28 +67,40 @@ function pageUp() {
     }
 }
 
-function setHtml(id, value) {
-    $("#"+id).html(value);
+function setHtml(obj, value) {
+    obj.innerHTML = value;
 }
 
 function showBLog() {
-    for (let index = 1; index <= 5 && blogCount < blogTotal; index++, blogCount++, blogNum++) {
-        $(".needEmptyBorder").css("style", "border:none");
+    for (let index = 1; index <= singlePageNum && blogCount < blogTotal; index++, blogCount++, blogNum++) {
         const element = blogList[blogCount];
-        setHtml("blog" + index + "Title", element.title);
-        setHtml("blog" + index + "Summary", element.blog);
-        let aLi1 = document.createElement("a");
-        aLi1.setAttribute("id", element.blogId);
-        aLi1.setAttribute("class", "btn btn-primary");
-        aLi1.setAttribute("href", "blog.html?" + element.blogId);
-        aLi1.innerHTML = "浏览";
-        $("#blog" + index + "Href").append(aLi1);
+        let div1 = document.createElement("div");
+        let div2 = document.createElement("div");
+        let h2 = document.createElement("h2");
+        let p1 = document.createElement("p");
+        let p2 = document.createElement("p");
+        let p2A = document.createElement("a");
+        div1.setAttribute("class", "thumbnail");
+        div2.setAttribute("class", "caption");
+
+        setHtml(h2, element.title);
+        setHtml(p1, element.blog);
+        setHtml(p2A, "浏览");
+        p2A.setAttribute("class", "btn btn-primary");
+        p2A.setAttribute("href", "blog.html?" + element.blogId);
+        p2.appendChild(p2A);
+        div2.appendChild(h2);
+        div2.appendChild(p1);
+        div2.appendChild(p2);
+        div1.appendChild(div2);
+        $("#blog" + index).append(div1);
     }
 }
 
 function empty() {
-    $(".needEmpty").empty();
-    $(".needEmptyBorder").css("style", "border:none");
+   for (let index = 1; index <= singlePageNum; index++) {
+       $("#blog" + index).empty();
+   }
 }
 
 
@@ -99,3 +112,21 @@ function updatePageNum() {
 }
 
 
+function addAttention() {
+    $.ajax({
+        type: "post",
+        url: "../com/ladeyi/test/WriteAttentionServlet",
+        data: {
+            "formUser" : $.cookie("account"),
+            "toUser": userName
+        },
+        datatype: "json",
+        success: function(data) {
+            if (data.ret === "1" ) {
+                alert("关注成功");
+            } else {
+                alert("关注失败");
+            }
+        },
+    });
+}
