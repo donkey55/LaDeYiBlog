@@ -135,14 +135,15 @@ public class Update {
         return ret;
     }
 
-    public static int messageInsert(int fromUserId, int toUserId, String message) {
+    public static int messageInsert(int fromUserId, int toUserId, String message, int messageType) {
         int ret = 0;
-        String sql = "INSERT INTO message(fromUserId,toUserId,message) values (?,?,?)";
+        String sql = "INSERT INTO message(fromUserId,toUserId,message,messageType) values (?,?,?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, fromUserId);
             preparedStatement.setInt(2, toUserId);
             preparedStatement.setString(3, message);
+            preparedStatement.setInt(4, messageType);
             ret = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             return -100;
@@ -201,8 +202,8 @@ public class Update {
 
     public static int blogUpdate(int blogId, String blog, String title) {
         int ret = 0;
-        String sql1 = "UPDATE blog SET " + blog + "=? WHERE blogId=?";
-        String sql2 = "UPDATE blog SET " + title + "=? WHERE blogId=?";
+        String sql1 = "UPDATE blog SET blog =? WHERE blogId=?";
+        String sql2 = "UPDATE blog SET title =? WHERE blogId=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql1);
             preparedStatement.setString(1, blog);

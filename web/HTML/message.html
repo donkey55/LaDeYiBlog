@@ -4,33 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="cache-control" content="no-cache">
-    <title>博客编辑</title>
+    <title>个人消息</title>
     <link href="../images/blogLogo.jpg" rel="icon" type="image/x-ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <link rel="stylesheet" href="../CSS/login_user.css">
-    <link rel="stylesheet" href="../CSS/writeBlog.css">
-    <link rel="stylesheet" href="../CSS/user.css">
-    <link rel="stylesheet" href="../editormd/css/editormd.css" />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-    <script src=" ../editormd/lib/marked.min.js"> </script>
-    <script src="../editormd/lib/prettify.min.js"></script>
-    <script src="../editormd/lib/raphael.min.js"></script>
-    <script src="../editormd/lib/underscore.min.js"></script>
-    <script src="../editormd/lib/sequence-diagram.min.js"></script>
-    <script src="../editormd/lib/flowchart.min.js"></script>
-    <script src="../editormd/lib/jquery.flowchart.min.js"></script>
-    <script src="../editormd/editormd.min.js"></script>
     <script src="../script/refJS/jquery.cookie.js"></script>
-
+    <script src="../script/message.js"></script>
 </head>
 <body>
 
-<!--导航栏-->
+<!--导航-->
 <nav class="ui inverted gird-header">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
-            <h2 class="ui olive header item" style="font-family: STSong">添加博客</h2>
+            <h2 class="ui olive header item" style="font-family: STSong">个人消息</h2>
             <a href="main.html" class=" m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
             <a href="user.html" class=" m-item item m-mobile-hide"><i class="pencil alternate icon"></i>文章</a>
             <a href="attention.html" class=" m-item item m-mobile-hide"><i class="heart icon"></i>关注</a>
@@ -57,26 +46,30 @@
         <i class="sidebar icon"></i>
     </a>
 </nav>
-<br>
-<br>
-<br>
 
 <!--中间内容-->
-<div class="ui container">
-    <div id="editorForm" style="width: 100%; display: block; margin-top: 20px; height: 100%;">
-        <div id="blogTitle">
-            <label for="title">标题</label>
-            <input type="text" id="title" name="title" placeholder="请输入标题...." required>
-            <button class="ui primary button" onclick="getCon()">修改</button>
+<div style="margin-top: 10%;">
+    <div class="ui container">
+        <div class="ui relaxed divided list" id="messageList">
+            <!--加入消息-->
         </div>
-        <div id="test-editor">
-            <textarea style="display:none;" id="blogContent"></textarea>
-            <textarea id="test-editor-html-code" name="my-editormd-html-code" style="display:none;"></textarea>
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column" align="center">
+                <i class="chevron left icon" onclick="pageUp()"></i>
+            </div>
+
+            <div class="ten wide column" align="center">
+                <p>第 <span id="pageIndex"></span> 页，共 <span id="pageNum"></span> 页，有 <span id="messageNum"></span> 条消息</p>
+            </div>
+
+            <div class="three wide column" align="center">
+                <i class="chevron right icon" onclick="pageDown()"></i>
+            </div>
         </div>
     </div>
 </div>
+
 </body>
 <script src="../script/normal.js"></script>
-<script src="../script/changeBlog.js"></script>
 </html>
 

@@ -4,7 +4,7 @@ let commentList;
 
 window.onload = function () {
     var id = window.location.toString().split('?')[1];
-    //let str = {"blog":"$$\nsum=\sum k"};
+    //     //let str = {"blog":"$$\nsum=\sum k"};
     //console.log(JSON.stringify( {"blog":"$$\nsum=\sum k"}));
 
     if (count === 0) {
@@ -38,7 +38,8 @@ window.onload = function () {
         success: function (data) {
             document.getElementById("preference_num").innerHTML =data.preferenceCount;
             document.getElementById("comment_num").innerHTML = data.commentCount;
-            if(data.concerned == 1){
+            console.log(data.concerned)
+            if(data.concerned === "1"){
                 preferenceFlag = 1;
             }else{
                 preferenceFlag = 0;
@@ -57,7 +58,7 @@ window.onload = function () {
         success: function (data) {
             commentList = data;
             //console.log(data)
-            if(commentList.length == 0){
+            if(commentList.length === 0){
                 let p = document.createElement("p")
                 p.innerText = "暂时没有评论哦~"
                 document.getElementById("all_comments").appendChild(p)
@@ -128,7 +129,7 @@ function preview() {
 }
 
 function showStyle() {
-    if(preferenceFlag == 1){
+    if(preferenceFlag === 1){
         document.getElementById("preference").setAttribute("class","ui red button");
         document.getElementById("preference_num").setAttribute("class","ui basic red left pointing label");
     }else{
@@ -140,9 +141,12 @@ function showStyle() {
 function changeStyle() {
     preferenceFlag = -preferenceFlag + 1;
     showStyle();
-    if(preferenceFlag == 1){
-        var id = window.location.toString().split('?')[1];
-        var label = prompt("请输入标签", "");
+    var id = window.location.toString().split('?')[1];
+    if(preferenceFlag === 1){
+        let label = ""
+        while(label === ""){
+            label = prompt("请输入标签", "");
+        }
         $.ajax({
             type: "post",
             url: "../com/ladeyi/test/WritePreferenceServlet",
@@ -163,8 +167,38 @@ function changeStyle() {
                 alert("收藏失败")
             }
         });
+        //向收藏博客的作者发送消息
+        //对应的messageType为1
+        //console.log($.cookie("account"))
+        //console.log(document.getElementById("author").innerText)
+        //console.log(id)
+        $.ajax({
+            type: "post",
+            url: "../com/ladeyi/test/WriteMessageServlet",
+            data: {
+                "fromUserName": $.cookie("account"),
+                "toUserName": document.getElementById("author").innerText,
+                "message": id + "#" + document.getElementById("title").innerText
+                    .replace(/\\/g,'\\\\' )
+                    .replace(/"/g,'\\"')
+                    .replace(/\r\n|\n/g, '\\n')
+                    .replace(/\s/g, ' '),
+                "messageType": "1"
+            },
+            dataType: "json",
+            success: function (data) {
+                console.log(data.ret)
+                if(data.ret === "1"){
+                    //alert("收藏成功")
+                }else {
+                    alert("收藏消息添加失败")
+                }
+            },
+            error: function () {
+                alert("收藏消息添加失败")
+            }
+        });
     }else{
-        var id = window.location.toString().split('?')[1];
         $.ajax({
             type: "post",
             url: "../com/ladeyi/test/DeletePreferenceServlet",
@@ -182,6 +216,37 @@ function changeStyle() {
             },
             error: function () {
                 alert("取消收藏失败")
+            }
+        });
+        //向取消收藏的博客的作者发送消息
+        //对应的messageType为-1
+        //console.log($.cookie("account"))
+        //console.log(document.getElementById("author").innerText)
+        //console.log(id)
+        $.ajax({
+            type: "post",
+            url: "../com/ladeyi/test/WriteMessageServlet",
+            data: {
+                "fromUserName": $.cookie("account"),
+                "toUserName": document.getElementById("author").innerText,
+                "message": id+ "#" + document.getElementById("title").innerText
+                    .replace(/\\/g,'\\\\' )
+                    .replace(/"/g,'\\"')
+                    .replace(/\r\n|\n/g, '\\n')
+                    .replace(/\s/g, ' '),
+                "messageType": "-1"
+            },
+            dataType: "json",
+            success: function (data) {
+                console.log(data.ret)
+                if(data.ret === "1"){
+                    //alert("收藏成功")
+                }else {
+                    alert("取消收藏消息添加失败")
+                }
+            },
+            error: function () {
+                alert("取消收藏消息添加失败")
             }
         });
     }
@@ -274,7 +339,7 @@ function insertComment(topDiv,topUserName,topCommentId,comment,userNames,replies
 function expand(obj) {
     let target = obj.parentNode.parentNode.parentNode.childNodes[2]
     //console.log(target.hidden)
-    if(target.hidden == true){
+    if(target.hidden === true){
         target.removeAttribute("hidden")
         obj.innerHTML = "<i class=\"reply all icon\"></i>收起所有回复"
     }else{
@@ -287,7 +352,7 @@ function expand(obj) {
 function reply(obj) {
     let target = obj.parentNode.parentNode.childNodes[3]
     //console.log(target.hidden)
-    if(target.hidden == true){
+    if(target.hidden === true){
         target.removeAttribute("hidden")
         obj.innerHTML = "<i class=\"reply icon\"></i>收起回复"
     }else{
@@ -300,31 +365,36 @@ function submit_reply(obj) {
     let target = obj.parentNode.parentNode.parentNode.parentNode.id
     console.log(target)
     console.log($("#submit_reply").val())
-    $.ajax({
-        type: "post",
-        url: "../com/ladeyi/test/WriteReplyServlet",
-        data: {
-            "commentId": target,
-            "userName":$.cookie("account"),
-            "reply": $("#submit_reply").val()
-                .replace(/\\/g,'\\\\' )
-                .replace(/"/g,'\\"')
-                .replace(/\r\n|\n/g, '\\n')
-                .replace(/\s/g, ' '),
-        },
-        dataType: "json",
-        success: function (data) {
-            if(data.ret === "1"){
-                alert("回复成功")
-                //location.reload()
-            }else {
+    let reply = $("#submit_reply").val()
+            .replace(/\\/g,'\\\\' )
+            .replace(/"/g,'\\"')
+            .replace(/\r\n|\n/g, '\\n')
+            .replace(/\s/g, ' ')
+    if(reply === ""){
+        alert("你还啥回复都没写呢")
+    }else{
+        $.ajax({
+            type: "post",
+            url: "../com/ladeyi/test/WriteReplyServlet",
+            data: {
+                "commentId": target,
+                "userName":$.cookie("account"),
+                "reply": reply,
+            },
+            dataType: "json",
+            success: function (data) {
+                if(data.ret === "1"){
+                    alert("回复成功")
+                    //location.reload()
+                }else {
+                    alert("回复失败")
+                }
+            },
+            error: function () {
                 alert("回复失败")
             }
-        },
-        error: function () {
-            alert("回复失败")
-        }
-    });
+        });
+    }
 }
 
 function addComment(obj) {
@@ -341,29 +411,34 @@ function addComment(obj) {
 
 function publishComment() {
     var id = window.location.toString().split('?')[1];
-    $.ajax({
-        type: "post",
-        url: "../com/ladeyi/test/WriteCommentServlet",
-        data: {
-            "blogId": id,
-            "userName":$.cookie("account"),
-            "comment": $("#comment_text_field").val()
-                .replace(/\\/g,'\\\\' )
-                .replace(/"/g,'\\"')
-                .replace(/\r\n|\n/g, '\\n')
-                .replace(/\s/g, ' '),
-        },
-        dataType: "json",
-        success: function (data) {
-            if(data.ret === "1"){
-                alert("评论成功")
-                //location.reload()
-            }else {
+    let comment = $("#comment_text_field").val()
+        .replace(/\\/g,'\\\\' )
+        .replace(/"/g,'\\"')
+        .replace(/\r\n|\n/g, '\\n')
+        .replace(/\s/g, ' ')
+    if(comment === ""){
+        alert("你还啥评论都没写呢")
+    } else{
+        $.ajax({
+            type: "post",
+            url: "../com/ladeyi/test/WriteCommentServlet",
+            data: {
+                "blogId": id,
+                "userName":$.cookie("account"),
+                "comment": comment,
+            },
+            dataType: "json",
+            success: function (data) {
+                if(data.ret === "1"){
+                    alert("评论成功")
+                    //location.reload()
+                }else {
+                    alert("评论失败")
+                }
+            },
+            error: function () {
                 alert("评论失败")
             }
-        },
-        error: function () {
-            alert("评论失败")
-        }
-    });
+        });
+    }
 }

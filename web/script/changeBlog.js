@@ -35,11 +35,16 @@ function show() {
 }
 
 function getCon() {
+    var id = window.location.toString().split('?')[1];
     $.ajax({
         type: "post",
-        url: "../com/ladeyi/test/WriteBlogServlet",
+        url: "../com/ladeyi/test/ChangeBlogServlet",
         data: {
-            "title" : $("#title").val(),
+            "title" : $("#title").val()
+                .replace(/\\/g,'\\\\' )
+                .replace(/"/g,'\\"')
+                .replace(/\r\n|\n/g, '\\n')
+                .replace(/\s/g, ' '),
             "blog" : $("#test-editor-html-code").val()
                 .replace(/\\/g,'\\\\' )
                 .replace(/"/g,'\\"')
@@ -47,12 +52,12 @@ function getCon() {
                 .replace(/\r\n\$\$|\n\$\$/g, '$$$$')
                 .replace(/\r\n|\n/g, '\\n')
                 .replace(/\s/g, ' '),
-            "userName": $.cookie("account")
+            "blogId": id
         },
         dataType: "json",
         success: function(data) {
             //console.log($("#test-editor-html-code").val());
-            if (data.ret === "1") {
+            if (data.ret === "2") {
                 alert("修改成功");
                 location.reload();
             }else{

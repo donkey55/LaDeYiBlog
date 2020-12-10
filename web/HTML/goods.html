@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品</title>
+    <link href="../images/blogLogo.jpg" rel="icon" type="image/x-ico">
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../CSS/login_user.css">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <script src="../script/refJS/jquery.cookie.js"></script>
+    <script src="../script/mall.js"></script>
+    <style>
+        .good-img {
+            width: 100%;
+            height: 100%;
+            border: 1px wheat solid;
+        }
+
+        .avatar {
+            width: 100%;
+
+            border-radius: 50%;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <nav class="ui inverted gird-header">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui olive header item" style="font-family: STSong">个人信息</h2>
+                <a href="main.html" class=" m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                <a href="user.html" class=" m-item item m-mobile-hide"><i class="pencil alternate icon"></i>文章</a>
+                <a href="attention.html" class="m-item item m-mobile-hide"><i class="heart icon"></i>关注</a>
+                <a href="preference.html" class=" m-item item m-mobile-hide"><i class="folder icon"></i>收藏</a>
+                <a href="mall.html" class="m-item item m-mobile-hide"><i class="folder icon"></i>商城</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="dropdown item" style="z-index: 100;">
+                        <img class="ui avatar image" src="../images/blogLogo.jpg">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                            style="background: transparent; color:white; border: none;">
+                            <span class="caret"></span>
+                            <span id="username">45</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="min-width:100%;">
+                            <li><a href="userInfo.html" onclick="">个人信息</a></li>
+                            <li><a href="message.html" onclick="">消息</a></li>
+                            <li><a href="bill.html" onclick="">订单</a></li>
+                            <li><a href="#" onclick="gotoLogin()">注销</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+
+    <main style="margin-top: 100px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="../images/index/6.jpg" alt="" class="good-img">
+                        </div>
+
+                        <div class="col-md-5 col-md-offset-1">
+                            <h3 id="goodsName">商品名称</h3>
+                            <hr>
+                            ￥ <span id="price">59.99</span>
+                            <hr>
+                            <div id="goodDescription">商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述</div>
+                            <hr>
+                            库存<span id="stockNum">199</span>件
+                            <hr>
+                            <button type="button" class="btn btn-sm add-btn" id='increase' onclick="increase()">+</button>
+                            <button type="button" class="btn btn-sm disabled count" id='count'>1</button>
+                            <button type="button" class="btn btn-sm sub-btn" id='decrease' onclick="decrease()">-</button>
+                            <hr>
+                            <button class="btn btn-success col-md-5 col-md-offset-1" onclick="buy()">购买</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+    let goodId = window.location.split("?")[1];
+    let element;
+    $(function () {
+        $.ajax({
+            type: "post",
+            url: "",
+            data: {
+                "goodsId" : goodId
+            },
+            success: function (data) {
+                setHtml("goodsName", data.goodsName);
+                setHtml("price", data.goodsPrice);
+                setHtml("stockNum", data.goodsAmount);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    });
+
+    function setHtml(id, value) {
+        $("#"+id).html(value);
+    }
+
+    function buy() {
+        $.ajax({
+            type: "post",
+            url: "" ,
+            data: {
+                "userName": $.cookie("account"),
+                "goodsId": element.goodsId,
+                "amount": $("#count").html()
+            },
+            datatype:"json",
+            success:function (data) {
+                if (data.ret === 1) {
+                    alert("购买成功");
+                } else {
+                    alert("购买失败");
+                }
+            }
+        });
+    }
+
+    function increase() {
+        let value = parseInt($("#count").html());
+        value++;
+        $("#count").html(value);
+    }
+
+    function decrease() {
+        let value = parseInt($("#count").html());
+        value--;
+        if (value < 0) {
+            value = 0;
+        }
+        $("#count").html(value);
+    }
+</script>
+
+</html>
