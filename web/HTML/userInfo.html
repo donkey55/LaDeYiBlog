@@ -37,10 +37,10 @@
                 <div class="right m-item m-mobile-hide menu">
                     <div class="dropdown item" style="z-index: 100;">
                         <img class="ui avatar image" src="../images/blogLogo.jpg">
+                        <span id="userName"></span>
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="background: transparent; color:white; border: none;">
-                            <span class="caret"></span>                           
-                            <span id="userName"></span>                                                 
+                            <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="min-width:100%;">
                             <li><a href="userInfo.html" onclick="">个人信息</a></li>
@@ -116,14 +116,12 @@
             <div class="col-md-3 col-xs-offset-3">
                 <img alt="140x140" src="../images/a.jpg" class="img-circle" />
                 <div class="hero-unit well" id="user">
-                    <h1>
-                        LSP
+                    <h1 id="account">
+                        <!--填入用户名-->
                     </h1>
-                    <span><i class="heart icon"></i>粉丝</span><span id="fans">222</span>
-                    <span><i class="star icon"></i>关注</span><span id="attention">222</span>
-                    <p id="selfIntroduction">
-                        这是一个可视化布局模板, 你可以点击模板里的文字进行修改, 也可以通过点击弹出的编辑框进行富文本修改. 拖动区块能实现排序
-                    </p>
+                    <span><i class="heart icon"></i>粉丝</span><span id="fans"><!--填入粉丝数--></span>
+                    <span><i class="star icon"></i>关注</span><span id="attention"><!--填入关注数--></span>
+                    <p id="selfIntroduction"></p>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#panel1" data-toggle="pill" contenteditable="false">个人信息</a>
@@ -138,20 +136,16 @@
                         <ul class="thumbnails" style="list-style: none;">
                             <li class="col-md-12" style="outline: none;">
                                 <h2 contenteditable="false">性别</h2>
-                                <p contenteditable="false" id="sex">本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页,
-                                    下一次打开仍然能恢复上一次的操作.</p>
+                                <p contenteditable="false" id="sex"></p>
                                 <hr>
                                 <h2 contenteditable="false">电话</h2>
-                                <p contenteditable="false" id="phone">本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页,
-                                    下一次打开仍然能恢复上一次的操作.</p>
+                                <p contenteditable="false" id="phone"></p>
                                 <hr>
                                 <h2 contenteditable="false">兴趣爱好</h2>
-                                <p contenteditable="false" id="interest">本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页,
-                                    下一次打开仍然能恢复上一次的操作.</p>
+                                <p contenteditable="false" id="interest"></p>
                                 <hr>
                                 <h2 contenteditable="false">地址</h2>
-                                <p contenteditable="false" id="address">本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页,
-                                    下一次打开仍然能恢复上一次的操作.</p>
+                                <p contenteditable="false" id="address"></p>
                                 <hr>
                             </li>
                         </ul>

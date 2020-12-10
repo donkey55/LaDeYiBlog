@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="cache-control" content="no-cache">
-    <title>博客编辑</title>
+    <title>博客修改</title>
     <link href="../images/blogLogo.jpg" rel="icon" type="image/x-ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <link rel="stylesheet" href="../CSS/login_user.css">
@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="../editormd/css/editormd.css" />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-    <script src=" ../editormd/lib/marked.min.js"> </script>
+    <script src="../script/refJS/jquery.cookie.js"></script>
+    <script src="../editormd/lib/marked.min.js"> </script>
     <script src="../editormd/lib/prettify.min.js"></script>
     <script src="../editormd/lib/raphael.min.js"></script>
     <script src="../editormd/lib/underscore.min.js"></script>
@@ -23,6 +24,7 @@
     <script src="../editormd/editormd.min.js"></script>
     <script src="../script/refJS/jquery.cookie.js"></script>
 
+
 </head>
 <body>
 
@@ -30,7 +32,7 @@
 <nav class="ui inverted gird-header">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
-            <h2 class="ui olive header item" style="font-family: STSong">添加博客</h2>
+            <h2 class="ui olive header item" style="font-family: STSong">修改博客</h2>
             <a href="main.html" class=" m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
             <a href="user.html" class=" m-item item m-mobile-hide"><i class="pencil alternate icon"></i>文章</a>
             <a href="attention.html" class=" m-item item m-mobile-hide"><i class="heart icon"></i>关注</a>
@@ -63,16 +65,23 @@
 
 <!--中间内容-->
 <div class="ui container">
-    <div id="editorForm" style="width: 100%; display: block; margin-top: 20px; height: 100%;">
+    <div id="editorForm" style="width: 100%; display: block; margin-top: 20px; height: 80%;">
         <div id="blogTitle">
             <label for="title">标题</label>
             <input type="text" id="title" name="title" placeholder="请输入标题...." required>
-            <button class="ui primary button" onclick="getCon()">修改</button>
+        </div>
+        <div class="ui form" id="blogSummary">
+            <label for="title">摘要</label>
+            <textarea id="summary_text_field" placeholder="请输入摘要..." style="height:50%;width:50%;"></textarea>
         </div>
         <div id="test-editor">
             <textarea style="display:none;" id="blogContent"></textarea>
             <textarea id="test-editor-html-code" name="my-editormd-html-code" style="display:none;"></textarea>
         </div>
+        <button class="ui primary button" onclick="getCon()">修改</button>
+    </div>
+    <div id="test-editormd">
+        <textarea id="doc-contenttext" style="display: none;"></textarea>
     </div>
 </div>
 </body>

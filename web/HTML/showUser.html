@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="cache-control" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人信息</title>
+    <title id="topTitle"></title>
     <link href="../images/blogLogo.jpg" rel="icon" type="image/x-ico">
     <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
@@ -13,6 +13,7 @@
 
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="../script/refJS/jquery.cookie.js"></script>
     <script src="../script/showUser.js"></script>
 
     <!--引用百度bootstrap-->
@@ -111,16 +112,11 @@
         <div class="row" style="margin-top: 5%; padding-bottom: 5%;">
             <div class="col-md-3 col-lg-offset-3">
                 <img alt="140x140" src="../images/a.jpg" class="img-circle" />
-                <div class="hero-unit well" id="user">
-                    <h1>
-                        LSP 
-                        
-                    </h1>
-                    
+                <div class="hero-unit well">
+                    <h1 id="account"><!--填入用户名--></h1>
                     <span><i class="heart icon"></i>粉丝</span><span id="fans"></span>
                     <span><i class="star icon"></i>关注</span><span id="attention"></span>
                     <p id="selfIntroduction">
-                        这是一个可视化布局模板, 你可以点击模板里的文字进行修改, 也可以通过点击弹出的编辑框进行富文本修改. 拖动区块能实现排序
                     </p>
                     <button onclick="addAttention()">+加关注</button>
                 </div>
@@ -161,8 +157,7 @@
                                     </div>
 
                                     <div class="ten wide column" align="center">
-                                        <p>第 <span id="pageIndex"></span> 页，共 <span id="pageNum"></span> 页，有 <span
-                                                id="blogTotal"></span> 博客</p>
+                                        <p>第 <span id="pageIndex"></span> 页，共 <span id="pageNum"></span> 页，有 <span id="blogTotal"></span> 博客</p>
                                     </div>
 
                                     <div class="three wide column" align="center">

@@ -22,7 +22,8 @@ public class Main {
     private static Connection connection = MyConnection.getConnection();
 
     public static void main(String[] args) throws SQLException {
-        String ret = "[";
+        Attention.insertAttention(1,1);
+        /*String ret = "[";
         String userName = "user2";
         try {
             ResultSet userIdSet = User.checkId(userName);
@@ -43,7 +44,7 @@ public class Main {
             ret = ret.substring(0, ret.length() - 1);
         }
         ret = ret + "]";
-        System.out.println(ret);
+        System.out.println(ret);*/
         //Query query = new Query(myConnection.getConnection());
         //Update update = new Update(myConnection.getConnection());
         //Call call=new Call(myConnection.getConnection());

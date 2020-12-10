@@ -12,12 +12,14 @@ $(function () {
         dataType: "json",
         success: function (data) {
             userInfo = data;
-            $("#user h1").innerText = userName;
+            setHtml("account", userName);
             setHtml("sex", data.sex);
             setHtml("phone", data.phone);
-            setHtml("interest", data.interset);
+            setHtml("interest", data.interest);
             setHtml("address", data.address);
             setHtml("selfIntroduction", data.selfIntroduction);
+            setHtml("fans", data.fansCount);
+            setHtml("attention", data.attentionCount);
 
             setSex(data.sex);
             setValue("inputUserName", userName);

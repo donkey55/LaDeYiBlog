@@ -75,14 +75,16 @@ public class Update {
         return ret;
     }
 
-    public static int blogInsert(int userId, String blog, String title) {
+    public static int blogInsert(int userId, String blog, String title, String summary, String label) {
         int ret = 0;
-        String sql = "INSERT INTO blog(userId,blog,title) values (?,?,?)";
+        String sql = "INSERT INTO blog(userId,blog,title,summary,label) values (?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, userId);
             preparedStatement.setString(2, blog);
             preparedStatement.setString(3, title);
+            preparedStatement.setString(4,summary);
+            preparedStatement.setString(5,label);
             ret = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             return -100;
@@ -200,11 +202,15 @@ public class Update {
         return ret;
     }
 
-    public static int blogUpdate(int blogId, String blog, String title) {
+    public static int blogUpdate(int blogId, String blog, String title,String summary, String label) {
         int ret = 0;
-        String sql1 = "UPDATE blog SET blog =? WHERE blogId=?";
+        /*String sql1 = "UPDATE blog SET blog =? WHERE blogId=?";
         String sql2 = "UPDATE blog SET title =? WHERE blogId=?";
+        String sql3 = "UPDATE blog SET summary =? WHERE blogId=?";
+        String sql4 = "UPDATE blog SET label =? WHERE blogId=?";*/
+        String sql = "UPDATE blog SET blog =?, title =?, summary =?, label=? WHERE blogId =?";
         try {
+            /*
             PreparedStatement preparedStatement = connection.prepareStatement(sql1);
             preparedStatement.setString(1, blog);
             preparedStatement.setInt(2, blogId);
@@ -212,6 +218,21 @@ public class Update {
             preparedStatement = connection.prepareStatement(sql2);
             preparedStatement.setString(1, title);
             preparedStatement.setInt(2, blogId);
+            ret += preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement(sql3);
+            preparedStatement.setString(1, summary);
+            preparedStatement.setInt(2, blogId);
+            ret += preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement(sql4);
+            preparedStatement.setString(1, label);
+            preparedStatement.setInt(2, blogId);
+            ret += preparedStatement.executeUpdate();*/
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, blog);
+            preparedStatement.setString(2, title);
+            preparedStatement.setString(3, summary);
+            preparedStatement.setString(4, label);
+            preparedStatement.setInt(5, blogId);
             ret += preparedStatement.executeUpdate();
         } catch (SQLException e) {
             return -100;

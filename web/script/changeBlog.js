@@ -1,3 +1,4 @@
+let lastLabel
 $(function(){
     /* if($.cookie("account") == undefined){
         window.location.href="../HTML/login.html";
@@ -14,6 +15,8 @@ $(function(){
         success: function (data) {
             document.getElementById("title").value = data.title;
             document.getElementById("blogContent").innerText = data.blog;
+            document.getElementById("summary_text_field").innerText = data.summary;
+            lastLabel = data.label;
         }, error: function () {
             alert("error");
         }
@@ -36,6 +39,13 @@ function show() {
 
 function getCon() {
     var id = window.location.toString().split('?')[1];
+    let label = "";
+    while(label === ""){
+        label = prompt("请输入标签", lastLabel);
+    }
+    if(label == null){
+        label = "未设置"
+    }
     $.ajax({
         type: "post",
         url: "../com/ladeyi/test/ChangeBlogServlet",
@@ -52,12 +62,18 @@ function getCon() {
                 .replace(/\r\n\$\$|\n\$\$/g, '$$$$')
                 .replace(/\r\n|\n/g, '\\n')
                 .replace(/\s/g, ' '),
-            "blogId": id
+            "blogId": id,
+            "summary" : $("#summary_text_field").val()
+                .replace(/\\/g,'\\\\' )
+                .replace(/"/g,'\\"')
+                .replace(/\r\n|\n/g, '\\n')
+                .replace(/\s/g, ' '),
+            "label" : label
         },
         dataType: "json",
         success: function(data) {
             //console.log($("#test-editor-html-code").val());
-            if (data.ret === "2") {
+            if (data.ret === "1") {
                 alert("修改成功");
                 location.reload();
             }else{

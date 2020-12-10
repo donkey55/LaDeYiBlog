@@ -14,12 +14,12 @@ import java.sql.SQLException;
 返回-100：数据库处理错误；
 */
 public class Blog {
-    public static int insertBlog(int userId, String blog, String title) {
-        return Update.blogInsert(userId, blog, title);
+    public static int insertBlog(int userId, String blog, String title, String summary, String label) {
+        return Update.blogInsert(userId, blog, title, summary, label);
     }
 
-    public static int updateBlog(int blogId, String blog, String title) {
-        return Update.blogUpdate(blogId, blog, title);
+    public static int updateBlog(int blogId, String blog, String title,String summary,String label) {
+        return Update.blogUpdate(blogId, blog, title, summary, label);
     }
 
     public static ResultSet checkBlog(int id) {
@@ -36,6 +36,36 @@ public class Blog {
         try {
             String restrict = "blogId=" + id;
             ResultSet resultSet = Query.select("title", "blog", restrict);
+            return resultSet;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public static ResultSet checkSummary(int id) {
+        try {
+            String restrict = "blogId=" + id;
+            ResultSet resultSet = Query.select("summary", "blog", restrict);
+            return resultSet;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public static ResultSet checkLabel(int id) {
+        try {
+            String restrict = "blogId=" + id;
+            ResultSet resultSet = Query.select("label", "blog", restrict);
+            return resultSet;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public static ResultSet checkAll(int id) {
+        try {
+            String restrict = "blogId=" + id;
+            ResultSet resultSet = Query.select("*", "blog", restrict);
             return resultSet;
         } catch (SQLException e) {
             return null;
@@ -70,6 +100,14 @@ public class Blog {
     public static ResultSet searchBlog(String keyword) {
         try {
             return Query.blogSearchSelect(keyword);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public static ResultSet getAllBlog() {
+        try {
+            return Query.select("blogId, title, summary, time", "blog", "");
         } catch (SQLException e) {
             return null;
         }

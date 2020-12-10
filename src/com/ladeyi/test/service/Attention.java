@@ -37,4 +37,26 @@ public class Attention {
         ;
         return Update.delete("attention", restrict);
     }
+
+    public static int checkFromAttentionCount(int toUserId){
+        try {
+            String restrict = "toUserId=" + toUserId;
+            ResultSet resultSet = Query.select("COUNT(*)", "attention", restrict);
+            resultSet.next();
+            return resultSet.getInt(1);
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
+    public static int checkToAttentionCount(int fromUserId){
+        try {
+            String restrict = "fromUserId=" + fromUserId;
+            ResultSet resultSet = Query.select("COUNT(*)", "attention", restrict);
+            resultSet.next();
+            return resultSet.getInt(1);
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
 }

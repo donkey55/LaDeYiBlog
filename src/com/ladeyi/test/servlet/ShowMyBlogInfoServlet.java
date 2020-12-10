@@ -43,11 +43,13 @@ public class ShowMyBlogInfoServlet extends HttpServlet {
             int userId=userIdSet.getInt(1);
             ResultSet blogIdSet = Blog.checkBlogId(userId);
             while (blogIdSet.next()) {
-                ResultSet blogTitle = Blog.checkTitle(Integer.parseInt(blogIdSet.getString(1)));
                 ret = ret + "{\"blogId\":\"" + blogIdSet.getString(1) + "\",";
-                while (blogTitle.next()) {
-                    ret = ret + "\"title\":\"" + blogTitle.getString(1) + "\"},";
-                }
+                ResultSet blogTitle = Blog.checkTitle(Integer.parseInt(blogIdSet.getString(1)));
+                blogTitle.next();
+                ret = ret + "\"title\":\"" + blogTitle.getString(1) + "\",";
+                ResultSet blogSummary = Blog.checkSummary(Integer.parseInt(blogIdSet.getString(1)));
+                blogSummary.next();
+                ret = ret + "\"summary\":\"" + blogSummary.getString(1) + "\"},";
             }
         } catch (SQLException e) {
         }
