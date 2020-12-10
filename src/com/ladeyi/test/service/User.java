@@ -111,7 +111,7 @@ public class User {
     public static ResultSet checkPoint(String userName) {
         try {
             String restrict = "userName=\"" + userName + "\"";
-            ResultSet resultSet = Query.select("point", "user", restrict);
+            ResultSet resultSet = Query.select("points", "user", restrict);
             return resultSet;
         } catch (SQLException e) {
             return null;

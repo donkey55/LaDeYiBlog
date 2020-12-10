@@ -12,7 +12,7 @@ $(function () {
     document.getElementById("username").innerHTML=$.cookie("account");
     $.ajax({
         type: "post",
-        url:"",
+        url:"../com/ladeyi/test/ShowAllBlogServlet",
         data: {
         },
         datatype: "json",
@@ -85,7 +85,7 @@ function pageUp() {
 function updatePageNum() {
     document.getElementById("pageIndex").innerHTML = String(pageIndex);
     document.getElementById("pageNum").innerHTML = String(pageNum);
-    document.getElementById("blogNum").innerHTML = String(blogTotal);
+    document.getElementById("blogTotal").innerHTML = String(blogTotal);
 }
 
 function showBlog() {
@@ -96,7 +96,7 @@ function showBlog() {
         div1.setAttribute("class", "caption");
        
         let h1 = create("h1");
-        h1.innerHTML = element.blogTitle;
+        h1.innerHTML = element.title;
 
         let span = create("span");
         span.setAttribute("class", "postMeta");
@@ -105,17 +105,22 @@ function showBlog() {
         i1.innerHTML = "&ensp;发表于:" + element.time +  "&ensp;";
         let i2 = create("i");
         i2.setAttribute("class", "glyphicon glyphicon-star");
-        i2.innerHTML = "&ensp;收藏:" + element.preferenceNum + "&ensp;";
+        i2.innerHTML = "&ensp;收藏:" + element.preferenceCount + "&ensp;";
         let i3 = create("i");
         i3.setAttribute("class", "glyphicon glyphicon-comment");
-        i3.innerHTML = "&ensp;评论:" + element.commentNum + "&ensp;";
+        i3.innerHTML = "&ensp;评论:" + element.commentCount + "&ensp;";
+        span.appendChild(i1);
+        span.appendChild(i2);
+        span.appendChild(i3);
 
         let p1 = create("p");
-        p1.innerHTML = "摘要：" + element.blog;
+        p1.innerHTML = "摘要：" + element.summary;
         let p2 = create("p");
         let p2A = create("a");
         p2A.innerHTML = "查看全文";
         p2A.setAttribute("class", "btn btn-link");
+        p2A.setAttribute("href", 'blog.html?' + element.blogId + '?' + $.cookie("account"));
+        p2A.setAttribute("target", "_blank");
         p2.appendChild(p2A);
         div1.appendChild(h1);
         div1.appendChild(span);

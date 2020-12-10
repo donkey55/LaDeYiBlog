@@ -91,10 +91,14 @@ function transform(element) {
         message = element.message
     }else if(element.messageType === "1"){
         let messageSet = element.message.split('#')
-        message = "收藏了你的博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"'>"+ messageSet[1] +"</a>"
-    }else if(element.messageType === "-1"){
+        message = "评论了你的博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"'>"+ messageSet[1] +"</a>" +
+            "<br>评论内容为：<br>" + messageSet[2]
+    }else if(element.messageType === "2"){
         let messageSet = element.message.split('#')
-        message = "取消了对你的博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"'>"+ messageSet[1] +"</a>的收藏"
+        message = "回复了你对博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"'>"+ messageSet[1] +"</a>" +
+            "的评论<br>评论内容为：<br>" + messageSet[2] +
+            "<br>回复内容为：<br>" + messageSet[3]
+        //console.log(message)
     }
     return message
 }

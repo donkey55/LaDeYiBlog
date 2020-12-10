@@ -5,12 +5,12 @@ let pageNum = 0;
 let pageIndex = 1;
 let blogTotal = 0;
 let singlePageNum = 6;
-const fans = 20;
+let blogNum = 0;
+
+
 $(function () {
-    alert(fans);
-    blogCount = 0;
-    pageIndex = 1;
-    blogNum = 0;
+    document.getElementById("username").innerText = $.cookie("account");
+    document.getElementById("topTitle").innerText = userName + "的空间";
     $.ajax({
         type: "post",
         url: "../com/ladeyi/test/ShowUserInfoServlet",
@@ -19,39 +19,15 @@ $(function () {
         },
         dataType: "json",
         success: function (data) {
-            $("#user h1").innerText = userName;
-            setHtml("selfIntroduction", data.selfIntroduction);
+            document.getElementById("account").innerText = userName;
+            document.getElementById("selfIntroduction").innerText = data.selfIntroduction;
+            document.getElementById("fans").innerText = data.fansCount;
+            document.getElementById("attention").innerText = data.attentionCount;
         },
         error() {
 
         }
     });
-    //fans  
-    $.ajax({
-        type: "post",
-        url: "../com/ladeyi/test/ShowToAttentionServlet",
-        data: {
-            "userName": userName
-        },
-        dataType: "json",
-        success: function (data) {
-            $("#fans").html(data.length);
-        }
-    });
-
-
-    $.ajax({
-        type: "post",
-        url: "../com/ladeyi/test/ShowFromAttentionServlet",
-        data: {
-            "userName": userName
-        },
-        dataType: "json",
-        success: function (data) {
-            $("#attention").html(data.length);
-        }
-    });
-
     $.ajax({
         type: "post",
         url: "../com/ladeyi/test/ShowMyBlogInfoServlet",
@@ -86,7 +62,9 @@ function pageDown() {
 }
 
 function pageUp() {
+    //console.log("into")
     if (blogCount > blogNum) {
+        //console.log("into2")
         blogCount -= (blogNum + singlePageNum);
         empty();
         showBLog();
@@ -112,7 +90,7 @@ function showBLog() {
         div2.setAttribute("class", "caption");
 
         setHtml(h2, element.title);
-        setHtml(p1, element.blog);
+        setHtml(p1, element.summary);
         setHtml(p2A, "浏览");
         p2A.setAttribute("class", "btn btn-primary");
         p2A.setAttribute("href", "blog.html?" + element.blogId);
@@ -126,6 +104,7 @@ function showBLog() {
 }
 
 function empty() {
+    blogNum = 0;
     for (let index = 1; index <= singlePageNum; index++) {
         $("#blog" + index).empty();
     }
@@ -141,19 +120,23 @@ function updatePageNum() {
 
 
 function addAttention() {
+    console.log($.cookie("account"))
+    console.log(userName)
     $.ajax({
         type: "post",
         url: "../com/ladeyi/test/WriteAttentionServlet",
         data: {
-            "formUser": $.cookie("account"),
-            "toUser": userName
+            "fromUserName": $.cookie("account"),
+            "toUserName": userName
         },
         datatype: "json",
         success: function (data) {
             if (data.ret === "1") {
                 alert("关注成功");
-            } else {
-                alert("关注失败");
+            } else if(data.ret === "2"){
+                alert("不能关注自己哦~~");
+            }else {
+                alert("你已经关注过他了");
             }
         },
     });

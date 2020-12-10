@@ -100,6 +100,37 @@ function deletePreference(obj) {
                 alert("error");
             }
         });
+        //向取消收藏的博客的作者发送消息
+        //对应的messageType为-1
+        //console.log($.cookie("account"))
+        //console.log(document.getElementById("author").innerText)
+        //console.log(id)
+        $.ajax({
+            type: "post",
+            url: "../com/ladeyi/test/WriteMessageServlet",
+            data: {
+                "fromUserName": $.cookie("account"),
+                "toUserName": document.getElementById("author").innerText,
+                "message": id+ "#" + document.getElementById("title").innerText
+                    .replace(/\\/g,'\\\\' )
+                    .replace(/"/g,'\\"')
+                    .replace(/\r\n|\n/g, '\\n')
+                    .replace(/\s/g, ' '),
+                "messageType": "-1"
+            },
+            dataType: "json",
+            success: function (data) {
+                console.log(data.ret)
+                if(data.ret === "1"){
+                    //alert("收藏成功")
+                }else {
+                    alert("取消收藏消息添加失败")
+                }
+            },
+            error: function () {
+                alert("取消收藏消息添加失败")
+            }
+        });
     }
 }
 

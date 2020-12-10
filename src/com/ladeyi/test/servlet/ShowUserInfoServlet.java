@@ -2,6 +2,7 @@ package com.ladeyi.test.servlet;
 
 
 import com.ladeyi.test.mapper.Query;
+import com.ladeyi.test.service.Attention;
 import com.ladeyi.test.service.Blog;
 import com.ladeyi.test.service.User;
 import com.mysql.cj.xdevapi.JsonArray;
@@ -55,7 +56,17 @@ public class ShowUserInfoServlet extends HttpServlet {
             ret = ret + "\"selfIntroduction\":\"" + resultSet.getString(1) + "\",";
             resultSet = User.checkPoint(userName);
             resultSet.next();
-            ret = ret + "\"point\":\"" + resultSet.getString(1) + "\"}";
+            ret = ret + "\"point\":\"" + resultSet.getString(1) + "\",";
+            //传出粉丝数
+            ResultSet userIdSet = User.checkId(userName);
+            userIdSet.next();
+            int userId=userIdSet.getInt(1);
+            int fansCount = Attention.checkFromAttentionCount(userId);
+            ret = ret + "\"fansCount\":\"" + fansCount + "\",";
+            //传出关注数
+            int attentionCount = Attention.checkToAttentionCount(userId);
+            ret = ret + "\"attentionCount\":\"" + attentionCount + "\"}";
+
         } catch (SQLException e) {
         }
         printWriter.write(ret);

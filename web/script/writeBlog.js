@@ -20,6 +20,14 @@ $(function(){
 });
 
 function getCon() {
+    let label = ""
+    while(label === ""){
+        label = prompt("请输入标签", "");
+    }
+    if(label == null){
+        label = "未设置"
+    }
+    console.log(label)
     $.ajax({
         type: "post",
         url: "../com/ladeyi/test/WriteBlogServlet",
@@ -36,7 +44,13 @@ function getCon() {
                 .replace(/\r\n\$\$|\n\$\$/g, '$$$$')
                 .replace(/\r\n|\n/g, '\\n')
                 .replace(/\s/g, ' '),
-            "userName": $.cookie("account")
+            "userName": $.cookie("account"),
+            "summary" : $("#summary_text_field").val()
+                .replace(/\\/g,'\\\\' )
+                .replace(/"/g,'\\"')
+                .replace(/\r\n|\n/g, '\\n')
+                .replace(/\s/g, ' '),
+            "label" : label
         },
         dataType: "json",
         success: function(data) {

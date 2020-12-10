@@ -1,6 +1,8 @@
 package com.ladeyi.test.servlet;
 
 import com.ladeyi.test.service.Blog;
+import com.ladeyi.test.service.Comment;
+import com.ladeyi.test.service.Preference;
 import com.ladeyi.test.service.User;
 
 import javax.servlet.ServletException;
@@ -13,11 +15,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /*
-在点击一篇博客之后显示该博客内容，需要输入该博客的id，
-返回写这篇博客的作者的用户名、博客的内容和博客的标题
+返回所有博客，信息包括标题，摘要，id
 */
-public class ShowBlogServlet extends HttpServlet {
-    public ShowBlogServlet() {
+public class ShowAllBlogServlet extends HttpServlet {
+    public ShowAllBlogServlet() {
         super();
     }
 
@@ -28,24 +29,26 @@ public class ShowBlogServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ret = "";
+        String ret = "[";
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        int blogId = Integer.parseInt(request.getParameter("blogId"));
         try {
-            ResultSet blogAllSet = Blog.checkAll(blogId);
-            blogAllSet.next();
-            ResultSet userNameSet = User.checkUserName(blogAllSet.getString(2));
-            userNameSet.next();
-            ret = ret + "{\"userName\":\"" + userNameSet.getString(1) + "\",";
-            ret = ret + "\"blog\":\"" + blogAllSet.getString(3) + "\",";
-            ret = ret + "\"title\":\"" + blogAllSet.getString(4) + "\",";
-            ret = ret + "\"summary\":\"" + blogAllSet.getString(5) + "\",";
-            ret = ret + "\"time\":\"" + blogAllSet.getString(6) + "\",";
-            ret = ret + "\"label\":\"" + blogAllSet.getString(7) + "\"}";
+            ResultSet allBlogSet = Blog.getAllBlog();
+            while (allBlogSet.next()) {
+                ret = ret + "{\"blogId\":\"" + allBlogSet.getString(1) + "\",";
+                ret = ret + "\"title\":\"" + allBlogSet.getString(2) + "\",";
+                ret = ret + "\"summary\":\"" + allBlogSet.getString(3) + "\",";
+                ret = ret + "\"preferenceCount\":\"" + Preference.checkPreferenceCount(allBlogSet.getInt(1)) + "\",";
+                ret = ret + "\"commentCount\":\"" + Comment.checkCommentCount(allBlogSet.getInt(1)) + "\",";
+                ret = ret + "\"time\":\"" + allBlogSet.getString(4) + "\"},";
+            }
         } catch (SQLException e) {
         }
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
+        ret = ret + "]";
         printWriter.write(ret);
     }
 
@@ -53,3 +56,4 @@ public class ShowBlogServlet extends HttpServlet {
         // Put your code here
     }
 }
+

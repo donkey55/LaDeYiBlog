@@ -36,11 +36,13 @@ public class WriteBlogServlet extends HttpServlet {
         String userName = request.getParameter("userName");
         String blog = request.getParameter("blog");
         String title = request.getParameter("title");
+        String summary = request.getParameter("summary");
+        String label = request.getParameter("label");
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
             int userId=userIdSet.getInt(1);
-            ret = Blog.insertBlog(userId, blog, title);
+            ret = Blog.insertBlog(userId, blog, title, summary, label);
         } catch (SQLException e) {
         }
         String output = "{\"ret\":\"" + ret + "\"}";

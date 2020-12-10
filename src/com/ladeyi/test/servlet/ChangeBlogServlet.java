@@ -36,7 +36,9 @@ public class ChangeBlogServlet extends HttpServlet {
         int blogId = Integer.parseInt(request.getParameter("blogId"));
         String blog = request.getParameter("blog");
         String title = request.getParameter("title");
-        ret = Blog.updateBlog(blogId, blog, title);
+        String summary = request.getParameter("summary");
+        String label = request.getParameter("label");
+        ret = Blog.updateBlog(blogId, blog, title, summary, label);
         String output = "{\"ret\":\"" + ret + "\"}";
         printWriter.write(output);
     }

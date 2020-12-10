@@ -74,13 +74,13 @@ function searchUserBlog() {
 }
 
 function pageDown() {
-   if(blogCount < blogTotal) {
-       empty();
-       //显示文章
-       addTd();
-       pageIndex++;
-       document.getElementById("pageIndex").innerHTML = String(pageIndex);
-   }
+    if(blogCount < blogTotal) {
+        empty();
+        //显示文章
+        addTd();
+        pageIndex++;
+        document.getElementById("pageIndex").innerHTML = String(pageIndex);
+    }
 }
 
 function pageUp() {
@@ -122,7 +122,7 @@ function deleteBlog(obj) {
 
 function changeBlog(obj) {
     let id = obj.id;
-    window.open("changeBlog.html?" + id);
+    window.open("changeBlog.html?" + id + "?" + $.cookie("account"));
 }
 
 function writeBlog() {

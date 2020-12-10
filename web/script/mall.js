@@ -7,6 +7,7 @@ let goodsNum = 0;
 let goodsTotal = 0;
 let goodsCount = 0;
 $(function(){
+    setHtml("userName", userName);
     $.ajax({
         type: "post",
         url: "../com/ladeyi/test/ShowShopInfoServlet",

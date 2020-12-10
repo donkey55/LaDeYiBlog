@@ -288,4 +288,12 @@
 		<servlet-name>WriteReplyServlet</servlet-name>
 		<url-pattern>/com/ladeyi/test/WriteReplyServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ShowAllBlogServlet</servlet-name>
+		<servlet-class>com.ladeyi.test.servlet.ShowAllBlogServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowAllBlogServlet</servlet-name>
+		<url-pattern>/com/ladeyi/test/ShowAllBlogServlet</url-pattern>
+	</servlet-mapping>
 </web-app>
