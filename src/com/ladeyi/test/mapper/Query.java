@@ -40,4 +40,38 @@ public class Query {
         resultSet = preparedStatement.executeQuery();
         return resultSet;
     }
+
+    public static ResultSet attentionSearchSelect(int fromUserId,String keyword) throws SQLException {
+        ResultSet resultSet = null;
+        String sql = "SELECT user.userName FROM attention,user WHERE attention.toUserId=user.id AND user.userName LIKE ? AND attention.fromUserId=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, "%" + keyword + "%");
+        preparedStatement.setInt(2, fromUserId);
+        resultSet = preparedStatement.executeQuery();
+        return resultSet;
+    }
+
+    public static ResultSet preferenceSearchSelect(int userId,String keyword) throws SQLException {
+        ResultSet resultSet = null;
+        String sql = "SELECT blog.title,preference.blogId,preference.label FROM preference,blog WHERE preference.blogId=blog.blogId AND (blog.blog LIKE ? OR blog.title LIKE ? OR preference.label LIKE ?) AND preference.userId=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, "%" + keyword + "%");
+        preparedStatement.setString(2, "%" + keyword + "%");
+        preparedStatement.setString(3, "%" + keyword + "%");
+        preparedStatement.setInt(4, userId);
+        resultSet = preparedStatement.executeQuery();
+        return resultSet;
+    }
+
+    public static ResultSet billSearchSelect(int userId,String keyword) throws SQLException {
+        ResultSet resultSet = null;
+        String sql = "SELECT bill.goodsId,bill.amount,bill.billId,goods.goodsName FROM bill,goods WHERE goods.goodsId=bill.goodsId AND (goods.goodsName LIKE ? OR goods.goodsIntroduction LIKE ? OR bill.billId LIKE ?) AND bill.userId=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, "%" + keyword + "%");
+        preparedStatement.setString(2, "%" + keyword + "%");
+        preparedStatement.setString(3, "%" + keyword + "%");
+        preparedStatement.setInt(4, userId);
+        resultSet = preparedStatement.executeQuery();
+        return resultSet;
+    }
 }

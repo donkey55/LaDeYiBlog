@@ -59,4 +59,12 @@ public class Attention {
             return 0;
         }
     }
+
+    public static ResultSet searchAttention(int fromUserId,String keyword) {
+        try {
+            return Query.attentionSearchSelect(fromUserId,keyword);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 }

@@ -105,12 +105,44 @@
 		<url-pattern>/com/ladeyi/test/RegisterServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>SearchAttentionServlet</servlet-name>
+		<servlet-class>com.ladeyi.test.servlet.SearchAttentionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchAttentionServlet</servlet-name>
+		<url-pattern>/com/ladeyi/test/SearchAttentionServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SearchBillServlet</servlet-name>
+		<servlet-class>com.ladeyi.test.servlet.SearchBillServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchBillServlet</servlet-name>
+		<url-pattern>/com/ladeyi/test/SearchBillServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>SearchBlogServlet</servlet-name>
 		<servlet-class>com.ladeyi.test.servlet.SearchBlogServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SearchBlogServlet</servlet-name>
 		<url-pattern>/com/ladeyi/test/SearchBlogServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SearchPreferenceServlet</servlet-name>
+		<servlet-class>com.ladeyi.test.servlet.SearchPreferenceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchPreferenceServlet</servlet-name>
+		<url-pattern>/com/ladeyi/test/SearchPreferenceServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ShowAllBlogServlet</servlet-name>
+		<servlet-class>com.ladeyi.test.servlet.ShowAllBlogServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowAllBlogServlet</servlet-name>
+		<url-pattern>/com/ladeyi/test/ShowAllBlogServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowBlogCommentServlet</servlet-name>
@@ -159,6 +191,14 @@
 	<servlet-mapping>
 		<servlet-name>ShowGoodsInfoServlet</servlet-name>
 		<url-pattern>/com/ladeyi/test/ShowGoodsInfoServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ShowGoodsServlet</servlet-name>
+		<servlet-class>com.ladeyi.test.servlet.ShowGoodsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowGoodsServlet</servlet-name>
+		<url-pattern>/com/ladeyi/test/ShowGoodsServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ShowMyBillServlet</servlet-name>
@@ -287,13 +327,5 @@
 	<servlet-mapping>
 		<servlet-name>WriteReplyServlet</servlet-name>
 		<url-pattern>/com/ladeyi/test/WriteReplyServlet</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>ShowAllBlogServlet</servlet-name>
-		<servlet-class>com.ladeyi.test.servlet.ShowAllBlogServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ShowAllBlogServlet</servlet-name>
-		<url-pattern>/com/ladeyi/test/ShowAllBlogServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

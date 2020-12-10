@@ -1,4 +1,5 @@
 BuyGoodsServlet.java
+ChangeBlogServlet.java
 ChangePasswordServlet.java
 ChangeUserInfoServlet.java
 DeleteAttentionServlet.java
@@ -10,13 +11,18 @@ DeleteReplyServlet.java
 DeleteUserServlet.java
 LoginServlet.java
 RegisterServlet.java
+SearchAttentionServlet.java
+SearchBillServlet.java
 SearchBlogServlet.java
+SearchPreferenceServlet.java
+ShowAllBlogServlet.java
 ShowBlogCommentServlet.java
 ShowBlogServlet.java
 ShowCommentReplyServlet.java
 ShowFromAttentionServlet.java
 ShowFromMessageServlet.java
 ShowGoodsInfoServlet.java
+ShowGoodsServlet.java
 ShowMyBillServlet.java
 ShowMyBlogInfoServlet.java
 ShowMyCommentServlet.java

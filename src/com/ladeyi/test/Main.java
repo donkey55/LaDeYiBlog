@@ -22,36 +22,19 @@ public class Main {
     private static Connection connection = MyConnection.getConnection();
 
     public static void main(String[] args) throws SQLException {
-<<<<<<< HEAD
-        String ret="";
-        int goodsId = 1;
-        try {
-            ResultSet resultSet = Goods.checkGoodsUseGoodsId(goodsId);
-            while (resultSet.next()) {
-                ret = ret + "{\"goodsId\":\"" + resultSet.getString(1) + "\",";
-                ret = ret + "\"goodsName\":\"" + resultSet.getString(2) + "\",";
-                ret = ret + "\"goodsIntroduction\":\"" + resultSet.getString(3) + "\",";
-                ret = ret + "\"shopId\":\"" + resultSet.getString(4) + "\",";
-                ret = ret + "\"goodsAmount\":\"" + resultSet.getString(5) + "\",";
-                ret = ret + "\"goodsPrice\":\"" + resultSet.getString(6) + "\"},";
-            }
-        } catch (SQLException e) {
-        }
-=======
-        String ret ="[";
-
+        String ret="[";
         String userName = "zdxx";
+        String keyword = "无";
         try {
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();
-            int userId=userIdSet.getInt(1);
-            ResultSet PreferenceSet = Preference.checkPreference(userId);
-            while (PreferenceSet.next()) {
-                ResultSet blogSet = Blog.checkTitle(Integer.parseInt(PreferenceSet.getString(2)));
-                blogSet.next();
-                ret = ret + "{\"title\":\"" + blogSet.getString(1) + "\",";
-                ret = ret + "\"blogId\":\"" + PreferenceSet.getString(2) + "\",";
-                ret = ret + "\"label\":\"" + PreferenceSet.getString(3) + "\"},";
+            int userId = userIdSet.getInt(1);
+            ResultSet billSet = Bill.searchBill(userId,keyword);
+            while (billSet.next()) {
+                ret = ret + "{\"goodsId\":\"" + billSet.getString(1) + "\",";
+                ret = ret + "\"goodsName\":\"" + billSet.getString(4) + "\",";
+                ret = ret + "\"amount\":\"" + billSet.getString(2) + "\",";
+                ret = ret + "\"billId\":\"" + billSet.getString(3) + "\"},";
             }
         } catch (SQLException e) {
         }
@@ -59,7 +42,6 @@ public class Main {
             ret = ret.substring(0, ret.length() - 1);
         }
         ret = ret + "]";
->>>>>>> 62ab4597f211383d91ee89126fe1200ee9081261
         System.out.println(ret);
         /*String ret = "[";
         String userName = "user2";

@@ -51,4 +51,12 @@ public class Preference {
             return 0;
         }
     }
+
+    public static ResultSet searchPreference(int userId,String keyword) {
+        try {
+            return Query.preferenceSearchSelect(userId,keyword);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 }

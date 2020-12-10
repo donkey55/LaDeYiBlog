@@ -15,4 +15,12 @@ public class Bill {
             return null;
         }
     }
+
+    public static ResultSet searchBill(int userId,String keyword) {
+        try {
+            return Query.billSearchSelect(userId,keyword);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 }
