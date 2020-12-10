@@ -22,7 +22,21 @@ public class Main {
     private static Connection connection = MyConnection.getConnection();
 
     public static void main(String[] args) throws SQLException {
-        Attention.insertAttention(1,1);
+        String ret="";
+        int goodsId = 1;
+        try {
+            ResultSet resultSet = Goods.checkGoodsUseGoodsId(goodsId);
+            while (resultSet.next()) {
+                ret = ret + "{\"goodsId\":\"" + resultSet.getString(1) + "\",";
+                ret = ret + "\"goodsName\":\"" + resultSet.getString(2) + "\",";
+                ret = ret + "\"goodsIntroduction\":\"" + resultSet.getString(3) + "\",";
+                ret = ret + "\"shopId\":\"" + resultSet.getString(4) + "\",";
+                ret = ret + "\"goodsAmount\":\"" + resultSet.getString(5) + "\",";
+                ret = ret + "\"goodsPrice\":\"" + resultSet.getString(6) + "\"},";
+            }
+        } catch (SQLException e) {
+        }
+        System.out.println(ret);
         /*String ret = "[";
         String userName = "user2";
         try {

@@ -23,7 +23,7 @@ public class Goods {
     public static ResultSet checkGoodsUseGoodsId(int goodsId) {
         try {
             String restrict = "goodsId=" + goodsId;
-            ResultSet resultSet = Query.select("goodsName", "goods", restrict);
+            ResultSet resultSet = Query.select("*", "goods", restrict);
             return resultSet;
         } catch (SQLException e) {
             return null;
