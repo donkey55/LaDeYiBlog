@@ -15,7 +15,7 @@ $(function () {
     document.getElementById("username").innerHTML = $.cookie("account");
     $.ajax({
         type: "post",
-        url: "../com/ladeyi/test/ShowToAttentionServelt",
+        url: "../com/ladeyi/test/ShowFromAttentionServlet",
         data: {
             "userName": $.cookie("account")
         },

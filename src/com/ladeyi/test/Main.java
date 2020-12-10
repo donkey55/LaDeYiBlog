@@ -22,6 +22,7 @@ public class Main {
     private static Connection connection = MyConnection.getConnection();
 
     public static void main(String[] args) throws SQLException {
+<<<<<<< HEAD
         String ret="";
         int goodsId = 1;
         try {
@@ -36,6 +37,29 @@ public class Main {
             }
         } catch (SQLException e) {
         }
+=======
+        String ret ="[";
+
+        String userName = "zdxx";
+        try {
+            ResultSet userIdSet = User.checkId(userName);
+            userIdSet.next();
+            int userId=userIdSet.getInt(1);
+            ResultSet PreferenceSet = Preference.checkPreference(userId);
+            while (PreferenceSet.next()) {
+                ResultSet blogSet = Blog.checkTitle(Integer.parseInt(PreferenceSet.getString(2)));
+                blogSet.next();
+                ret = ret + "{\"title\":\"" + blogSet.getString(1) + "\",";
+                ret = ret + "\"blogId\":\"" + PreferenceSet.getString(2) + "\",";
+                ret = ret + "\"label\":\"" + PreferenceSet.getString(3) + "\"},";
+            }
+        } catch (SQLException e) {
+        }
+        if (ret.charAt(ret.length() - 1) == ',') {
+            ret = ret.substring(0, ret.length() - 1);
+        }
+        ret = ret + "]";
+>>>>>>> 62ab4597f211383d91ee89126fe1200ee9081261
         System.out.println(ret);
         /*String ret = "[";
         String userName = "user2";
