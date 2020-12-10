@@ -19,8 +19,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /*
-在用户进入商店之后加载商店所有的商品，需要输入进入的商店的id，
-返回所有商品的商品id、商品名、商品介绍、商品数量、商品价格
+输出某件商品的所有信息，需要输入商品的id
+返回该商品的商品id、商品名、商品介绍、商店id、商品数量、商品价格
 */
 public class ShowGoodsServlet extends HttpServlet {
     public ShowGoodsServlet() {
