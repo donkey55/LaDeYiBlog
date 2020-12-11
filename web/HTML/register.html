@@ -2,6 +2,65 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache">
+    <title>拉德衣博客注册</title>
+    <link href="../images/blogLogo.jpg" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../CSS/login_user.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <script src="../script/refJS/jquery.cookie.js"></script>
+    <script src="../script/register.js"></script>
+</head>
+
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+    <div class="ur container">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui teal image header">
+                    <div class="content">
+                        注册
+                    </div>
+                </h2>
+                <fieldset class="ui large form" style="border: 0px;">
+                    <div class="ui  segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="account" id="userName" class="textfield" required placeholder="请设置用户名">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" id="password_field" class="textfield" required placeholder="请设置密码">
+                            </div>
+                        </div>
+                        <button class="ui fluid large teal submit button" id="submit" onclick="register()">注 册</button>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
+
+
+<!--<!DOCTYPE html>
+<html>
+
+<head>
     <meta charset="utf8">
     <title>拉德衣博客注册</title>
     <link rel="stylesheet" href="../CSS/register.css">
@@ -9,25 +68,25 @@
 </head>
 
 <body>
-    <div id="register">
-        <div id="form">
-            <fieldset>
-                <div class="tableRow">
-                    <label for="userName1">用户名</label>
-                    <p><input type="text" name="userName" id="userName1" class="textfield" required></p>
-                </div>
-                <div class="tableRow">
-                    <label for="password_field">密码</label>
-                    <p><input type="password" name="password" id="password_field" class="textfield" required></p>
-                </div>
+<div id="register">
+    <div id="form">
+        <fieldset>
+            <div class="tableRow">
+                <label for="userName">用户名</label>
+                <p><input type="text" name="userName" id="userName" class="textfield" required></p>
+            </div>
+            <div class="tableRow">
+                <label for="password_field">密码</label>
+                <p><input type="password" name="password" id="password_field" class="textfield" required></p>
+            </div>
 
-                <div class="tableRow" id="summitRow">
-                    <label for="submit"></label>
-                    <p><button id="submit" onclick="register()">注册</button></p>
-                </div>
-            </fieldset>
-        </div>
+            <div class="tableRow" id="summitRow">
+                <label for="submit"></label>
+                <p><button id="submit" onclick="register()">注册</button></p>
+            </div>
+        </fieldset>
     </div>
+</div>
 </body>
 <script src="../script/register.js"></script>
-</html>
+</html>-->

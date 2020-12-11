@@ -22,9 +22,10 @@ public class Message {
         }
     }
 
+    //这里加了一个排序
     public static ResultSet checkMessageUseToUserId(int id) {
         try {
-            String restrict = "toUserId=" + id;
+            String restrict = "toUserId=" + id + " order by time desc";
             ResultSet resultSet = Query.select("*", "message", restrict);
             return resultSet;
         } catch (SQLException e) {

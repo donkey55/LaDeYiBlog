@@ -107,7 +107,7 @@ public class Blog {
 
     public static ResultSet getAllBlog() {
         try {
-            return Query.select("blogId, title, summary, time", "blog", "");
+            return Query.select("blogId, userId, title, summary, time", "blog", "");
         } catch (SQLException e) {
             return null;
         }

@@ -2,6 +2,7 @@ package com.ladeyi.test.mapper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Update {
@@ -86,6 +87,16 @@ public class Update {
             preparedStatement.setString(4,summary);
             preparedStatement.setString(5,label);
             ret = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            return -100;
+        }
+        sql = "select blogId from blog where userId =? order by blogId desc LIMIT 1";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            ret = resultSet.getInt(1);
         } catch (SQLException e) {
             return -100;
         }

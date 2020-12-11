@@ -2,7 +2,7 @@ var attentionCount = 0;
 var attentionList;
 var pageIndex = 1;
 var attentionNum = 0;
-var pageNum;
+var pageNum = 1;
 var attentionTotal = 0;
 
 $(function () {
@@ -23,7 +23,9 @@ $(function () {
         success: function (data) {
             //保存得到的人
             attentionList = data;
-            pageNum = Math.ceil(attentionList.length / 5);
+            if(attentionList.length > 0){
+                pageNum = Math.ceil(attentionList.length / 5);
+            }
             attentionTotal = attentionList.length;
             //显示关注
             addTd();
@@ -53,14 +55,19 @@ function searchAttention() {
         },
         dataType: "json",
         success: function (data) {
-            //保存得到的
+            //保存得到的用户
             attentionList = data;
             attentionCount = 0;
             pageIndex = 1;
             attentionNum = 0;
-            pageNum = Math.ceil(attentionList.length / 5);
+            if(attentionList.length > 0){
+                pageNum = Math.ceil(attentionList.length / 5);
+            }else{
+                pageNum = 1;
+            }
             attentionTotal = attentionList.length;
-            //显示文章
+            emptyTd();
+            //显示用户
             addTd();
             document.getElementById("pageIndex").innerHTML = String(pageIndex);
             document.getElementById("pageNum").innerHTML = String(pageNum);
@@ -68,6 +75,7 @@ function searchAttention() {
         },
         error: function () {
             console.log("error");
+            emptyTd();
             pageNum = 1;
             document.getElementById("pageIndex").innerHTML = String(pageIndex);
             document.getElementById("pageNum").innerHTML = String(pageNum);
@@ -78,14 +86,14 @@ function searchAttention() {
 }
 
 function deleteAttention(obj) {
-    var id = obj.id;
+    var toUserName = obj.id;
     if (confirm("您真的准备取消关注他吗？")) {
         $.ajax({
             type: "post",
             url: "../com/ladeyi/test/DeleteAttentionServlet",
             data: {
-                "userName": $.cookie("account"),
-                "attentionName": id
+                "fromUserName": $.cookie("account"),
+                "toUserName": toUserName
             },
             dataType: "json",
             success: function (data) {
@@ -143,7 +151,7 @@ function addTd() {
         aLi2.setAttribute("href", "#");
         aLi2.setAttribute("onclick", "deleteAttention(this)");
         aLi2.setAttribute("class", "ui mini red basic button");
-        aLi2.innerHTML = "取消收藏"
+        aLi2.innerHTML = "取消关注"
 
         tableElement.appendChild(td1);
         td2.appendChild(aLi1);

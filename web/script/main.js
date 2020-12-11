@@ -3,7 +3,7 @@ let blogTotal;
 let blogCount = 0;
 let blogNum = 0;
 let pageIndex = 1;
-let pageNum = 0;
+let pageNum = 1;
 
 $(function () {
     blogCount = 0;
@@ -19,7 +19,9 @@ $(function () {
         success: function (data) {
             blogList = data;
             blogTotal = data.length;
-            pageNum = Math.ceil(blogTotal / 15);
+            if(blogList.length > 0){
+                pageNum = Math.ceil(blogTotal / 15);
+            }
             showBlog();
             showPage();
             updatePageNum();
@@ -67,7 +69,7 @@ function pageDown() {
         showBlog();
         showPage();
         pageIndex++;
-        document.getElementById("pageIndex").innerHTML = String(pageIndex);
+        updatePageNum()
     }
 }
 
@@ -78,7 +80,7 @@ function pageUp() {
         showBlog();
         showPage();
         pageIndex--;
-        document.getElementById("pageIndex").innerHTML = String(pageIndex);
+        updatePageNum()
     }
 }
 
@@ -101,17 +103,25 @@ function showBlog() {
         let span = create("span");
         span.setAttribute("class", "postMeta");
         let i1 = create("i");
-        i1.setAttribute("class", "glyphicon glyphicon-time");
-        i1.innerHTML = "&ensp;发表于:" + element.time +  "&ensp;";
+        i1.setAttribute("class", "glyphicon glyphicon-user");
+        i1.innerHTML = "&ensp;作者:" + element.userName +  "&ensp;";
         let i2 = create("i");
-        i2.setAttribute("class", "glyphicon glyphicon-star");
-        i2.innerHTML = "&ensp;收藏:" + element.preferenceCount + "&ensp;";
+        i2.setAttribute("class", "glyphicon glyphicon-time");
+        i2.innerHTML = "&ensp;发表于:" + element.time +  "&ensp;";
         let i3 = create("i");
-        i3.setAttribute("class", "glyphicon glyphicon-comment");
-        i3.innerHTML = "&ensp;评论:" + element.commentCount + "&ensp;";
+        i3.setAttribute("class", "glyphicon glyphicon-star");
+        i3.innerHTML = "&ensp;收藏:" + element.preferenceCount + "&ensp;";
+        let i4 = create("i");
+        i4.setAttribute("class", "glyphicon glyphicon-comment");
+        i4.innerHTML = "&ensp;评论:" + element.commentCount + "&ensp;";
+        let br1 = create("br")
+        let br2 = create("br")
         span.appendChild(i1);
+        span.appendChild(br1);
         span.appendChild(i2);
+        span.appendChild(br2)
         span.appendChild(i3);
+        span.appendChild(i4);
 
         let p1 = create("p");
         p1.innerHTML = "摘要：" + element.summary;
@@ -133,6 +143,7 @@ function showBlog() {
 
 
 function empty() {
+    blogNum = 0
     $("#blogList").empty();
 }
 

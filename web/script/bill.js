@@ -1,14 +1,15 @@
-let billCount;
-let billTotal;
+let billCount=0;
+let billTotal=0;
 let billList;
-let billNum;
+let billNum=0;
 let pageIndex = 1;
-let pageNum;
+let pageNum = 1;
 
 $(function() {
+    $("#username").html($.cookie("account"));
     $.ajax({
         type: "post",
-        url : "",
+        url : "../com/ladeyi/test/ShowMyBillServlet",
         data: {
             "userName": $.cookie("account")
         },
@@ -17,16 +18,53 @@ $(function() {
             billList = data;
             billTotal = data.length;
             pageIndex = 1;
-            pageNum = Math.ceil(blogList.length / 5);
+            if(billList.length > 0){
+                pageNum = Math.ceil(billList.length / 5);
+            }
             showBill();
             updatePageNum();
         }, 
         error: function (data) {
-            alert("error");
+            //alert("error");
             updatePageNum();
         }
     });
 });
+
+function searchUserBlog() {
+    let keyword = document.getElementById("keywords").value;
+    $.ajax({
+        type: "post",
+        url: "../com/ladeyi/test/SearchBillServlet",
+        data: {
+            "userName" : $.cookie("account"),
+            "keyword" : keyword
+        },
+        dataType: "json",
+        success: function (data) {
+            //保存得到订单
+            billList = data;
+            //console.log(billList);
+            billCount = 0;
+            pageIndex = 1;
+            //console.log(SBlogList);
+            if(data.length > 0){
+                pageNum = Math.ceil(billList.length / 5);
+            }else{
+                pageNum = 1;
+            }
+            billTotal = billList.length;
+            empty();
+            showBill();
+            updatePageNum();
+        },
+        error:function(){
+            console.log("error");
+            pageNum = 1;
+            updatePageNum();
+        }
+    });
+}
 
 function pageDown() {
     if(billCount < billTotal) {
@@ -71,7 +109,7 @@ function showBill() {
 function updatePageNum() {
     document.getElementById("pageIndex").innerHTML = String(pageIndex);
     document.getElementById("pageNum").innerHTML = String(pageNum);
-    document.getElementById("blogTotal").innerHTML = String(blogTotal);
+    document.getElementById("billTotal").innerHTML = String(billTotal);
 }
 
 function empty() {

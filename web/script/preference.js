@@ -2,7 +2,7 @@ var preferenceCount = 0;
 var preferenceList;
 var pageIndex = 1;
 var preferenceNum = 0;
-var pageNum;
+var pageNum = 1;
 var preferenceTotal = 0;
 
 $(function () {
@@ -21,11 +21,13 @@ $(function () {
         },
         dataType: "json",
         success: function (data) {
-            //保存得到的
+            //保存得到的收藏
             preferenceList = data;
-            pageNum = Math.ceil(preferenceList.length / 5);
+            if(preferenceList.length > 0){
+                pageNum = Math.ceil(preferenceList.length / 5);
+            }
             preferenceTotal = preferenceList.length;
-            //显示文章
+            //显示收藏
             addTd();
             document.getElementById("pageIndex").innerHTML = String(pageIndex);
             document.getElementById("pageNum").innerHTML = String(pageNum);
@@ -53,14 +55,19 @@ function searchPreference() {
         },
         dataType: "json",
         success: function (data) {
-            //保存得到的
+            //保存得到的收藏
             preferenceList = data;
             preferenceCount = 0;
             pageIndex = 1;
             preferenceNum = 0;
-            pageNum = Math.ceil(preferenceList.length / 5);
+            if(preferenceList.length > 0){
+                pageNum = Math.ceil(preferenceList.length / 5);
+            }else{
+                pageNum = 1;
+            }
             preferenceTotal = preferenceList.length;
-            //显示文章
+            emptyTd();
+            //显示收藏
             addTd();
             document.getElementById("pageIndex").innerHTML = String(pageIndex);
             document.getElementById("pageNum").innerHTML = String(pageNum);
@@ -68,6 +75,7 @@ function searchPreference() {
         },
         error: function () {
             console.log("error");
+            emptyTd();
             pageNum = 1;
             document.getElementById("pageIndex").innerHTML = String(pageIndex);
             document.getElementById("pageNum").innerHTML = String(pageNum);
@@ -98,37 +106,6 @@ function deletePreference(obj) {
             },
             error: function () {
                 alert("error");
-            }
-        });
-        //向取消收藏的博客的作者发送消息
-        //对应的messageType为-1
-        //console.log($.cookie("account"))
-        //console.log(document.getElementById("author").innerText)
-        //console.log(id)
-        $.ajax({
-            type: "post",
-            url: "../com/ladeyi/test/WriteMessageServlet",
-            data: {
-                "fromUserName": $.cookie("account"),
-                "toUserName": document.getElementById("author").innerText,
-                "message": id+ "#" + document.getElementById("title").innerText
-                    .replace(/\\/g,'\\\\' )
-                    .replace(/"/g,'\\"')
-                    .replace(/\r\n|\n/g, '\\n')
-                    .replace(/\s/g, ' '),
-                "messageType": "-1"
-            },
-            dataType: "json",
-            success: function (data) {
-                console.log(data.ret)
-                if(data.ret === "1"){
-                    //alert("收藏成功")
-                }else {
-                    alert("取消收藏消息添加失败")
-                }
-            },
-            error: function () {
-                alert("取消收藏消息添加失败")
             }
         });
     }

@@ -19,7 +19,7 @@ $(function () {
         },
         dataType: "json",
         success: function (data) {
-            //保存得到的文章
+            //保存得到的消息
             messageList = data;
             if(messageList.length == 0){
                 pageNum = 1;
@@ -46,7 +46,9 @@ function addMessage() {
         div.setAttribute("class", "item")
         div.innerHTML="<img class=\"ui avatar image\" src=\"../images/defaultAvatar.jpg\">\n" +
             "                <div class=\"content\">\n" +
-            "                    <a class=\"header\">"+element.userName+"</a>\n" +
+            "                    <a class=\"header\" target='_blank' href='showUser.html?" + element.userName + "?" + $.cookie("account") + "'>"+element.userName+"</a>\n" +
+            "                    <i class=\"clock outline icon m-font-size-text-mini\" style='color: #808080'></i>\n" +
+            "                    <span class=\"m-font-size-text-mini\" id=\"time\" style='color: #808080'>" + element.time + "</span>"+
             "                    <div class=\"description\">"+transform(element)+"</div>\n" +
             "                </div>"
         document.getElementById("messageList").appendChild(div)
@@ -91,14 +93,18 @@ function transform(element) {
         message = element.message
     }else if(element.messageType === "1"){
         let messageSet = element.message.split('#')
-        message = "评论了你的博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"'>"+ messageSet[1] +"</a>" +
+        message = "评论了你的博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"' target='_blank'>"+ messageSet[1] +"</a>" +
             "<br>评论内容为：<br>" + messageSet[2]
     }else if(element.messageType === "2"){
         let messageSet = element.message.split('#')
-        message = "回复了你对博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"'>"+ messageSet[1] +"</a>" +
+        message = "回复了你对博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"' target='_blank'>"+ messageSet[1] +"</a>" +
             "的评论<br>评论内容为：<br>" + messageSet[2] +
             "<br>回复内容为：<br>" + messageSet[3]
         //console.log(message)
+    }
+    else if(element.messageType === "3"){
+        let messageSet = element.message.split('#')
+        message = "发表了新博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"' target='_blank'>"+ messageSet[1] +"</a>"
     }
     return message
 }

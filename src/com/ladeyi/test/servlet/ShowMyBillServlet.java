@@ -46,7 +46,7 @@ public class ShowMyBillServlet extends HttpServlet {
                 ResultSet goodsSet = Goods.checkGoodsUseGoodsId(Integer.parseInt(billSet.getString(2)));
                 goodsSet.next();
                 ret = ret + "{\"goodsId\":\"" + billSet.getString(2) + "\",";
-                ret = ret + "\"goodsName\":\"" + goodsSet.getString(1) + "\",";
+                ret = ret + "\"goodsName\":\"" + goodsSet.getString(2) + "\",";
                 ret = ret + "\"amount\":\"" + billSet.getString(3) + "\",";
                 ret = ret + "\"billId\":\"" + billSet.getString(4) + "\"},";
             }

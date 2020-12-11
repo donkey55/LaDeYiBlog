@@ -20,12 +20,16 @@ window.onload = function () {
                 document.getElementById("title").innerHTML = data.title;
                 document.getElementById("topTitle").innerHTML = data.title;
                 document.getElementById("author").innerHTML = data.userName;
-                document.getElementById("userName").innerHTML = data.userName;
+                document.getElementById("userName").innerHTML = $.cookie("account");
                 document.getElementById("blog").innerHTML = data.blog;
                 document.getElementById("time").innerHTML = data.time;
                 document.getElementById("label").innerHTML = data.label;
                 document.getElementById("author").href = "showUser.html?" + data.userName + "?" + $.cookie("account");
                 preview();
+            },
+            error: function () {
+                alert("此文章已被删除！")
+                window.close()
             }
         });
         //console.log(count);
@@ -73,8 +77,10 @@ window.onload = function () {
                 let topUserName = commentList[index].userName;
                 let topComment = commentList[index].comment;
                 let topCommentId = commentList[index].commentId;
+                let commentTime = commentList[index].time;
                 let userNames = new Array();
                 let replies = new Array();
+                let times = new Array();
                 //console.log(commentList[index].commentId)
                 $.ajax({
                     type: "post",
@@ -87,6 +93,7 @@ window.onload = function () {
                         for(let index = 0; index < data.length; index++){
                             userNames[index] = data[index].userName;
                             replies[index] = data[index].reply;
+                            times[index] = data[index].time;
                         }
                         //console.log(topUserName)
                         //console.log(topComment)
@@ -96,8 +103,10 @@ window.onload = function () {
                             topUserName,
                             topCommentId,
                             topComment,
+                            commentTime,
                             userNames,
-                            replies);
+                            replies,
+                            times);
                     },
                     error: function () {
                         //console.log(topUserName);
@@ -201,7 +210,7 @@ function changeStyle() {
 }
 
 //向commentsDiv元素中加入一条回复
-function insertReply(commentDivs,userName, reply) {
+function insertReply(commentDivs,userName, reply, replyTime) {
     let a1 = document.createElement("a")
     a1.setAttribute("class","avatar")
     let img = document.createElement("img")
@@ -211,11 +220,22 @@ function insertReply(commentDivs,userName, reply) {
     div1.setAttribute("class","content")
     let a2 = document.createElement("a")
     a2.setAttribute("class","ui teal image label")
+    a2.setAttribute("href","showUser.html?" + userName + "?" + $.cookie("account"))
+    a2.setAttribute("target","blank")
     a2.innerText = userName
+    let i = document.createElement("i")
+    i.setAttribute("class", "clock outline icon m-font-size-text-mini")
+    i.setAttribute("style", "color: #808080")
+    let span = document.createElement("span")
+    span.setAttribute("class", "m-font-size-text-mini")
+    span.setAttribute("style", "color: #808080")
+    span.innerText = replyTime
     let div2 = document.createElement("div")
     div2.setAttribute("class", "text")
     div2.innerText = reply
     div1.appendChild(a2)
+    div1.appendChild(i)
+    div1.appendChild(span)
     div1.appendChild(div2)
     let div3 = document.createElement("div")
     div3.setAttribute("class","comment")
@@ -225,7 +245,7 @@ function insertReply(commentDivs,userName, reply) {
 }
 
 //添加一条评论及其所有回复
-function insertComment(topDiv,topUserName,topCommentId,comment,userNames,replies) {
+function insertComment(topDiv,topUserName,topCommentId,comment, commentTime, userNames,replies, replyTimes) {
     let a1 = document.createElement("a")
     a1.setAttribute("class","avatar")
     let img = document.createElement("img")
@@ -235,7 +255,16 @@ function insertComment(topDiv,topUserName,topCommentId,comment,userNames,replies
     div1.setAttribute("class","content")
     let a2 = document.createElement("a")
     a2.setAttribute("class","ui teal image label")
+    a2.setAttribute("href","showUser.html?" + topUserName + "?" + $.cookie("account"))
+    a2.setAttribute("target","blank")
     a2.innerText = topUserName
+    let i = document.createElement("i")
+    i.setAttribute("class", "clock outline icon m-font-size-text-mini")
+    i.setAttribute("style", "color: #808080")
+    let span = document.createElement("span")
+    span.setAttribute("class", "m-font-size-text-mini")
+    span.setAttribute("style", "color: #808080")
+    span.innerText = commentTime
     let div2 = document.createElement("div")
     div2.setAttribute("class", "text")
     div2.innerText = comment
@@ -260,6 +289,8 @@ function insertComment(topDiv,topUserName,topCommentId,comment,userNames,replies
     div5.appendChild(a3)
     div5.appendChild(a4)
     div1.appendChild(a2)
+    div1.appendChild(i)
+    div1.appendChild(span)
     div1.appendChild(div2)
     div1.appendChild(div5)
     div1.appendChild(div6)
@@ -274,7 +305,7 @@ function insertComment(topDiv,topUserName,topCommentId,comment,userNames,replies
     div3.appendChild(div4)
     if(userNames.length > 0){
         for(let index = 0; index < userNames.length; index++){
-            insertReply(div4, userNames[index], replies[index])
+            insertReply(div4, userNames[index], replies[index], replyTimes[index])
         }
     }else{
         let p = document.createElement("p")
@@ -298,7 +329,7 @@ function expand(obj) {
 }
 
 function reply(obj) {
-    let target = obj.parentNode.parentNode.childNodes[3]
+    let target = obj.parentNode.parentNode.childNodes[5]
     //console.log(target.hidden)
     if(target.hidden === true){
         target.removeAttribute("hidden")
@@ -349,7 +380,7 @@ function submit_reply(obj, topCommentId) {
                                 .replace(/"/g,'\\"')
                                 .replace(/\r\n|\n/g, '\\n')
                                 .replace(/\s/g, ' ') + "#" +
-                                obj.parentNode.parentNode.parentNode.childNodes[1].innerText
+                                obj.parentNode.parentNode.parentNode.childNodes[3].innerText
                                     .replace(/\\/g,'\\\\' )
                                     .replace(/"/g,'\\"')
                                     .replace(/\r\n|\n/g, '\\n')
@@ -360,13 +391,13 @@ function submit_reply(obj, topCommentId) {
                         success: function (data) {
                             console.log(data.ret)
                             if(data.ret === "1"){
-                                //alert("收藏成功")
+                                //alert("回复消息添加失败")
                             }else {
-                                alert("评论消息添加失败")
+                                alert("回复消息添加失败")
                             }
                         },
                         error: function () {
-                            alert("评论消息添加失败")
+                            alert("回复消息添加失败")
                         }
                     });
                 }else {
@@ -437,7 +468,7 @@ function publishComment() {
                         success: function (data) {
                             console.log(data.ret)
                             if(data.ret === "1"){
-                                //alert("收藏成功")
+                                //alert("评论消息添加成功")
                             }else {
                                 alert("评论消息添加失败")
                             }

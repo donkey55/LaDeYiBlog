@@ -46,7 +46,8 @@ public class ShowToMessageServlet extends HttpServlet {
                 ret = ret + "{\"messageId\":\"" + messageSet.getString(1) + "\",";
                 ret = ret + "\"userName\":\"" + userSet.getString(1) + "\",";
                 ret = ret + "\"message\":\"" + messageSet.getString(4) + "\",";
-                ret = ret + "\"messageType\":\"" + messageSet.getString(5) + "\"},";
+                ret = ret + "\"messageType\":\"" + messageSet.getString(5) + "\",";
+                ret = ret + "\"time\":\"" + messageSet.getString(6) + "\"},";
             }
         } catch (SQLException e) {
         }

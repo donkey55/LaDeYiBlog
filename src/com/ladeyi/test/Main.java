@@ -1,6 +1,8 @@
 package com.ladeyi.test;
 
+import com.ladeyi.test.mapper.Call;
 import com.ladeyi.test.mapper.MyConnection;
+import com.ladeyi.test.mapper.Query;
 import com.ladeyi.test.service.Attention;
 import com.ladeyi.test.service.Bill;
 import com.ladeyi.test.service.Blog;
@@ -22,7 +24,9 @@ public class Main {
     private static Connection connection = MyConnection.getConnection();
 
     public static void main(String[] args) throws SQLException {
-        String ret="[";
+        System.out.println(Query.billSearchSelect(1,"w"));
+        //System.out.println(Call.buyProcedure(1,1,10));
+        /*String ret="[";
         String userName = "zdxx";
         String keyword = "无";
         try {
@@ -42,7 +46,7 @@ public class Main {
             ret = ret.substring(0, ret.length() - 1);
         }
         ret = ret + "]";
-        System.out.println(ret);
+        System.out.println(ret);*/
         /*String ret = "[";
         String userName = "user2";
         try {

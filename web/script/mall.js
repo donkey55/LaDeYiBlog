@@ -1,5 +1,4 @@
 let userName = $.cookie("account");
-let shopId;
 let goodsList;
 let pageIndex = 1;
 let pageNum = 1;
@@ -10,29 +9,15 @@ $(function(){
     setHtml("userName", userName);
     $.ajax({
         type: "post",
-        url: "../com/ladeyi/test/ShowShopInfoServlet",
-        data: {
-        },
-        dataType: "json",
-        success: function (data) {
-            let shopList = data;
-            shopId = data[0].shopId;
-        },
-        error:function(){
-            console.log("error");
-        }
-    });
-
-    $.ajax({
-        type: "post",
         url: "../com/ladeyi/test/ShowGoodsInfoServlet",
         data: {
-            "shopId" : shopId
         },
         dataType: "json",
         success: function (data) {
             goodsList = data;
-            pageNum = pageNum = Math.ceil(goodsTotal/9);
+            if(goodsList.length > 0){
+                pageNum = Math.ceil(goodsTotal/9);
+            }
             pageIndex = 1;
             goodsTotal = data.length;
             showGoods();
@@ -51,7 +36,7 @@ function pageDown() {
         //显示文章
         showGoods();
         pageIndex++;
-        document.getElementById("pageIndex").innerHTML = String(pageIndex);
+        updatePageNum();
     }
 }
 
@@ -61,22 +46,24 @@ function pageUp() {
         empty();
         showGoods();
         pageIndex--;
-        document.getElementById("pageIndex").innerHTML = String(pageIndex);
+        updatePageNum();
     }
 }
 
 function showGoods() {
-    for (let index = 1; index <= 9 && index < goodsTotal; index++, goodsCount++, goodsNum++) {
+    for (let index = 0; index < 9 && index < goodsTotal; index++, goodsCount++, goodsNum++) {
         const element = goodsList[goodsCount];
         let aLi = document.createElement("a");
-        setHtml("goodsName" + index, element.goodsName);
-        setHtml("goodsDescription" + index, goodsDescSummary(element.introduction));
-        setHtml("goodsImg" + index, element.image); //设置照片
-        showBorder(index);
+        setHtml("goodsName" + String(index+1), element.goodsName);
+        setHtml("goodsDescription" + String(index+1), goodsDescSummary(element.goodsIntroduction));
+        //设置照片
+        document.getElementById("goodsImg" + String(index+1))
+            .setAttribute("src", element.goodsImg);
+        showBorder(index+1);
         aLi.setAttribute("class", "btn btn-primary");
         aLi.innerHTML = "购买";
-        aLi.setAttribute("href", "goods.html?" + element.goodsId);
-        $("#href" + index).append(aLi);
+        aLi.setAttribute("href", "goods.html?" + element.goodsId + "?" + $.cookie("account"));
+        $("#href" + String(index+1)).append(aLi);
     }
 }
 
@@ -99,6 +86,7 @@ function updatePageNum() {
 }
 
 function empty() {
+    goodsNum = 0;
     $(".needEmpty").empty();
     $(".needEmptyBorder").css("style", "border:none");
 

@@ -10,10 +10,20 @@ import java.sql.SQLException;
 
 public class Goods {
 
-    public static ResultSet checkGoods(int shopId) {
+    public static ResultSet checkGoods() {
         try {
-            String restrict = "shopId=" + shopId;
+            String restrict = "";
             ResultSet resultSet = Query.select("*", "goods", restrict);
+            return resultSet;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public static ResultSet checkGoodsInfo() {
+        try {
+            String restrict = "";
+            ResultSet resultSet = Query.select("goodsId, goodsName, goodsIntroduction, goodsImg", "goods", restrict);
             return resultSet;
         } catch (SQLException e) {
             return null;

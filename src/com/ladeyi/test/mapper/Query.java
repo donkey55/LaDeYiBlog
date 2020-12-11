@@ -65,7 +65,7 @@ public class Query {
 
     public static ResultSet billSearchSelect(int userId,String keyword) throws SQLException {
         ResultSet resultSet = null;
-        String sql = "SELECT bill.goodsId,bill.amount,bill.billId,goods.goodsName FROM bill,goods WHERE goods.goodsId=bill.goodsId AND (goods.goodsName LIKE ? OR goods.goodsIntroduction LIKE ? OR bill.billId LIKE ?) AND bill.userId=?";
+        String sql = "SELECT bill.goodsId,bill.num,bill.billId,goods.goodsName FROM bill,goods WHERE goods.goodsId=bill.goodsId AND (goods.goodsName LIKE ? OR goods.goodsIntroduction LIKE ? OR bill.billId LIKE ?) AND bill.userId=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, "%" + keyword + "%");
         preparedStatement.setString(2, "%" + keyword + "%");

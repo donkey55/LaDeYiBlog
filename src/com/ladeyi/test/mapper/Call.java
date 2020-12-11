@@ -29,7 +29,7 @@ public class Call {
             callableStatement.setInt(1, goodsId);
             callableStatement.setInt(2, userId);
             callableStatement.setInt(3, amount);
-            callableStatement.registerOutParameter(4, Types.BIGINT);
+            callableStatement.registerOutParameter(4, Types.INTEGER);
             callableStatement.execute();
             return callableStatement.getInt(4);
         } catch (SQLException e) {

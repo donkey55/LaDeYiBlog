@@ -66,11 +66,12 @@ function changeUserInfo() {
         isChange = true;
     }
     if (inputSelfIntroduction !== userInfo.selfIntroduction) {
-        changeUserInfoAjax("selfIntroduction");
+        changeUserInfoAjax("selfIntroduction", inputSelfIntroduction);
         isChange = true;
     }
     if (isRight && isChange) {
         alert("修改成功");
+        location.reload();
     } else if (isChange){
         alert("用户名格式不正确");
     }
@@ -97,10 +98,10 @@ function getValue(id) {
     return $("#"+id).val();
 }
 
-function changeUserInfoAjax(attribute, content, servlet) {
+function changeUserInfoAjax(attribute, content) {
     $.ajax({
         type: "post",
-        url: "../com/ladeyi/test/" + servlet,
+        url: "../com/ladeyi/test/ChangeUserInfoServlet",
         dataType: "json",
         data: {
             userName: $.cookie("account"),

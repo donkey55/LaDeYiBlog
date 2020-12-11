@@ -2,7 +2,7 @@ var blogCount = 0;
 var blogNum = 0;
 var blogList;
 var pageIndex = 1;
-var pageNum = 0;
+var pageNum = 1;
 var blogTotal = 0;
 
 $(function () {
@@ -23,7 +23,9 @@ $(function () {
         success: function (data) {
             //保存得到的文章
             blogList = data;
-            pageNum = Math.ceil(blogList.length / 5);
+            if(blogList.length > 0){
+                pageNum = Math.ceil(blogList.length / 5);
+            }
             blogTotal = blogList.length;
             //显示文章
             addTd();
@@ -59,7 +61,11 @@ function searchUserBlog() {
                 }
             }
             //console.log(SBlogList);
-            pageNum = Math.ceil(blogList.length / 5);
+            if(blogList.length > 0){
+                pageNum = Math.ceil(blogList.length / 5);
+            }else{
+                pageNum = 1;
+            }
             blogTotal = blogList.length;
             empty();
             addTd();

@@ -1,7 +1,7 @@
 let userName = window.location.href.split("?")[1];
 let blogList;
 let blogCount = 0;
-let pageNum = 0;
+let pageNum = 1;
 let pageIndex = 1;
 let blogTotal = 0;
 let singlePageNum = 6;
@@ -39,7 +39,9 @@ $(function () {
             //保存得到的文章
             blogList = data;
             blogTotal = blogList.length;
-            pageNum = Math.ceil(blogTotal / 5);
+            if(blogList.length > 0){
+                pageNum = Math.ceil(blogTotal / singlePageNum);
+            }
             showBLog();
             updatePageNum();
         },
@@ -93,7 +95,8 @@ function showBLog() {
         setHtml(p1, element.summary);
         setHtml(p2A, "浏览");
         p2A.setAttribute("class", "btn btn-primary");
-        p2A.setAttribute("href", "blog.html?" + element.blogId);
+        p2A.setAttribute("href", "blog.html?" + element.blogId + "?" + $.cookie("account"));
+        p2A.setAttribute("target","_blank")
         p2.appendChild(p2A);
         div2.appendChild(h2);
         div2.appendChild(p1);

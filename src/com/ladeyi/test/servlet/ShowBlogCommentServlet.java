@@ -41,7 +41,8 @@ public class ShowBlogCommentServlet extends HttpServlet {
                 userSet.next();
                 ret = ret + "{\"commentId\":\"" + commentSet.getString(1) + "\",";
                 ret = ret + "\"userName\":\"" + userSet.getString(1) + "\",";
-                ret = ret + "\"comment\":\"" + commentSet.getString(4) + "\"},";
+                ret = ret + "\"comment\":\"" + commentSet.getString(4) + "\",";
+                ret = ret + "\"time\":\"" + commentSet.getString(5) + "\"},";
             }
         } catch (SQLException e) {
         }

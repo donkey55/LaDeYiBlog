@@ -38,15 +38,13 @@ public class ShowGoodsInfoServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        int shopId = Integer.parseInt(request.getParameter("shopId"));
         try {
-            ResultSet resultSet = Goods.checkGoods(shopId);
+            ResultSet resultSet = Goods.checkGoodsInfo();
             while (resultSet.next()) {
                 ret = ret + "{\"goodsId\":\"" + resultSet.getString(1) + "\",";
                 ret = ret + "\"goodsName\":\"" + resultSet.getString(2) + "\",";
                 ret = ret + "\"goodsIntroduction\":\"" + resultSet.getString(3) + "\",";
-                ret = ret + "\"goodsAmount\":\"" + resultSet.getString(5) + "\",";
-                ret = ret + "\"goodsPrice\":\"" + resultSet.getString(6) + "\"},";
+                ret = ret + "\"goodsImg\":\"" + resultSet.getString(4) + "\"},";
             }
         } catch (SQLException e) {
         }

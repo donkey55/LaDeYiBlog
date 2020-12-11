@@ -1,5 +1,5 @@
 function query() {
-    var url = "user.html?" + $("#login_field").val();
+    var url = "main.html";
     /*window.open("user.html","_self");*/
     $.ajax({
         type: "post",

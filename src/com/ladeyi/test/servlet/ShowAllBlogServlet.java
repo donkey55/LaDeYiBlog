@@ -37,11 +37,14 @@ public class ShowAllBlogServlet extends HttpServlet {
             ResultSet allBlogSet = Blog.getAllBlog();
             while (allBlogSet.next()) {
                 ret = ret + "{\"blogId\":\"" + allBlogSet.getString(1) + "\",";
-                ret = ret + "\"title\":\"" + allBlogSet.getString(2) + "\",";
-                ret = ret + "\"summary\":\"" + allBlogSet.getString(3) + "\",";
+                ret = ret + "\"title\":\"" + allBlogSet.getString(3) + "\",";
+                ret = ret + "\"summary\":\"" + allBlogSet.getString(4) + "\",";
                 ret = ret + "\"preferenceCount\":\"" + Preference.checkPreferenceCount(allBlogSet.getInt(1)) + "\",";
                 ret = ret + "\"commentCount\":\"" + Comment.checkCommentCount(allBlogSet.getInt(1)) + "\",";
-                ret = ret + "\"time\":\"" + allBlogSet.getString(4) + "\"},";
+                ret = ret + "\"time\":\"" + allBlogSet.getString(5) + "\",";
+                ResultSet userNameSet = User.checkUserName(allBlogSet.getString(2));
+                userNameSet.next();
+                ret = ret + "\"userName\":\"" + userNameSet.getString(1) + "\"},";
             }
         } catch (SQLException e) {
         }

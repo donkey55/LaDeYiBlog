@@ -36,12 +36,19 @@ public class BuyGoodsServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        int goodsId = Integer.parseInt(request.getParameter("goodsId"));
-        int userId = Integer.parseInt(request.getParameter("userId"));
-        int amount = Integer.parseInt(request.getParameter("amount"));
-        ret= Goods.buyGoods(goodsId,userId,amount);
-        String output = "{\"ret\":\"" + ret + "\"}";
-        printWriter.write(output);
+        try {
+            int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+            String userName = request.getParameter("userName");
+            ResultSet userIdSet = User.checkId(userName);
+            userIdSet.next();
+            int userId = userIdSet.getInt(1);
+            int amount = Integer.parseInt(request.getParameter("amount"));
+            ret= Goods.buyGoods(goodsId,userId,amount);
+            String output = "{\"ret\":\"" + ret + "\"}";
+            printWriter.write(output);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void init() throws ServletException {

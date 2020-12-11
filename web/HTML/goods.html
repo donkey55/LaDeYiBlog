@@ -13,7 +13,7 @@
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script src="../script/refJS/jquery.cookie.js"></script>
-    <script src="../script/mall.js"></script>
+    <script src="../script/goods.js"></script>
     <style>
         .good-img {
             width: 100%;
@@ -43,12 +43,12 @@
                 <a href="mall.html" class="m-item item m-mobile-hide"><i class="folder icon"></i>商城</a>
                 <div class="right m-item m-mobile-hide menu">
                     <div class="dropdown item" style="z-index: 100;">
-                        <img class="ui avatar image" src="../images/blogLogo.jpg">
+                        <img class="ui avatar image" src="../images/defaultAvatar.jpg">
+                        <span id="userName"><!--填入用户名--></span>
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
                             style="background: transparent; color:white; border: none;">
                             <span class="caret"></span>
-                            <span id="username">45</span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="min-width:100%;">
                             <li><a href="userInfo.html" onclick="">个人信息</a></li>
@@ -69,17 +69,17 @@
                 <div class="col-md-10 col-md-offset-1">
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="../images/index/6.jpg" alt="" class="good-img">
+                            <img src="" alt="" class="good-img" id="goodsImg">
                         </div>
 
                         <div class="col-md-5 col-md-offset-1">
-                            <h3 id="goodsName">商品名称</h3>
+                            <h3 id="goodsName"><!--填入商品名称--></h3>
                             <hr>
-                            ￥ <span id="price">59.99</span>
+                            ￥ <span id="price"><!--填入价格--></span>
                             <hr>
-                            <div id="goodDescription">商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述</div>
+                            <div id="goodDescription"><!--填入商品描述--></div>
                             <hr>
-                            库存<span id="stockNum">199</span>件
+                            库存<span id="stockNum"><!--填入库存--></span>件
                             <hr>
                             <button type="button" class="btn btn-sm add-btn" id='increase' onclick="increase()">+</button>
                             <button type="button" class="btn btn-sm disabled count" id='count'>1</button>
@@ -94,64 +94,7 @@
     </main>
 </body>
 <script>
-    let goodId = window.location.split("?")[1];
-    let element;
-    $(function () {
-        $.ajax({
-            type: "post",
-            url: "",
-            data: {
-                "goodsId" : goodId
-            },
-            success: function (data) {
-                setHtml("goodsName", data.goodsName);
-                setHtml("price", data.goodsPrice);
-                setHtml("stockNum", data.goodsAmount);
-            },
-            error: function () {
-                alert("error");
-            }
-        });
-    });
 
-    function setHtml(id, value) {
-        $("#"+id).html(value);
-    }
-
-    function buy() {
-        $.ajax({
-            type: "post",
-            url: "" ,
-            data: {
-                "userName": $.cookie("account"),
-                "goodsId": element.goodsId,
-                "amount": $("#count").html()
-            },
-            datatype:"json",
-            success:function (data) {
-                if (data.ret === 1) {
-                    alert("购买成功");
-                } else {
-                    alert("购买失败");
-                }
-            }
-        });
-    }
-
-    function increase() {
-        let value = parseInt($("#count").html());
-        value++;
-        $("#count").html(value);
-    }
-
-    function decrease() {
-        let value = parseInt($("#count").html());
-        value--;
-        if (value < 0) {
-            value = 0;
-        }
-        $("#count").html(value);
-    }
 </script>
 
 </html>

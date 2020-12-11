@@ -45,9 +45,9 @@ public class ShowGoodsServlet extends HttpServlet {
                 ret = ret + "{\"goodsId\":\"" + resultSet.getString(1) + "\",";
                 ret = ret + "\"goodsName\":\"" + resultSet.getString(2) + "\",";
                 ret = ret + "\"goodsIntroduction\":\"" + resultSet.getString(3) + "\",";
-                ret = ret + "\"shopId\":\"" + resultSet.getString(4) + "\",";
-                ret = ret + "\"goodsAmount\":\"" + resultSet.getString(5) + "\",";
-                ret = ret + "\"goodsPrice\":\"" + resultSet.getString(6) + "\"},";
+                ret = ret + "\"goodsNum\":\"" + resultSet.getString(4) + "\",";
+                ret = ret + "\"goodsPrice\":\"" + resultSet.getString(5) + "\",";
+                ret = ret + "\"goodsImg\":\"" + resultSet.getString(6) + "\"}";
             }
         } catch (SQLException e) {
         }
