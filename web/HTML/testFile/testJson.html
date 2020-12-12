@@ -1,40 +1,244 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-</head>
+    <title>js 生成随机背景图</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+    <style>
+        /*css reset */
+        body,p,div,ol,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,iframe,nav {
+            margin: 0;
+            padding: 0;
+        }
+        html,body {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            font: 14px Microsoft YaHei;
+            -webkit-text-size-adjust:100%;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            position: relative;
+            background: #000;
+        }
 
-<body onbeforeunload="checkLeave()">
-    <div id="json">
-        <ul id="blogList">
-        </ul>
-    </div>
+        #canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            opacity: .8;
+        }
+    </style>
+    <!--代码放置于</body>上方-->
+
+    <script>
+
+        !function(){
+
+            function n(n,e,t){
+
+                return n.getAttribute(e)||t
+
+            }
+
+            function e(n){
+
+                return document.getElementsByTagName(n)
+
+            }
+
+            function t(){
+
+                var t=e("script"),o=t.length,i=t[o-1];
+
+                return{
+
+                    l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.5),c:n(i,"color","0,0,0"),n:n(i,"count",99)
+
+                }
+
+            }
+
+            function o(){
+
+                a=m.width=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth,
+
+                    c=m.height=window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight
+
+            }
+
+            function i(){
+
+                r.clearRect(0,0,a,c);
+
+                var n,e,t,o,m,l;
+
+                s.forEach(function(i,x){
+
+                    for(i.x+=i.xa,i.y+=i.ya,i.xa*=i.x>a||i.x<0?-1:1,i.ya*=i.y>c||i.y<0?-1:1,r.fillRect(i.x-.5,i.y-.5,1,1),e=x+1;e<u.length;e++)n=u[e],
+
+                    null!==n.x&&null!==n.y&&(o=i.x-n.x,m=i.y-n.y,
+
+                        l=o*o+m*m,l<n.max&&(n===y&&l>=n.max/2&&(i.x-=.03*o,i.y-=.03*m),
+
+                        t=(n.max-l)/n.max,r.beginPath(),r.lineWidth=t/2,r.strokeStyle="rgba("+d.c+","+(t+.2)+")",r.moveTo(i.x,i.y),r.lineTo(n.x,n.y),r.stroke()))
+
+                }),
+
+                    x(i)
+
+            }
+
+            var a,c,u,m=document.createElement("canvas"),
+
+                d=t(),l="c_n"+d.l,r=m.getContext("2d"),
+
+                x=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||
+
+                    function(n){
+
+                        window.setTimeout(n,1e3/45)
+
+                    },
+
+                w=Math.random,y={x:null,y:null,max:2e4};m.id=l,m.style.cssText="position:fixed;top:0;left:0;z-index:"+d.z+";opacity:"+d.o,e("body")[0].appendChild(m),o(),window.onresize=o,
+
+                window.onmousemove=function(n){
+
+                    n=n||window.event,y.x=n.clientX,y.y=n.clientY
+
+                },
+
+                window.onmouseout=function(){
+
+                    y.x=null,y.y=null
+
+                };
+
+            for(var s=[],f=0;d.n>f;f++){
+
+                var h=w()*a,g=w()*c,v=2*w()-1,p=2*w()-1;s.push({x:h,y:g,xa:v,ya:p,max:6e3})
+
+            }
+
+            u=s.concat([y]),
+
+                setTimeout(function(){i()},100)
+
+        }();
+
+    </script>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
 </body>
 <script>
-    function checkLeave() {
-        event.returnValue = "确定离开当前页面吗？";
-    }
-    /* var user1 = {
-        "id": "123",
-        "title": "op"
-    };
-    var li = document.createElement("li");
-    var aLi = document.createElement("a");
-    var span = document.createElement("span");
-    aLi.setAttribute('href', '');
-    aLi.setAttribute('class', 'blogLink');
-    aLi.innerHTML = "123";
-    span.innerHTML = "789";
-    aLi.appendChild(span);
-    li.appendChild(aLi);
-    aLi.innerHTML = "123";
-    var ulList = document.getElementById("blogList");
-    ulList.appendChild(li);
-    $(".blogLink").click(function () {
-        alert("success");
-        window.open("user.html");
-    }); */
-</script>
+    // 音量大小,0.01-1
 
+
+    //宇宙特效
+    var canvas = document.getElementById('canvas'),
+        ctx = canvas.getContext('2d'),
+        w = canvas.width = window.innerWidth,
+        h = canvas.height = window.innerHeight,
+
+        hue = 217,
+        stars = [],
+        count = 0,
+        maxStars = 1100;    //星星数量,默认1300
+    var canvas2 = document.createElement('canvas'),
+        ctx2 = canvas2.getContext('2d');
+    canvas2.width = 100;
+    canvas2.height = 100;
+    var half = canvas2.width / 2,
+        gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
+    gradient2.addColorStop(0.025, '#CCC');
+    gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+    gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+    gradient2.addColorStop(1, 'transparent');
+
+    ctx2.fillStyle = gradient2;
+    ctx2.beginPath();
+    ctx2.arc(half, half, half, 0, Math.PI * 2);
+    ctx2.fill();
+
+    // End cache
+    function random(min, max) {
+        if (arguments.length < 2) {
+            max = min;
+            min = 0;
+        }
+
+        if (min > max) {
+            var hold = max;
+            max = min;
+            min = hold;
+        }
+
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function maxOrbit(x, y) {
+        var max = Math.max(x, y),
+            diameter = Math.round(Math.sqrt(max * max + max * max));
+        return diameter / 2;
+        //星星移动范围，值越大范围越小，
+    }
+
+    var Star = function() {
+
+        this.orbitRadius = random(maxOrbit(w, h));
+        this.radius = random(60, this.orbitRadius) / 10;  //星星大小,值越大星星越小,默认8
+
+        this.orbitX = w / 2;
+        this.orbitY = h / 2;
+        this.timePassed = random(0, maxStars);
+        this.speed = random(this.orbitRadius) / 80000;  //星星移动速度,值越大越慢,默认5W
+
+        this.alpha = random(2, 10) / 10;
+
+        count++;
+        stars[count] = this;
+    }
+
+    Star.prototype.draw = function() {
+        var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+            y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+            twinkle = random(10);
+
+        if (twinkle === 1 && this.alpha > 0) {
+            this.alpha -= 0.05;
+        } else if (twinkle === 2 && this.alpha < 1) {
+            this.alpha += 0.05;
+        }
+
+        ctx.globalAlpha = this.alpha;
+        ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
+        this.timePassed += this.speed;
+    }
+
+    for (var i = 0; i < maxStars; i++) {
+        new Star();
+    }
+
+    function animation() {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.globalAlpha = 0.5;         //尾巴
+        ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 2)';
+        ctx.fillRect(0, 0, w, h)
+
+        ctx.globalCompositeOperation = 'lighter';
+        for (var i = 1,
+                 l = stars.length; i < l; i++) {
+            stars[i].draw();
+        };
+
+        window.requestAnimationFrame(animation);
+    }
+
+    animation();
+</script>
 </html>

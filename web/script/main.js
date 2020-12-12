@@ -124,13 +124,14 @@ function showBlog() {
         span.appendChild(i4);
 
         let p1 = create("p");
-        p1.innerHTML = "摘要：" + element.summary;
+        p1.innerHTML = "<br><span style='font-size: 1.2em ;font-weight: bold'>摘要：</span>" + element.summary;
         let p2 = create("p");
         let p2A = create("a");
         p2A.innerHTML = "查看全文";
         p2A.setAttribute("class", "btn btn-link");
         p2A.setAttribute("href", 'blog.html?' + element.blogId + '?' + $.cookie("account"));
         p2A.setAttribute("target", "_blank");
+        p2A.setAttribute("style", "color : white");
         p2.appendChild(p2A);
         div1.appendChild(h1);
         div1.appendChild(span);
@@ -158,16 +159,17 @@ function showPage() {
     "<th colspan=\"7\">\n" + 
     "<div class=\"ui inverted divided stackable grid\">\n" + 
     "<div class=\"three wide column\" align=\"center\">\n" +
-    "<a class=\"item\" onclick=\"pageUp()\">上一页</a>\n" +
+    "<i class=\"chevron left icon\" onclick=\"pageUp()\"></i>\n" +
     " </div>\n" +
     "<div class=\"ten wide column\" align=\"center\">\n" + 
     "<p>第 <span id=\"pageIndex\"></span> 页，共 <span id=\"pageNum\"></span> 页，有 <span id=\"blogTotal\"></span> 篇博客</p>\n" +
     "</div>\n" +
     "<div class=\"three wide column\" align=\"center\">\n" +
-    "<a class=\"item\" onclick=\"pageDown()\">下一页</a>\n" +
+    "<i class=\"chevron right icon\" onclick=\"pageDown()\"></i>\n" +
     "</div>\n" +
     "</div>\n" +
     "</th>\n" +
     "</tr>\n";
     $("#blogList").append(div);
 }
+

@@ -118,6 +118,7 @@ function getCon() {
                 alert("error");
             }
         });
+        window.open("user.html", "_self")
     }
 }
 
