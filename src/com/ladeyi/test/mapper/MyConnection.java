@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class MyConnection {
     private static String driverClassName = "com.mysql.cj.jdbc.Driver";
     private static String url = "jdbc:mysql://localhost/blog?serverTimezone=UTC&useSLL = false";
-    private static String username = "root";
+    private static String username = "user1";
     private static String password = "123456";
     public static Connection connection = null;
 
