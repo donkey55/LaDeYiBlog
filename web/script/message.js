@@ -93,18 +93,18 @@ function transform(element) {
         message = element.message
     }else if(element.messageType === "1"){
         let messageSet = element.message.split('#')
-        message = "评论了你的博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"' target='_blank'>"+ messageSet[1] +"</a>" +
+        message = "评论了你的博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"' target='_blank' style='color:white'>"+ messageSet[1] +"</a>" +
             "<br>评论内容为：<br>" + messageSet[2]
     }else if(element.messageType === "2"){
         let messageSet = element.message.split('#')
-        message = "回复了你对博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"' target='_blank'>"+ messageSet[1] +"</a>" +
+        message = "回复了你对博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"' target='_blank' style='color:white'>"+ messageSet[1] +"</a>" +
             "的评论<br>评论内容为：<br>" + messageSet[2] +
             "<br>回复内容为：<br>" + messageSet[3]
         //console.log(message)
     }
     else if(element.messageType === "3"){
         let messageSet = element.message.split('#')
-        message = "发表了新博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"' target='_blank'>"+ messageSet[1] +"</a>"
+        message = "发表了新博客<a href='blog.html?"+ messageSet[0] + "?" + $.cookie("account") +"' target='_blank' style='color:white'>"+ messageSet[1] +"</a>"
     }
     return message
 }

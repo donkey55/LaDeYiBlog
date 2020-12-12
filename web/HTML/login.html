@@ -13,7 +13,7 @@
     <script src="../script/refJS/jquery.cookie.js"></script>
     <script src="../script/Login.js"></script>
 </head>
-<body>
+<body onkeydown="login()">
 <h1 class="ui header" style="font-family: STSong; margin-top: 20px;">
     <div align="center">
     <img src="../images/blogLogo.jpg" class="ui circular image">
@@ -52,7 +52,7 @@
                         <button class="ui fluid large teal submit button" id="submit" onclick="query()">登   录</button>
                     </div>
                     <div class="register">
-                        <p>没有注册过我们的账号？<a href="register.html">点击这里进行注册</a></p>
+                        <p>没有注册过我们的账号？<a href="register.html" style="color: white">点击这里进行注册</a></p>
                     </div>
                 </fieldset>
             </div>
@@ -60,4 +60,5 @@
     </div>
 </div>
 </body>
+<script src="../script/line.js"></script>
 </html>

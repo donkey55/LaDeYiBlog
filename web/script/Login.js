@@ -21,3 +21,12 @@ function query() {
         }
     });
 }
+
+function login(){
+    console.log(event.keyCode)
+    // 13为回车键
+    if (event.keyCode==13){
+        // 调用登陆按钮或者登陆方法
+        query();
+    }
+}
