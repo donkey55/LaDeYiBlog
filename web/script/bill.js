@@ -97,6 +97,7 @@ function showBill() {
         td3.innerHTML = element.amount;
         td4.innerHTML = element.billId;
         aLi1.href = "goods.html?" + element.goodsId;
+        aLi1.target = "_blank"
         aLi1.innerHTML = element.goodsName;
         td2.appendChild(aLi1);
         tableElement.appendChild(td1);
