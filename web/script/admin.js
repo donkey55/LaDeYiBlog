@@ -91,30 +91,7 @@ function pageUp() {
 
 
 
-function deleteBlog(obj) {
-    var id = obj.id;
-    if (confirm("您真的准备删除此博客吗？")) {
-        $.ajax({
-            type: "post",
-            url: "../com/ladeyi/test/DeleteBlogServlet",
-            data: {
-                "blogId" : id
-            },
-            dataType: "json",
-            success: function (data) {
-                if(data.ret > 0){
-                    alert("删除成功");
-                    location.reload();
-                }else{
-                    alert("删除失败");
-                }
-            },
-            error: function () {
-                alert("error");
-            }
-        });
-    }
-}
+
 
 
 function addTd() {
