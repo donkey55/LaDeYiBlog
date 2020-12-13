@@ -365,8 +365,8 @@ function submit_reply(obj, topCommentId) {
             dataType: "json",
             success: function (data) {
                 if(data.ret === "1"){
-                    alert("回复成功")
-                    //location.reload()
+                    alert("回复成功");
+                    location.reload();
                     //向被回复的评论的作者发送消息
                     //对应的messageType为2
                     $.ajax({
@@ -392,7 +392,7 @@ function submit_reply(obj, topCommentId) {
                             console.log(data.ret)
                             if(data.ret === "1"){
                                 //alert("回复消息添加失败")
-                            }else {
+                            } else {
                                 alert("回复消息添加失败")
                             }
                         },
@@ -445,7 +445,7 @@ function publishComment() {
             success: function (data) {
                 if(data.ret === "1"){
                     alert("评论成功")
-                    //location.reload()
+                    location.reload();
                     //向被评论的博客的作者发送消息
                     //对应的messageType为1
                     //console.log($.cookie("account"))
