@@ -15,24 +15,19 @@ $(function () {
     document.getElementById("username").innerHTML=$.cookie("account");
     $.ajax({
         type: "post",
-        url: "../com/ladeyi/test/ShowMyBlogInfoServlet",
+        url:"../com/ladeyi/test/ShowAllBlogServlet",
         data: {
-            "userName": $.cookie("account")
         },
-        dataType: "json",
+        datatype: "json",
         success: function (data) {
-            //保存得到的文章
             blogList = data;
+            blogTotal = data.length;
             if(blogList.length > 0){
-                pageNum = Math.ceil(blogList.length / singlePageNum);
+                pageNum = Math.ceil(blogTotal / singlePageNum);
             }
-            blogTotal = blogList.length;
-            //显示文章
             addTd();
             updatePageNum();
-        },
-        error:function(){
-            console.log("error");
+        }, error: function () {
             pageNum = 1;
             updatePageNum();
         }
@@ -55,11 +50,6 @@ function searchUserBlog() {
             blogCount = 0;
             pageIndex = 1;
             //显示文章
-            for(let i = 0; i < blogList.length; i++){
-                if(blogList[i].userName !== $.cookie("account")){
-                    blogList.splice(i, 1);
-                }
-            }
             //console.log(SBlogList);
             if(blogList.length > 0){
                 pageNum = Math.ceil(blogList.length / singlePageNum);
@@ -126,14 +116,6 @@ function deleteBlog(obj) {
     }
 }
 
-function changeBlog(obj) {
-    let id = obj.id;
-    window.open("changeBlog.html?" + id + "?" + $.cookie("account"));
-}
-
-function writeBlog() {
-    window.open("writeBlog.html?" + $.cookie("account"), "_blank");
-}
 
 function addTd() {
     for (let index = 0; index < singlePageNum && blogCount < blogTotal; index++, blogCount++, blogNum++) {
@@ -142,11 +124,8 @@ function addTd() {
         let td1 = document.createElement("td");
         let td2 = document.createElement("td");
         let td3 = document.createElement("td");
-        let td4 = document.createElement("td");
         let aLi1 = document.createElement("a");
         let aLi2 = document.createElement("a");
-        let aLi3 = document.createElement("a");
-
         td1.innerHTML = String(blogCount + 1);
         aLi1.innerHTML = element.title;
         aLi1.setAttribute('href', 'blog.html?' + element.blogId + '?' + $.cookie("account"));
@@ -157,19 +136,12 @@ function addTd() {
         aLi2.setAttribute("onclick","deleteBlog(this)");
         aLi2.setAttribute("class", "ui mini red basic button");
 
-        aLi3.setAttribute("id", element.blogId);
-        aLi3.setAttribute("href","#");
-        aLi3.setAttribute("onclick","changeBlog(this)");
-        aLi3.setAttribute("class", "ui mini green basic button");
         aLi2.innerHTML = "删除";
-        aLi3.innerHTML = "修改";
         tableElement.appendChild(td1);
         td2.appendChild(aLi1);
         tableElement.appendChild(td2);
-        td4.appendChild(aLi2);
-        td3.appendChild(aLi3);
+        td3.appendChild(aLi2);
         tableElement.appendChild(td3);
-        tableElement.appendChild(td4);
     }
 }
 

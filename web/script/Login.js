@@ -13,7 +13,12 @@ function query() {
             if (data.ret === "1") {
                 $.cookie("account", $("#login_field").val(), { expires: 7, path: '/', secure: false});
                 //alert($.cookie("account") + "1");
-                window.open(url, "_self");
+                if ($("#login_field").val() == "admin") {
+                    window.open("admin.html", "_self");
+                } else {
+                    window.open(url, "_self");
+                }
+
             } else {
                 alert("用户名或密码未填写或错误");
                 location.reload();
