@@ -20,6 +20,7 @@ $(function () {
             setHtml("selfIntroduction", data.selfIntroduction);
             setHtml("fans", data.fansCount);
             setHtml("attention", data.attentionCount);
+            setHtml("points",data.points);
 
             setSex(data.sex);
             setValue("inputUserName", userName);

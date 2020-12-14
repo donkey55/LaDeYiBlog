@@ -56,7 +56,7 @@ public class ShowUserInfoServlet extends HttpServlet {
             ret = ret + "\"selfIntroduction\":\"" + resultSet.getString(1) + "\",";
             resultSet = User.checkPoint(userName);
             resultSet.next();
-            ret = ret + "\"point\":\"" + resultSet.getString(1) + "\",";
+            ret = ret + "\"points\":\"" + resultSet.getString(1) + "\",";
             //传出粉丝数
             ResultSet userIdSet = User.checkId(userName);
             userIdSet.next();

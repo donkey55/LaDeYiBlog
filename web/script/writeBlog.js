@@ -118,7 +118,7 @@ function getCon() {
                 alert("error");
             }
         });
-        window.open("user.html", "_self")
+        //window.open("user.html", "_self")
     }
 }
 
