@@ -95,6 +95,8 @@ function getCon() {
                                         console.log(data.ret)
                                         if(data.ret === "1"){
                                             //alert("给粉丝发消息成功")
+                                            window.open("user.html", "_self")
+                                            //location.reload();
                                         }else {
                                             alert("给粉丝发消息失败")
                                         }
@@ -109,7 +111,6 @@ function getCon() {
                             alert("给粉丝的消息添加失败")
                         }
                     });
-                    //location.reload();
                 }else{
                     alert("发布失败");
                 }
@@ -118,7 +119,6 @@ function getCon() {
                 alert("error");
             }
         });
-        //window.open("user.html", "_self")
     }
 }
 
