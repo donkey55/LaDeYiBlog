@@ -149,7 +149,7 @@ function addTd() {
 
         aLi2.setAttribute("id", element.userName);
         aLi2.setAttribute("href", "#");
-        aLi2.setAttribute("onclick", "deleteAttention(this)");
+        aLi2.setAttribute("onclick", "deleteAttention(obj)");
         aLi2.setAttribute("class", "ui mini red basic button");
         aLi2.innerHTML = "取消关注"
 
